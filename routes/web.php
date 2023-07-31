@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
@@ -46,6 +47,32 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    // Routes for company
+
+    Route::prefix('/company')->group(function () {
+
+        Route::post('/create', [AdminController::class, 'addCompany']);
+
+        Route::get('/all', [AdminController::class, 'getCompanies']);
+
+        Route::patch('/update', [AdminController::class, 'updateCompany']);
+
+
+    });
+
+    Route::prefix('/profile')->group(function () {
+
+        Route::post('/create', [AdminController::class, 'createProfile']);
+
+        Route::post('/update', [AdminController::class, 'updateProfile']);
+
+
+    });
+
+
+
+
 });
 
 

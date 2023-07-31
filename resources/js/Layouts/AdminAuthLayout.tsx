@@ -1,10 +1,24 @@
-import { useState, PropsWithChildren, ReactNode } from "react";
+import { useState, PropsWithChildren, ReactNode, useEffect } from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 import { User } from "@/types";
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    navigationMenuTriggerStyle,
+} from "@/Components/ui/navigation-menu";
+import { Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
+import { Sidebar } from "lucide-react";
+import SideBAR from "@/Components/Admin/Navigation/SideBAR";
+import { useGeneralStore } from "@/store/GeneralStore";
+import { Toaster } from "@/Components/ui/toaster";
 
 export default function Authenticated({
     user,
@@ -14,25 +28,28 @@ export default function Authenticated({
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+    const { setShowSidebar } = useGeneralStore();
+
+
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav className="bg-[#4b4d5e] dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+                <div className="mx-auto ml-8 mr-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                                </Link>
+                            <div className="flex flex-row items-center gap-4 cursor-pointer">
+                                <Sidebar
+                                    className="h-8 text-white"
+                                    onClick={setShowSidebar}
+                                />
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
-                                >
-                                    Dashboard
-                                </NavLink>
+                            <div className="flex flex-row items-center ml-8 text-3xl">
+                                <div className="bg-gray-400 rounded-md p-2">
+                                    <Link href="/dashboard">
+                                        <span className="">Logo</span>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
@@ -124,10 +141,12 @@ export default function Authenticated({
                     </div>
                 </div>
 
+                {/* Mobil nézet */}
+
                 <div
                     className={
                         (showingNavigationDropdown ? "block" : "hidden") +
-                        " sm:hidden"
+                        " sm:hidden bg-white"
                     }
                 >
                     <div className="pt-2 pb-3 space-y-1">
@@ -164,16 +183,21 @@ export default function Authenticated({
                     </div>
                 </div>
             </nav>
+            <div>
+                <div className="flex flex-row gap-4">
+                    <SideBAR />
+                    <div className="mt-8">
+                        {header && (
+                            <div>
+                                <span>{header}</span>
+                            </div>
+                        )}
 
-            {header && (
-                <header className="bg-white dark:bg-gray-800 shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {header}
+                        <main>{children}</main>
+                        <Toaster />
                     </div>
-                </header>
-            )}
-
-            <main>{children}</main>
+                </div>
+            </div>
         </div>
     );
 }
