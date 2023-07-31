@@ -17,6 +17,9 @@ type CompanyStoreType = {
 
     selectedItem: Company | null;
     setSelectedItem: (item: Company | null) => void;
+
+    selectedItems: any;
+    setSelectedItems: (item:Company | null) => void;
 };
 
 export const useCompanyStore = create<CompanyStoreType>((set) => ({
@@ -34,9 +37,28 @@ export const useCompanyStore = create<CompanyStoreType>((set) => ({
 
     selectedItem: null,
     setSelectedItem: (item: Company | null) => {
-        if(typeof item === null){
-            set( { selectedItem: null})
+        if (typeof item === null) {
+            set({ selectedItem: null });
         }
-        set({ selectedItem: item })
+        set({ selectedItem: item });
     },
+
+    selectedItems: [],
+    setSelectedItems: (selectedRow: Company | null) => {
+        set((prevState) => {
+            // If selectedRow is null, reset the selectedItems array to an empty array
+            if (selectedRow === null) {
+                return { selectedItems: [] };
+            }
+
+            // If the selectedRow is not already in the selectedItems array, add it
+            if (!prevState.selectedItems.some((item:any) => item === selectedRow)) {
+                return { selectedItems: [...prevState.selectedItems, selectedRow] };
+            }
+
+            // If the selectedRow is already in the selectedItems array, remove it
+            return { selectedItems: prevState.selectedItems.filter((item:any) => item !== selectedRow) };
+        });
+    },
+
 }));

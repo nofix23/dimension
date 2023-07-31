@@ -71,7 +71,7 @@ function SideBAR() {
                                     text="Cégek"
                                     full
                                 />
-                                
+
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>

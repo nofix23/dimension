@@ -31,7 +31,7 @@ function SidebarItem({
                         {type === "link" ? (
                             <Link
                                 href={href}
-                                className={`p-2 flex flex-row gap-4 hover:bg-gray-400 hover:text-gray-900 hover:cursor-pointer rounded-xl
+                                className={`p-2 flex flex-row items-center gap-4 hover:bg-gray-400 hover:text-gray-900 hover:cursor-pointer rounded-xl
                                 ${
                                     routeName && route().current(routeName)
                                         ? "bg-gray-50/20"
@@ -44,7 +44,7 @@ function SidebarItem({
                                 <span>{text}</span>
                             </Link>
                         ) : (
-                            <div className="p-2 flex flex-row gap-4 hover:bg-gray-400 hover:text-gray-900 hover:cursor-pointer rounded-xl">
+                            <div className="p-2 flex flex-row items-center gap-4 hover:bg-gray-400 hover:text-gray-900 hover:cursor-pointer rounded-xl">
                                 <div
                                     className={` flex flex-row gap-3
                                 ${

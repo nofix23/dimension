@@ -58,6 +58,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
         Route::patch('/update', [AdminController::class, 'updateCompany']);
 
+        Route::post('/delete', [AdminController::class, 'deleteCompany']);
+
+
 
     });
 

@@ -70,6 +70,33 @@ class AdminController extends Controller
         }
     }
 
+    public function deleteCompany(Request $request)
+    {
+        try {
+
+            if($request->type === 'single'){
+                $company = Company::find($request->selectedItems['id']);
+
+                $company->delete();
+
+            }
+
+            elseif($request->type === 'multiple'){
+                foreach($request->selectedItems as $item){
+                    $company = Company::find($item['id']);
+                    $company->delete();
+                }
+            }
+
+
+            return Redirect::back();
+
+
+        } catch (Exception $e) {
+            return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
+        }
+    }
+
     public function createProfile(Request $request){
         try{
             $request->validate([
