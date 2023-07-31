@@ -11,6 +11,12 @@ import SidebarItem from "./SidebarItem";
 import { PlusIcon } from "lucide-react";
 import AddCompanySheet from "../Sheets/MySheet";
 import { useEffect } from "react";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/Components/ui/accordion";
 
 function SideBAR() {
     const { showSidebar } = useGeneralStore();
@@ -19,7 +25,7 @@ function SideBAR() {
         <div className="bg-[#343541] text-white h-screen">
             {/* Sidebar teljes */}
             {showSidebar ? (
-                <div className="w-[250px] flex flex-col mt-3 text-xs">
+                <div className="w-[250px] flex flex-col mt-3 text-md">
                     <div>
                         <SidebarItem
                             type="link"
@@ -31,46 +37,44 @@ function SideBAR() {
                         />
                     </div>
 
-                    <div>
-                        <div className="pl-4 mt-8">
-                            <span className="text-md">Megrendelések</span>
-                        </div>
-                        <SidebarItem
-                            type="link"
-                            href="#"
-                            Icon={BoltIcon}
-                            text="Aktív árajánlatok"
-                            full
-                        />
-                        <SidebarItem
-                            type="link"
-                            href="#"
-                            Icon={TableCellsIcon}
-                            text="Összes árajánlat"
-                            full
-                        />
-                    </div>
+                    <Accordion type="multiple">
+                        <AccordionItem value="item-1" className="border-none">
+                            <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline">
+                                <BoltIcon className="h-4" />
+                                <span>Megrendelések</span>
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                <SidebarItem
+                                    type="link"
+                                    href="#"
+                                    text="Aktív árajánlatok"
+                                    full
+                                />
+                                <SidebarItem
+                                    type="link"
+                                    href="#"
+                                    text="Összes árajánlat"
+                                    full
+                                />
+                            </AccordionContent>
+                        </AccordionItem>
 
-                    <div>
-                        <div className="pl-4 mt-8">
-                            <span className="text-md">Cégek</span>
-                        </div>
-                        <SidebarItem
-                            type="link"
-                            href="/company/all"
-                            Icon={BuildingOfficeIcon}
-                            text="Összes cég"
-                            full
-                        />
-
-                        <SidebarItem
-                            type="button"
-                            href="#"
-                            Icon={PlusIcon}
-                            text="Új"
-                            full
-                        />
-                    </div>
+                        <AccordionItem value="item-2" className="border-none">
+                            <AccordionTrigger className="ml-2 flex flex-row justify-start gap-3 hover:no-underline">
+                                <BuildingOfficeIcon className="h-4" />
+                                <span>Céges beállítások</span>
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                <SidebarItem
+                                    type="link"
+                                    href="/company/all"
+                                    text="Cégek"
+                                    full
+                                />
+                                
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
                 </div>
             ) : (
                 // Sidebar nem teljes

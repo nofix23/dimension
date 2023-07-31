@@ -26,12 +26,12 @@ function SidebarItem({
     return (
         <div>
             {full ? (
-                <div className="pt-2 pl-8 pr-8">
+                <div className="">
                     <div className="">
                         {type === "link" ? (
                             <Link
                                 href={href}
-                                className={`p-3 flex flex-row gap-3 hover:bg-gray-50 hover:text-black hover:cursor-pointer rounded-xl
+                                className={`p-2 flex flex-row gap-4 hover:bg-gray-400 hover:text-gray-900 hover:cursor-pointer rounded-xl
                                 ${
                                     routeName && route().current(routeName)
                                         ? "bg-gray-50/20"
@@ -40,13 +40,13 @@ function SidebarItem({
 
                             `}
                             >
-                                <Icon className="h-6" />
+                                {Icon && <Icon className="h-4" />}
                                 <span>{text}</span>
                             </Link>
                         ) : (
-                            <div className="hover:bg-gray-50 hover:text-black hover:cursor-pointer rounded-xl">
+                            <div className="p-2 flex flex-row gap-4 hover:bg-gray-400 hover:text-gray-900 hover:cursor-pointer rounded-xl">
                                 <div
-                                    className={`p-3 flex flex-row gap-3
+                                    className={` flex flex-row gap-3
                                 ${
                                     routeName && route().current(routeName)
                                         ? "bg-gray-50/20"
@@ -55,9 +55,9 @@ function SidebarItem({
 
                             `}
                                 >
-                                    <Icon className="h-6" />
+                                    {Icon && <Icon className="h-4" />}
                                     <MySheet
-                                        trigger="Új"
+                                        trigger="Hozzáadás"
                                         side="right"
                                         title="Új cég hozzáadása"
                                     >
@@ -74,7 +74,7 @@ function SidebarItem({
                         {type === "link" ? (
                             <Link
                                 href={href}
-                                className={`p-2 flex flex-col items-center gap-2 text-xs hover:bg-gray-50 hover:text-black hover:cursor-pointer rounded-xl
+                                className={`p-1 flex flex-col items-center gap-1 text-xs hover:bg-gray-50 hover:text-black hover:cursor-pointer rounded-xl
                                 ${
                                     routeName && route().current(routeName)
                                         ? "bg-gray-50/20"
@@ -83,14 +83,14 @@ function SidebarItem({
 
                             `}
                             >
-                                <Icon className="h-4" />
+                                {Icon && <Icon className="h-2" />}
                                 <span>{text}</span>
                             </Link>
                         ) : (
                             <div className="flex justify-center hover:bg-gray-50 hover:text-black hover:cursor-pointer rounded-xl">
                                 <button>
                                     <div
-                                        className={`p-2 flex flex-col items-center gap-2 text-xs rounded-xl
+                                        className={`p-1 flex flex-col items-center gap-2 text-xs rounded-xl
                                 ${
                                     routeName && route().current(routeName)
                                         ? "bg-gray-50/20"
@@ -99,7 +99,7 @@ function SidebarItem({
 
                             `}
                                     >
-                                        <Icon className="h-4" />
+                                        {Icon && <Icon className="h-3" />}
                                         <span>{text}</span>
                                     </div>
                                 </button>

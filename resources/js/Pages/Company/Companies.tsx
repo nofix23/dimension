@@ -20,6 +20,8 @@ import {
     TableRow,
 } from "@/Components/ui/table";
 import {
+    AlignRightIcon,
+    ArrowRightIcon,
     CheckIcon,
     CircleIcon,
     Edit2Icon,
@@ -74,7 +76,8 @@ import { initialValues as initCreateProfileValues } from "@/Utils/FormikHelper/C
 import { initialValues as initUpdateProfileValues } from "@/Utils/FormikHelper/UpdateProfile";
 
 import FormikField from "@/Components/FormikField";
-import { Label } from "@/components/ui/label";
+import CreateCompanyForm from "@/Components/Admin/Forms/CreateCompanyForm";
+import { Label } from "@/Components/ui/label";
 
 export default function Companies({ auth, companies, users }: PageProps) {
     const {
@@ -197,7 +200,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                 id: values.id,
                 name: values.name,
                 email: values.email,
-                role: values.role
+                role: values.role,
             },
             {
                 onBefore: () => {
@@ -282,17 +285,44 @@ export default function Companies({ auth, companies, users }: PageProps) {
         <AdminAuthLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Cégek
-                </h2>
+                <div className="flex flex-row gap-4 items-center mt-24 ml-24 font-semibold text-4xl text-gray-800 leading-tight">
+                    <BuildingOffice2Icon className="h-12" />
+                    <span>Cégek</span>
+                </div>
             }
         >
             <Head title="Cégek" />
 
-            <div className="mt-8 text-gray-500">
-                <Table>
+            <div className="mt-8 ml-24 text-white">
+
+                    <Dialog>
+                        <DialogTrigger>
+                            <div className="flex items-center justify-center">
+                                <Button className="bg-green-100 hover:bg-green-200 text-green-900">
+                                    <div className="flex flex-row gap-2">
+                                        <PlusIcon className="h-4" />
+                                        <span>Hozzáadás</span>
+                                    </div>
+                                </Button>
+                            </div>
+                        </DialogTrigger>
+
+                        <DialogContent className="min-w-[600px] bg-gray-50">
+                            <DialogHeader>
+                                <DialogTitle className="mb-8">
+                                    Cég hozzáadása a rendszerhez
+                                </DialogTitle>
+                                <DialogDescription>
+                                    <CreateCompanyForm />
+                                </DialogDescription>
+                            </DialogHeader>
+                        </DialogContent>
+                    </Dialog>
+                </div>
+                <Table className="min-w-[1000px]">
                     <TableHeader>
                         <TableRow>
+                            <TableHead></TableHead>
                             <TableHead className="w-[100px]">
                                 Cég neve
                             </TableHead>
@@ -318,7 +348,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                             <ArrowDownIcon className="h-5 hover:cursor-pointer" />
                                         </PopoverTrigger>
                                         <PopoverContent className="w-80 bg-white rounded-md">
-                                            <div className="flex flex-col gap-2 flex-grow-2 w-full p-4">
+                                            <div className="flex flex-col gap-2 flex-grow-2 w-full p-1">
                                                 <label>
                                                     Státusz szerinti szűrés
                                                 </label>
@@ -337,8 +367,8 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                             )
                                                         }
                                                     />
-                                                    <label className="bg-blue-100 text-blue-900 p-1 m-1 rounded-xl">
-                                                        <div className="flex flex-row justify-center p-2 gap-2 items-center">
+                                                    <label className="bg-blue-100 text-blue-900 p-1 rounded-md">
+                                                        <div className="">
                                                             <span className="">
                                                                 Összes
                                                             </span>
@@ -359,8 +389,8 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                             )
                                                         }
                                                     />
-                                                    <label className="bg-green-100 text-green-900 p-1 m-1 rounded-xl">
-                                                        <div className="flex flex-row gap-2 p-2 justify-center items-center">
+                                                    <label className="bg-green-100 text-green-900 p-1 m-1 rounded-md">
+                                                        <div className="">
                                                             <span className="">
                                                                 Aktív
                                                             </span>
@@ -382,8 +412,8 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                             )
                                                         }
                                                     />
-                                                    <label className="bg-red-100 text-red-900 p-1 m-1 rounded-xl">
-                                                        <div className="flex flex-row gap-2 p-2 justify-center items-center">
+                                                    <label className="bg-red-100 text-red-900 p-1 m-1 rounded-md">
+                                                        <div className="">
                                                             <span className="">
                                                                 Inaktív
                                                             </span>
@@ -403,11 +433,18 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     <TableBody>
                         {companyItems.map((company) => (
                             <TableRow
-                                className="hover:bg-gray-50 hover:cursor-pointer"
+                                key={company.id}
+                                className="group/item hover:bg-gray-50 hover:cursor-pointer"
                                 onClick={() => setSelectedItem(company)}
                             >
                                 <TableCell className="font-medium">
-                                    <div className="flex flex-row gap-4 justify-center items-center">
+                                    <div className="group/edit invisible group-hover/item:visible">
+                                        <ArrowRightIcon className="group-hover/edit:text-gray-700 h-4 text-gray-400 " />
+                                    </div>
+                                </TableCell>
+
+                                <TableCell className="font-medium">
+                                    <div className="flex flex-row justify-center gap-2 items-center">
                                         {company.company_name}
                                     </div>
                                 </TableCell>
@@ -489,7 +526,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                             required={false}
                                                             placeholder=""
                                                             readOnly={false}
-                                                            className="hover:bg-gray-50 hover:cursor-pointer"
+                                                            className="hover:bg-gray-50 hover:cursor-pointer min-w-[300px]"
                                                         />
                                                     </div>
                                                     <div className="flex flex-row gap-8 items-center">
@@ -501,7 +538,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                             required={false}
                                                             placeholder=""
                                                             readOnly={false}
-                                                            className="hover:bg-gray-50 hover:cursor-pointer"
+                                                            className="hover:bg-gray-50 hover:cursor-pointer min-w-[300px]"
                                                         />
                                                     </div>
                                                     <div className="flex flex-row gap-8 items-center">
@@ -515,7 +552,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                             required={false}
                                                             placeholder=""
                                                             readOnly={false}
-                                                            className="hover:bg-gray-50 hover:cursor-pointer"
+                                                            className="hover:bg-gray-50 hover:cursor-pointer min-w-[300px]"
                                                         />
                                                     </div>
 
@@ -529,7 +566,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                             placeholder=""
                                                             readOnly={false}
                                                             as="select"
-                                                            className="p-3 focus:outline-none hover:bg-gray-50 hover:cursor-pointer"
+                                                            className="p-3 focus:outline-none hover:bg-gray-50 hover:cursor-pointer min-w-[100px]"
                                                         >
                                                             <option value={1}>
                                                                 <div>
@@ -587,6 +624,9 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                                                 user
                                                                             ) => (
                                                                                 <div
+                                                                                    key={
+                                                                                        user.id
+                                                                                    }
                                                                                     className={`
 
                                                                                 ${
@@ -705,7 +745,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                                                     </div>
                                                                                 </Button>
                                                                             </DialogTrigger>
-                                                                            <DialogContent className="sm:max-w-[425px] bg-gray-50">
+                                                                            <DialogContent className="min-w-[600px] bg-gray-50">
                                                                                 <DialogHeader>
                                                                                     <DialogTitle>
                                                                                         Profil
@@ -871,10 +911,12 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                                                                     </Field>
                                                                                                 </div>
 
-                                                                                                <Button className="bg-green-100 hover:bg-green-200 ">
-                                                                                                    Profil
-                                                                                                    létrehozása
-                                                                                                </Button>
+                                                                                                <div className="flex justify-center mt-5">
+                                                                                                    <Button className="bg-green-100 hover:bg-green-200 ">
+                                                                                                        Profil
+                                                                                                        létrehozása
+                                                                                                    </Button>
+                                                                                                </div>
                                                                                             </Form>
                                                                                         )}
                                                                                     </Formik>
@@ -913,7 +955,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                                     </Button>
                                                                 )}
                                                             </DialogTrigger>
-                                                            <DialogContent className="sm:max-w-[425px] bg-gray-50">
+                                                            <DialogContent className="min-w-[600px] bg-gray-50">
                                                                 <DialogHeader>
                                                                     <DialogTitle>
                                                                         Profil
@@ -924,7 +966,9 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                                 </DialogHeader>
                                                                 <div className="grid gap-4 py-4">
                                                                     <Formik
-                                                                        initialValues={initUpdateProfileValues(selectedItem.user)}
+                                                                        initialValues={initUpdateProfileValues(
+                                                                            selectedItem.user
+                                                                        )}
                                                                         onSubmit={(
                                                                             values,
                                                                             actions
@@ -986,7 +1030,6 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                                                     />
                                                                                 </div>
 
-
                                                                                 <div className="grid grid-cols-4 items-center gap-4">
                                                                                     <Label
                                                                                         htmlFor="role"
@@ -1022,11 +1065,12 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                                                         </option>
                                                                                     </Field>
                                                                                 </div>
-
-                                                                                <Button className="bg-green-100 hover:bg-green-200 ">
-                                                                                    Változtatások mentése
-
-                                                                                </Button>
+                                                                                <div className="flex justify-center mt-5">
+                                                                                    <Button className="bg-green-100 hover:bg-green-200 ">
+                                                                                        Változtatások
+                                                                                        mentése
+                                                                                    </Button>
+                                                                                </div>
                                                                             </Form>
                                                                         )}
                                                                     </Formik>
@@ -1067,7 +1111,6 @@ export default function Companies({ auth, companies, users }: PageProps) {
                         </SheetContent>
                     </Sheet>
                 )}
-            </div>
         </AdminAuthLayout>
     );
 }

@@ -3,35 +3,35 @@ import React from "react";
 
 type PropsType = {
     className?: string;
+    type: string;
     id: string;
     name: string;
-    type: string;
     required?: boolean;
     placeholder?: string;
     readOnly?: boolean;
-    as?: string;
+    as?: "input" | "select" | "textarea";
 };
 
 function FormikField({
     className,
+    type,
     id,
     name,
-    type,
     required = false,
     placeholder,
     readOnly = false,
-    as,
+    as="input",
 }: PropsType) {
-    const fieldClass = `${className} rounded-lg dark:bg-[#010409] dark:text-white h-9 focus:outline-none
+    const fieldClass = `${className} rounded-lg h-9 focus:outline-none
     ${readOnly ? "border-2 border-[#CC8513]" : ""}
     `;
     return (
         <Field
             as={as}
+            type={type}
             className={fieldClass}
             id={id}
             name={name}
-            type={type}
             required={required}
             placeholder={placeholder}
             readOnly={readOnly}

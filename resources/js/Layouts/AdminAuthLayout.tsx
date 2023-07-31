@@ -28,26 +28,24 @@ export default function Authenticated({
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
-    const { setShowSidebar } = useGeneralStore();
-
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="min-h-screen bg-white dark:bg-gray-900">
             <nav className="bg-[#4b4d5e] dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <div className="mx-auto ml-8 mr-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            <div className="flex flex-row items-center gap-4 cursor-pointer">
+                            {/* <div className="flex flex-row items-center gap-4 cursor-pointer">
                                 <Sidebar
-                                    className="h-8 text-white"
+                                    className="h-6 text-white"
                                     onClick={setShowSidebar}
                                 />
-                            </div>
+                            </div> */}
 
-                            <div className="flex flex-row items-center ml-8 text-3xl">
-                                <div className="bg-gray-400 rounded-md p-2">
+                            <div className="flex flex-row items-center ml-8 text-xl">
+                                <div className="bg-gray-400 rounded-md p-1">
                                     <Link href="/dashboard">
-                                        <span className="">Logo</span>
+                                        <span className="">Dimenzió</span>
                                     </Link>
                                 </div>
                             </div>
