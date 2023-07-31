@@ -19,6 +19,7 @@ import { Sidebar } from "lucide-react";
 import SideBAR from "@/Components/Admin/Navigation/SideBAR";
 import { useGeneralStore } from "@/store/GeneralStore";
 import { Toaster } from "@/Components/ui/toaster";
+import { CubeTransparentIcon } from "@heroicons/react/24/outline";
 
 export default function Authenticated({
     user,
@@ -31,7 +32,7 @@ export default function Authenticated({
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
-            <nav className="bg-[#4b4d5e] dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+            <nav className="bg-[#343541] dark:bg-gray-800 border-gray-100 dark:border-gray-700">
                 <div className="mx-auto ml-8 mr-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
@@ -43,9 +44,9 @@ export default function Authenticated({
                             </div> */}
 
                             <div className="flex flex-row items-center ml-8 text-xl">
-                                <div className="bg-gray-400 rounded-md p-1">
+                                <div className="bg-gray-200 rounded-2xl p-1">
                                     <Link href="/dashboard">
-                                        <span className="">Dimenzió</span>
+                                        <CubeTransparentIcon className="h-8" />
                                     </Link>
                                 </div>
                             </div>

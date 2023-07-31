@@ -36,9 +36,14 @@ import {
     BuildingOffice2Icon,
     CheckBadgeIcon,
     EllipsisHorizontalIcon,
+    MagnifyingGlassCircleIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { ArrowDownIcon, Pencil2Icon } from "@radix-ui/react-icons";
+import {
+    ArrowDownIcon,
+    MagnifyingGlassIcon,
+    Pencil2Icon,
+} from "@radix-ui/react-icons";
 import {
     Sheet,
     SheetContent,
@@ -93,6 +98,8 @@ export default function Companies({ auth, companies, users }: PageProps) {
         selectedItem,
         selectedItems,
         setSelectedItems,
+        filterItems,
+        setFilterItems,
     } = useCompanyStore();
 
     const form = useForm();
@@ -130,16 +137,22 @@ export default function Companies({ auth, companies, users }: PageProps) {
     }, []);
 
     useEffect(() => {
-        if (Number(active) != -1) {
-            setCompanyItems(
-                companies.filter((company) => company.active === Number(active))
-            );
-        } else if (Number(active) == -1) {
-            setCompanyItems(companies);
+        if (filterItems.length > 0) {
+            const active = filterItems.find((item) => item === 1);
+
+            const inactive = filterItems.find((item) => item === 0);
+
+                setCompanyItems(
+                    companies.filter(
+                        (company) => company.active === active || company.active === inactive
+                    )
+                )
+
+            
         }
 
         setUserProfile(selectedItem?.user);
-    }, [active, setCompanyItems, selectedItem]);
+    }, [filterItems, setFilterItems, setCompanyItems, selectedItem]);
 
     function handleUpdateSubmit(
         slug: string,
@@ -196,39 +209,35 @@ export default function Companies({ auth, companies, users }: PageProps) {
         onBefore?: string,
         values?: any
     ) {
-        router[method](
-            slug,
-            values,
-            {
-                onBefore: () => {
-                    if (onBefore) {
-                        const reply = confirm(onBefore);
-                        if (!reply) {
-                            // setLoading(false);
-                            return false;
-                        }
+        router[method](slug, values, {
+            onBefore: () => {
+                if (onBefore) {
+                    const reply = confirm(onBefore);
+                    if (!reply) {
+                        // setLoading(false);
+                        return false;
                     }
-                },
+                }
+            },
 
-                onSuccess: () => {
-                    showToast({
-                        type: "success",
-                        title: "Sikeres művelet!",
-                        description: "Adatok frissítve!",
-                    });
-                },
+            onSuccess: () => {
+                showToast({
+                    type: "success",
+                    title: "Sikeres művelet!",
+                    description: "Adatok frissítve!",
+                });
+            },
 
-                onError: (resp: any) => {
-                    showToast({
-                        type: "failed",
-                        title: "Hiba!",
-                        description: resp.errors,
-                    });
-                },
+            onError: (resp: any) => {
+                showToast({
+                    type: "failed",
+                    title: "Hiba!",
+                    description: resp.errors,
+                });
+            },
 
-                onFinish: () => {},
-            }
-        );
+            onFinish: () => {},
+        });
     }
 
     function handleUpdateProfileSubmit(
@@ -328,7 +337,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
         <AdminAuthLayout
             user={auth.user}
             header={
-                <div className="flex flex-row gap-4 items-center mt-24 ml-24 font-semibold text-4xl text-gray-800 leading-tight">
+                <div className="flex flex-row gap-4 items-center mt-24 ml-24 font-semibold text-3xl text-gray-600 leading-tight bg-gray-50 p-8">
                     <BuildingOffice2Icon className="h-12" />
                     <span>Rendszerben szereplő cégek</span>
                 </div>
@@ -368,20 +377,69 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     )}
                 </div>
 
-                <div className="flex flex-row gap-4 justify-end items-center">
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-3">
+                <div className="flex flex-row justify-end items-center">
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <span className="h-5 hover:cursor-pointer">
+                                    Filter
+                                </span>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-80 bg-white rounded-md">
+                                <div className="flex flex-col gap-2 flex-grow-2 w-full p-1">
+                                    <label>Státusz szerinti szűrés</label>
+                                    <hr></hr>
+
+                                    <div className="flex flex-row gap-3">
+                                        <Checkbox
+                                            id="active"
+                                            onCheckedChange={() =>
+                                                setFilterItems(1)
+                                            }
+                                        />
+                                        <label
+                                            htmlFor="id"
+                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 bg-green-100 text-green-90 rounded-xl p-1"
+                                        >
+                                            Aktív
+                                        </label>
+                                    </div>
+
+                                    <div className="flex flex-row gap-3">
+                                        <Checkbox
+                                            id="inactive"
+                                            onCheckedChange={() =>
+                                                setFilterItems(0)
+                                            }
+                                        />
+                                        <label
+                                            htmlFor="id"
+                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 bg-red-100 text-red-90 rounded-xl p-1"
+                                        >
+                                            Inaktív
+                                        </label>
+                                    </div>
+                                </div>
+                            </PopoverContent>
+                        </Popover>
+                    </div>
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
+                        <span>Rendezés</span>
+                    </div>
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
+                        <MagnifyingGlassIcon className="h-6" />
+                    </div>
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
                         <EllipsisHorizontalIcon className="h-6" />
                     </div>
                     <Dialog>
                         <DialogTrigger>
-                            <div className="flex items-center justify-center">
-                                <Button className="bg-green-100 hover:bg-green-200 text-green-900">
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <PlusIcon className="h-4" />
-                                        <span>Hozzáadás</span>
-                                    </div>
-                                </Button>
-                            </div>
+                            <Button className="bg-blue-100 hover:bg-blue-200 text-blue-900">
+                                <div className="flex flex-row justify-center items-center">
+                                    <PlusIcon className="h-4" />
+                                    <span>Hozzáadás</span>
+                                </div>
+                            </Button>
                         </DialogTrigger>
 
                         <DialogContent className="min-w-[600px] bg-gray-50">
@@ -405,7 +463,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                         <TableHead>
                             <div className="flex flex-row gap-3">
                                 <span>Státusz: </span>
-                                {Number(active) === -1 ? (
+                                {/* {Number(active) === -1 ? (
                                     <span className="text-blue-500">
                                         Összes
                                     </span>
@@ -417,90 +475,12 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                     <span className="text-red-500">
                                         Inaktív
                                     </span>
-                                )}
-
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <ArrowDownIcon className="h-5 hover:cursor-pointer" />
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-80 bg-white rounded-md">
-                                        <div className="flex flex-col gap-2 flex-grow-2 w-full p-1">
-                                            <label>
-                                                Státusz szerinti szűrés
-                                            </label>
-
-                                            <div className="flex flex-row gap-4">
-                                                <input
-                                                    name="active"
-                                                    type="radio"
-                                                    value="-1"
-                                                    onChange={(e) =>
-                                                        setActive(
-                                                            Number(
-                                                                e.target.value
-                                                            )
-                                                        )
-                                                    }
-                                                />
-                                                <label className="bg-blue-100 text-blue-900 p-1 rounded-md">
-                                                    <div className="">
-                                                        <span className="">
-                                                            Összes
-                                                        </span>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                            <div className="flex flex-row gap-4">
-                                                <input
-                                                    name="active"
-                                                    type="radio"
-                                                    value="1"
-                                                    onChange={(e) =>
-                                                        setActive(
-                                                            Number(
-                                                                e.target.value
-                                                            )
-                                                        )
-                                                    }
-                                                />
-                                                <label className="bg-green-100 text-green-900 p-1 m-1 rounded-md">
-                                                    <div className="">
-                                                        <span className="">
-                                                            Aktív
-                                                        </span>
-                                                    </div>
-                                                </label>
-                                            </div>
-
-                                            <div className="flex flex-row gap-4">
-                                                <input
-                                                    name="active"
-                                                    type="radio"
-                                                    value="0"
-                                                    onChange={(e) =>
-                                                        setActive(
-                                                            Number(
-                                                                e.target.value
-                                                            )
-                                                        )
-                                                    }
-                                                />
-                                                <label className="bg-red-100 text-red-900 p-1 m-1 rounded-md">
-                                                    <div className="">
-                                                        <span className="">
-                                                            Inaktív
-                                                        </span>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </PopoverContent>
-                                </Popover>
+                                )} */}
                             </div>
                         </TableHead>
                         <TableHead>Ország</TableHead>
                         <TableHead>E-mail cím</TableHead>
-                        <TableHead>Rendszer profilhoz csatolt</TableHead>
+                        <TableHead>Profilhoz csatolt</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody className="">
@@ -509,24 +489,28 @@ export default function Companies({ auth, companies, users }: PageProps) {
                             key={company.id}
                             className="group/item hover:bg-gray-50 hover:cursor-pointer"
                         >
-                            <TableCell className="flex flex-row gap-4 items-center">
-                                <div className="flex flex-row gap-4 group/edit invisible group-hover/item:visible">
-                                    <ArrowRightIcon
-                                        className="group-hover/edit:text-gray-700 h-4 text-gray-400 "
-                                        onClick={() => setSelectedItem(company)}
-                                    />
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <Checkbox
-                                        id={company.id}
-                                        onCheckedChange={() =>
-                                            setSelectedItems(company)
-                                        }
-                                    />
-                                    <label
-                                        htmlFor="id"
-                                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                    ></label>
+                            <TableCell className="">
+                                <div className="flex gap-3">
+                                    <div className="flex flex-row items-center justify-center gap-2 group/edit invisible group-hover/item:visible">
+                                        <EyeIcon
+                                            className="group-hover/edit:text-gray-700 h-5 text-gray-400 "
+                                            onClick={() =>
+                                                setSelectedItem(company)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <Checkbox
+                                            id={company.id}
+                                            onCheckedChange={() =>
+                                                setSelectedItems(company)
+                                            }
+                                        />
+                                        <label
+                                            htmlFor="id"
+                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        ></label>
+                                    </div>
                                 </div>
                             </TableCell>
 
@@ -557,7 +541,11 @@ export default function Companies({ auth, companies, users }: PageProps) {
                             <TableCell className="font-medium border-2">
                                 {company.user_id ? (
                                     <div className="bg-green-100 text-green-900 max-w-[200px] rounded-xl">
-                                        <span>@ {company.user.name}</span>
+                                        <span>
+                                            @{company.user.name} /{" "}
+                                            {company.user.email} /{" "}
+                                            {company.user.role}
+                                        </span>
                                     </div>
                                 ) : (
                                     <div className="bg-red-100 text-red-900 max-w-[200px] rounded-xl">

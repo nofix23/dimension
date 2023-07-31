@@ -19,7 +19,10 @@ type CompanyStoreType = {
     setSelectedItem: (item: Company | null) => void;
 
     selectedItems: any;
-    setSelectedItems: (item:Company | null) => void;
+    setSelectedItems: (item: Company | null) => void;
+
+    filterItems: number[];
+    setFilterItems: (item: number) => void;
 };
 
 export const useCompanyStore = create<CompanyStoreType>((set) => ({
@@ -52,13 +55,40 @@ export const useCompanyStore = create<CompanyStoreType>((set) => ({
             }
 
             // If the selectedRow is not already in the selectedItems array, add it
-            if (!prevState.selectedItems.some((item:any) => item === selectedRow)) {
-                return { selectedItems: [...prevState.selectedItems, selectedRow] };
+            if (
+                !prevState.selectedItems.some(
+                    (item: any) => item === selectedRow
+                )
+            ) {
+                return {
+                    selectedItems: [...prevState.selectedItems, selectedRow],
+                };
             }
 
             // If the selectedRow is already in the selectedItems array, remove it
-            return { selectedItems: prevState.selectedItems.filter((item:any) => item !== selectedRow) };
+            return {
+                selectedItems: prevState.selectedItems.filter(
+                    (item: any) => item !== selectedRow
+                ),
+            };
         });
     },
 
+    filterItems: [],
+
+    setFilterItems: (filter: number) => {
+        set((prevState) => {
+            if (!prevState.filterItems.includes(filter)) {
+                return {
+                    filterItems: [...prevState.filterItems, filter],
+                };
+            }
+
+            return {
+                filterItems: prevState.filterItems.filter(
+                    (item: any) => item !== filter
+                ),
+            };
+        });
+    },
 }));

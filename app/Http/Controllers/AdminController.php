@@ -143,4 +143,12 @@ class AdminController extends Controller
             return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
         }
     }
+
+    public function getProfiles(Request $request){
+        $users = User::all();
+
+        return Inertia::render('Profile/Accounts', [
+            "users" => $users
+        ]);
+    }
 }

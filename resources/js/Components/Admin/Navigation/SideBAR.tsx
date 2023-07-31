@@ -5,10 +5,11 @@ import {
     BuildingOfficeIcon,
     HomeIcon,
     TableCellsIcon,
+    UserIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "@inertiajs/react";
 import SidebarItem from "./SidebarItem";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, User2Icon } from "lucide-react";
 import AddCompanySheet from "../Sheets/MySheet";
 import { useEffect } from "react";
 import {
@@ -68,10 +69,24 @@ function SideBAR() {
                                 <SidebarItem
                                     type="link"
                                     href="/company/all"
-                                    text="Cégek"
+                                    text="Rendszerben szereplő cégek"
                                     full
                                 />
+                            </AccordionContent>
+                        </AccordionItem>
 
+                        <AccordionItem value="item-3" className="border-none" >
+                            <AccordionTrigger className="ml-2 flex flex-row justify-start gap-3 hover:no-underline">
+                                <UserIcon className="h-4" />
+                                <span>Hozzáférések kezelése</span>
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                <SidebarItem
+                                    type="link"
+                                    href="/profile/all"
+                                    text="Összes hozzáférés"
+                                    full
+                                />
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>

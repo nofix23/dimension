@@ -70,6 +70,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
         Route::post('/update', [AdminController::class, 'updateProfile']);
 
+        Route::get('/all', [AdminController::class, 'getProfiles']);
+
 
     });
 
