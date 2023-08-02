@@ -190,7 +190,17 @@ export default function Authenticated({
                 <div className="flex flex-row">
                     <SideBAR />
                     <div className="w-full mr-2">
-                        <div className="h-[200px] bg-gradient-to-b from-blue-100 to-transparent"></div>
+                        <div className="group/header">
+                            <div className="h-[200px] bg-gradient-to-b from-blue-100 to-transparent ">
+                                <div className="group/edit invisible group-hover/header:visible group-hover/header:cursor-pointer flex h-full justify-center items-start">
+                                    <div className="group-hover/header:text-black">
+                                        <div className="bg-white text-blue-900 hover:bg-gray-50 rounded-md mt-2 p-1 text-xs">
+                                            <button>Szerkesztés</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div className=" overflow-x-auto">
                             {header && (

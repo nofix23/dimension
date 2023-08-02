@@ -349,13 +349,13 @@ export default function Companies({ auth, companies, users }: PageProps) {
                 <div className="flex flex-row items-center">
                     {selectedItems.length > 0 ? (
                         <div className="flex">
-                            <div className="flex flex-row items-center gap-2 bg-blue-100 text-blue-900  p-2 hover:cursor-pointer hover:bg-blue-200">
+                            <div className="flex flex-row items-center gap-2 bg-blue-100 text-blue-900  p-2 hover:cursor-pointer hover:bg-blue-200 rounded-xl">
                                 <CheckBadgeIcon className="h-4" />
                                 <span>{selectedItems.length} Selected</span>
                             </div>
 
                             <div
-                                className="flex flex-row items-center bg-gray-50 p-2 hover:cursor-pointer hover:bg-gray-100"
+                                className="flex flex-row items-center bg-gray-50 p-2 hover:cursor-pointer hover:bg-gray-100 rounded-xl"
                                 onClick={() =>
                                     handleDeleteCompanySubmit(
                                         "/company/delete",
@@ -378,7 +378,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                 </div>
 
                 <div className="flex flex-row justify-end items-center">
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
                         <Popover>
                             <PopoverTrigger asChild>
                                 <span className="h-5 hover:cursor-pointer">
@@ -423,18 +423,18 @@ export default function Companies({ auth, companies, users }: PageProps) {
                             </PopoverContent>
                         </Popover>
                     </div>
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
                         <span>Rendezés</span>
                     </div>
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
                         <MagnifyingGlassIcon className="h-6" />
                     </div>
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
                         <EllipsisHorizontalIcon className="h-6" />
                     </div>
                     <Dialog>
                         <DialogTrigger>
-                            <Button className="bg-blue-100 hover:bg-blue-200 text-blue-900">
+                            <Button className="bg-blue-100 hover:bg-blue-200 text-blue-900 rounded-xl">
                                 <div className="flex flex-row justify-center items-center">
                                     <PlusIcon className="h-4" />
                                     <span>Hozzáadás</span>
