@@ -15,11 +15,11 @@ import {
     navigationMenuTriggerStyle,
 } from "@/Components/ui/navigation-menu";
 import { Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
-import { Sidebar } from "lucide-react";
+import { BellIcon, Sidebar } from "lucide-react";
 import SideBAR from "@/Components/Admin/Navigation/SideBAR";
 import { useGeneralStore } from "@/store/GeneralStore";
 import { Toaster } from "@/Components/ui/toaster";
-import { CubeTransparentIcon } from "@heroicons/react/24/outline";
+import { ArrowsRightLeftIcon, Bars3Icon, BellAlertIcon, CubeTransparentIcon } from "@heroicons/react/24/outline";
 
 export default function Authenticated({
     user,
@@ -29,19 +29,20 @@ export default function Authenticated({
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+    const generalStore = useGeneralStore();
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
-            <nav className="bg-[#343541] dark:bg-gray-800 border-gray-100 dark:border-gray-700">
+            <nav className="bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700">
                 <div className="mx-auto ml-8 mr-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            {/* <div className="flex flex-row items-center gap-4 cursor-pointer">
-                                <Sidebar
-                                    className="h-6 text-white"
-                                    onClick={setShowSidebar}
+                            <div className="flex flex-row items-center gap-4 cursor-pointer">
+                                <ArrowsRightLeftIcon
+                                    className="h-6"
+                                    onClick={generalStore.setShowSidebar}
                                 />
-                            </div> */}
+                            </div>
 
                             <div className="flex flex-row items-center ml-8 text-xl">
                                 <div className="bg-gray-200 rounded-2xl p-1">
@@ -53,6 +54,9 @@ export default function Authenticated({
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
+                            <div className="hover:cursor-pointer">
+                                <BellIcon className="h-5" />
+                            </div>
                             <div className="ml-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -83,14 +87,14 @@ export default function Authenticated({
                                         <Dropdown.Link
                                             href={route("profile.edit")}
                                         >
-                                            Profile
+                                            Profil
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route("logout")}
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            Kijelentkezés
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -183,9 +187,9 @@ export default function Authenticated({
                 </div>
             </nav>
             <div>
-                <div className="flex flex-row gap-4">
+                <div className="flex flex-row">
                     <SideBAR />
-                    <div className="mt-8">
+                    <div className="mt-8 overflow-x-auto">
                         {header && (
                             <div>
                                 <span>{header}</span>

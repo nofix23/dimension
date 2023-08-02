@@ -148,7 +148,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     )
                 )
 
-            
+
         }
 
         setUserProfile(selectedItem?.user);
@@ -337,19 +337,19 @@ export default function Companies({ auth, companies, users }: PageProps) {
         <AdminAuthLayout
             user={auth.user}
             header={
-                <div className="flex flex-row gap-4 items-center mt-24 ml-24 font-semibold text-3xl text-gray-600 leading-tight bg-gray-50 p-8">
+                <div className="flex flex-row gap-4 items-center font-semibold text-2xl text-orange-500 border-2  border-orange-50 leading-tight bg-gradient-to-r from-gray-50 to-transparent p-2">
                     <BuildingOffice2Icon className="h-12" />
-                    <span>Rendszerben szereplő cégek</span>
+                    <span>Cégek</span>
                 </div>
             }
         >
             <Head title="Cégek" />
 
-            <div className="flex flex-row justify-between mt-8 ml-24 border-b">
+            <div className="flex flex-row justify-between mt-8 pb-1 border-b w-full min-w-full">
                 <div className="flex flex-row items-center">
                     {selectedItems.length > 0 ? (
                         <div className="flex">
-                            <div className="flex flex-row items-center gap-2 bg-blue-100 text-blue-900  p-2 hover:cursor-pointer hover:bg-blue-200">
+                            <div className="flex flex-row items-center gap-2 bg-orange-100 text-orange-900  p-2 hover:cursor-pointer hover:bg-orange-200">
                                 <CheckBadgeIcon className="h-4" />
                                 <span>{selectedItems.length} Selected</span>
                             </div>
@@ -434,7 +434,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     </div>
                     <Dialog>
                         <DialogTrigger>
-                            <Button className="bg-blue-100 hover:bg-blue-200 text-blue-900">
+                            <Button className="bg-orange-100 hover:bg-orange-200 text-orange-900">
                                 <div className="flex flex-row justify-center items-center">
                                     <PlusIcon className="h-4" />
                                     <span>Hozzáadás</span>
@@ -455,15 +455,18 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     </Dialog>
                 </div>
             </div>
-            <Table className="min-w-[1400px] text-gray-500">
-                <TableHeader>
-                    <TableRow>
-                        <TableHead></TableHead>
-                        <TableHead className="w-[100px]">Cég neve</TableHead>
-                        <TableHead>
-                            <div className="flex flex-row gap-3">
-                                <span>Státusz: </span>
-                                {/* {Number(active) === -1 ? (
+            <div className="min-w-[1500px]">
+                <Table className=" text-gray-500 mt-6">
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead></TableHead>
+                            <TableHead className="w-[100px]">
+                                Cég neve
+                            </TableHead>
+                            <TableHead>
+                                <div className="flex flex-row gap-3">
+                                    <span>Státusz: </span>
+                                    {/* {Number(active) === -1 ? (
                                     <span className="text-blue-500">
                                         Összes
                                     </span>
@@ -476,89 +479,90 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                         Inaktív
                                     </span>
                                 )} */}
-                            </div>
-                        </TableHead>
-                        <TableHead>Ország</TableHead>
-                        <TableHead>E-mail cím</TableHead>
-                        <TableHead>Profilhoz csatolt</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody className="">
-                    {companyItems.map((company) => (
-                        <TableRow
-                            key={company.id}
-                            className="group/item hover:bg-gray-50 hover:cursor-pointer"
-                        >
-                            <TableCell className="">
-                                <div className="flex gap-3">
-                                    <div className="flex flex-row items-center justify-center gap-2 group/edit invisible group-hover/item:visible">
-                                        <EyeIcon
-                                            className="group-hover/edit:text-gray-700 h-5 text-gray-400 "
-                                            onClick={() =>
-                                                setSelectedItem(company)
-                                            }
-                                        />
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                        <Checkbox
-                                            id={company.id}
-                                            onCheckedChange={() =>
-                                                setSelectedItems(company)
-                                            }
-                                        />
-                                        <label
-                                            htmlFor="id"
-                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                        ></label>
-                                    </div>
                                 </div>
-                            </TableCell>
-
-                            <TableCell className="font-medium border-2">
-                                <div className="flex flex-row justify-center items-center">
-                                    {company.company_name}
-                                </div>
-                            </TableCell>
-                            <TableCell className="font-medium border-2">
-                                {company.active === 1 && (
-                                    <div className="flex justify-center items-center max-w-[50px] bg-green-100 text-green-900 rounded-xl">
-                                        <span>Aktív</span>
-                                    </div>
-                                )}
-
-                                {company.active === 0 && (
-                                    <div className="flex justify-center items-center max-w-[50px] bg-red-100 text-red-900 rounded-xl">
-                                        <span>Inaktív</span>
-                                    </div>
-                                )}
-                            </TableCell>
-                            <TableCell className="font-medium border-2">
-                                {company.country}
-                            </TableCell>
-                            <TableCell className="font-medium border-2">
-                                {company.email_address}
-                            </TableCell>
-                            <TableCell className="font-medium border-2">
-                                {company.user_id ? (
-                                    <div className="bg-green-100 text-green-900 max-w-[200px] rounded-xl">
-                                        <span>
-                                            @{company.user.name} /{" "}
-                                            {company.user.email} /{" "}
-                                            {company.user.role}
-                                        </span>
-                                    </div>
-                                ) : (
-                                    <div className="bg-red-100 text-red-900 max-w-[200px] rounded-xl">
-                                        <span>
-                                            Nincs még profillal párosítva
-                                        </span>
-                                    </div>
-                                )}
-                            </TableCell>
+                            </TableHead>
+                            <TableHead>Ország</TableHead>
+                            <TableHead>E-mail cím</TableHead>
+                            <TableHead>Profilhoz csatolt</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody className="">
+                        {companyItems.map((company) => (
+                            <TableRow
+                                key={company.id}
+                                className="group/item hover:bg-gray-50 hover:cursor-pointer"
+                            >
+                                <TableCell className="">
+                                    <div className="flex gap-3">
+                                        <div className="flex flex-row items-center justify-center gap-2 group/edit invisible group-hover/item:visible">
+                                            <EyeIcon
+                                                className="group-hover/edit:text-gray-700 h-5 text-gray-400 "
+                                                onClick={() =>
+                                                    setSelectedItem(company)
+                                                }
+                                            />
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                            <Checkbox
+                                                id={company.id.toString()}
+                                                onCheckedChange={() =>
+                                                    setSelectedItems(company)
+                                                }
+                                            />
+                                            <label
+                                                htmlFor="id"
+                                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                            ></label>
+                                        </div>
+                                    </div>
+                                </TableCell>
+
+                                <TableCell className="font-medium">
+                                    <div className="flex flex-row justify-center items-center">
+                                        {company.company_name}
+                                    </div>
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {company.active === 1 && (
+                                        <div className="flex justify-center items-center max-w-[50px] bg-green-100 text-green-900 rounded-xl">
+                                            <span>Aktív</span>
+                                        </div>
+                                    )}
+
+                                    {company.active === 0 && (
+                                        <div className="flex justify-center items-center max-w-[50px] bg-red-100 text-red-900 rounded-xl">
+                                            <span>Inaktív</span>
+                                        </div>
+                                    )}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {company.country}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {company.email_address}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {company.user_id ? (
+                                        <div className="bg-green-100 text-green-900 max-w-[200px] rounded-xl">
+                                            <span>
+                                                @{company.user.name} /{" "}
+                                                {company.user.email} /{" "}
+                                                {company.user.role}
+                                            </span>
+                                        </div>
+                                    ) : (
+                                        <div className="bg-red-100 text-red-900 max-w-[200px] rounded-xl">
+                                            <span>
+                                                Nincs még profillal párosítva
+                                            </span>
+                                        </div>
+                                    )}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
 
             {selectedItem && (
                 <Sheet open onOpenChange={() => setSelectedItem(null)}>
