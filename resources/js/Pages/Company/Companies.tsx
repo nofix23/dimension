@@ -142,13 +142,12 @@ export default function Companies({ auth, companies, users }: PageProps) {
 
             const inactive = filterItems.find((item) => item === 0);
 
-                setCompanyItems(
-                    companies.filter(
-                        (company) => company.active === active || company.active === inactive
-                    )
+            setCompanyItems(
+                companies.filter(
+                    (company) =>
+                        company.active === active || company.active === inactive
                 )
-
-
+            );
         }
 
         setUserProfile(selectedItem?.user);
@@ -390,7 +389,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                     <label>Státusz szerinti szűrés</label>
                                     <hr></hr>
 
-                                    <div className="flex flex-row gap-3">
+                                    <div className="flex flex-row gap-3 items-center">
                                         <Checkbox
                                             id="active"
                                             onCheckedChange={() =>
@@ -399,13 +398,13 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                         />
                                         <label
                                             htmlFor="id"
-                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 bg-green-100 text-green-90 rounded-xl p-1"
+                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 bg-green-100 text-green-90 rounded-xl p-2"
                                         >
                                             Aktív
                                         </label>
                                     </div>
 
-                                    <div className="flex flex-row gap-3">
+                                    <div className="flex flex-row gap-3 items-center">
                                         <Checkbox
                                             id="inactive"
                                             onCheckedChange={() =>
@@ -414,7 +413,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                         />
                                         <label
                                             htmlFor="id"
-                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 bg-red-100 text-red-90 rounded-xl p-1"
+                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 bg-red-100 text-red-90 rounded-xl p-2"
                                         >
                                             Inaktív
                                         </label>
@@ -460,27 +459,8 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     <TableHeader>
                         <TableRow>
                             <TableHead></TableHead>
-                            <TableHead className="w-[100px]">
-                                Cég neve
-                            </TableHead>
-                            <TableHead>
-                                <div className="flex flex-row gap-3">
-                                    <span>Státusz: </span>
-                                    {/* {Number(active) === -1 ? (
-                                    <span className="text-blue-500">
-                                        Összes
-                                    </span>
-                                ) : Number(active) === 1 ? (
-                                    <span className="text-green-500">
-                                        Aktív
-                                    </span>
-                                ) : (
-                                    <span className="text-red-500">
-                                        Inaktív
-                                    </span>
-                                )} */}
-                                </div>
-                            </TableHead>
+                            <TableHead>Cég neve</TableHead>
+                            <TableHead>Státusz</TableHead>
                             <TableHead>Ország</TableHead>
                             <TableHead>E-mail cím</TableHead>
                             <TableHead>Profilhoz csatolt</TableHead>
@@ -493,7 +473,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 className="group/item hover:bg-gray-50 hover:cursor-pointer"
                             >
                                 <TableCell className="">
-                                    <div className="flex gap-3">
+                                    <div className="flex gap-3 justify-center">
                                         <div className="flex flex-row items-center justify-center gap-2 group/edit invisible group-hover/item:visible">
                                             <EyeIcon
                                                 className="group-hover/edit:text-gray-700 h-5 text-gray-400 "
@@ -518,20 +498,18 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 </TableCell>
 
                                 <TableCell className="font-medium">
-                                    <div className="flex flex-row justify-center items-center">
-                                        {company.company_name}
-                                    </div>
+                                    {company.company_name}
                                 </TableCell>
-                                <TableCell className="font-medium">
+                                <TableCell className="font-medium flex">
                                     {company.active === 1 && (
-                                        <div className="flex justify-center items-center max-w-[50px] bg-green-100 text-green-900 rounded-xl">
-                                            <span>Aktív</span>
+                                        <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl p-2">
+                                            Aktív
                                         </div>
                                     )}
 
                                     {company.active === 0 && (
-                                        <div className="flex justify-center items-center max-w-[50px] bg-red-100 text-red-900 rounded-xl">
-                                            <span>Inaktív</span>
+                                        <div className="bg-red-100 text-red-900 max-w-[100px] rounded-xl p-2">
+                                            Inaktív
                                         </div>
                                     )}
                                 </TableCell>
@@ -543,18 +521,12 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 </TableCell>
                                 <TableCell className="font-medium">
                                     {company.user_id ? (
-                                        <div className="bg-green-100 text-green-900 max-w-[200px] rounded-xl">
-                                            <span>
-                                                @{company.user.name} /{" "}
-                                                {company.user.email} /{" "}
-                                                {company.user.role}
-                                            </span>
+                                        <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl justify-center flex flex-row">
+                                            <CheckIcon className="h-6" />
                                         </div>
                                     ) : (
-                                        <div className="bg-red-100 text-red-900 max-w-[200px] rounded-xl">
-                                            <span>
-                                                Nincs még profillal párosítva
-                                            </span>
+                                        <div className="bg-red-100 text-red-900 max-w-[100px] rounded-xl justify-center flex flex-row">
+                                            <XMarkIcon className="h-6" />
                                         </div>
                                     )}
                                 </TableCell>
