@@ -40,7 +40,7 @@ function SideBAR() {
 
                     <Accordion type="multiple">
                         <AccordionItem value="item-1" className="border-none">
-                            <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline hover:bg-gray-100 hover:cursor-pointer">
+                            <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline hover:bg-gray-100 hover:cursor-pointer text-xs">
                                 <BoltIcon className="h-4" />
                                 <span>Megrendelések</span>
                             </AccordionTrigger>
@@ -63,7 +63,7 @@ function SideBAR() {
                         </AccordionItem>
 
                         <AccordionItem value="item-2" className="border-none">
-                            <AccordionTrigger className="ml-2 flex flex-row justify-start gap-3 hover:no-underline hover:bg-gray-100 hover:cursor-pointer">
+                            <AccordionTrigger className="ml-2 flex flex-row justify-start gap-3 hover:no-underline hover:bg-gray-100 hover:cursor-pointer text-xs">
                                 <BuildingOfficeIcon className="h-4" />
                                 <span>Céges beállítások</span>
                             </AccordionTrigger>
@@ -80,7 +80,7 @@ function SideBAR() {
                         </AccordionItem>
 
                         <AccordionItem value="item-3" className="border-none">
-                            <AccordionTrigger className="ml-2 flex flex-row justify-start gap-3 hover:no-underline hover:bg-gray-100 hover:cursor-pointer">
+                            <AccordionTrigger className="ml-2 flex flex-row justify-start gap-3 hover:no-underline hover:bg-gray-100 hover:cursor-pointer text-xs">
                                 <UserIcon className="h-4" />
                                 <span>Hozzáférések kezelése</span>
                             </AccordionTrigger>

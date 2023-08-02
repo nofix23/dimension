@@ -337,7 +337,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
         <AdminAuthLayout
             user={auth.user}
             header={
-                <div className="flex flex-row gap-4 items-center font-semibold text-2xl text-orange-500 border-2  border-orange-50 leading-tight bg-gradient-to-r from-gray-50 to-transparent p-2">
+                <div className="flex flex-row gap-4 mt-4 items-center font-semibold text-2xl text-blue-500 leading-tight p-2">
                     <BuildingOffice2Icon className="h-12" />
                     <span>Cégek</span>
                 </div>
@@ -349,7 +349,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                 <div className="flex flex-row items-center">
                     {selectedItems.length > 0 ? (
                         <div className="flex">
-                            <div className="flex flex-row items-center gap-2 bg-orange-100 text-orange-900  p-2 hover:cursor-pointer hover:bg-orange-200">
+                            <div className="flex flex-row items-center gap-2 bg-blue-100 text-blue-900  p-2 hover:cursor-pointer hover:bg-blue-200">
                                 <CheckBadgeIcon className="h-4" />
                                 <span>{selectedItems.length} Selected</span>
                             </div>
@@ -434,7 +434,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     </div>
                     <Dialog>
                         <DialogTrigger>
-                            <Button className="bg-orange-100 hover:bg-orange-200 text-orange-900">
+                            <Button className="bg-blue-100 hover:bg-blue-200 text-blue-900">
                                 <div className="flex flex-row justify-center items-center">
                                     <PlusIcon className="h-4" />
                                     <span>Hozzáadás</span>
@@ -442,7 +442,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                             </Button>
                         </DialogTrigger>
 
-                        <DialogContent className="min-w-[600px] bg-gray-50">
+                        <DialogContent className="min-w-[600px] bg-white">
                             <DialogHeader>
                                 <DialogTitle className="mb-8">
                                     Cég hozzáadása a rendszerhez
@@ -849,7 +849,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                                                 </div>
                                                                             </Button>
                                                                         </DialogTrigger>
-                                                                        <DialogContent className="min-w-[600px] bg-gray-50">
+                                                                        <DialogContent className="min-w-[600px] bg-white">
                                                                             <DialogHeader>
                                                                                 <DialogTitle>
                                                                                     Profil
@@ -1056,7 +1056,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                                 </Button>
                                                             )}
                                                         </DialogTrigger>
-                                                        <DialogContent className="min-w-[600px] bg-gray-50">
+                                                        <DialogContent className="min-w-[600px] bg-white">
                                                             <DialogHeader>
                                                                 <DialogTitle>
                                                                     Profil

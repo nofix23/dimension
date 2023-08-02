@@ -189,15 +189,19 @@ export default function Authenticated({
             <div>
                 <div className="flex flex-row">
                     <SideBAR />
-                    <div className="mt-8 overflow-x-auto">
-                        {header && (
-                            <div>
-                                <span>{header}</span>
-                            </div>
-                        )}
+                    <div className="w-full mr-2">
+                        <div className="h-[200px] bg-gradient-to-b from-blue-100 to-transparent"></div>
 
-                        <main>{children}</main>
-                        <Toaster />
+                        <div className=" overflow-x-auto">
+                            {header && (
+                                <div>
+                                    <span>{header}</span>
+                                </div>
+                            )}
+
+                            <main>{children}</main>
+                            <Toaster />
+                        </div>
                     </div>
                 </div>
             </div>
