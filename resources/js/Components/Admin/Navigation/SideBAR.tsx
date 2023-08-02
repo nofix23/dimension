@@ -23,7 +23,7 @@ function SideBAR() {
     const { showSidebar } = useGeneralStore();
 
     return (
-        <div className="bg-white h-screen ml-6 ">
+        <div className="bg-white h-screen ml-6 border-r pr-2">
             {/* Sidebar teljes */}
             {showSidebar ? (
                 <div className="md:w-[250px] flex flex-col mt-3 font-semibold">

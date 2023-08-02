@@ -3,7 +3,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import { User } from "@/types";
 import {
     NavigationMenu,
@@ -19,7 +19,19 @@ import { BellIcon, Sidebar } from "lucide-react";
 import SideBAR from "@/Components/Admin/Navigation/SideBAR";
 import { useGeneralStore } from "@/store/GeneralStore";
 import { Toaster } from "@/Components/ui/toaster";
-import { ArrowsRightLeftIcon, Bars3Icon, BellAlertIcon, CubeTransparentIcon } from "@heroicons/react/24/outline";
+import {
+    ArrowsRightLeftIcon,
+    Bars3Icon,
+    BellAlertIcon,
+    CheckIcon,
+    CubeTransparentIcon,
+} from "@heroicons/react/24/outline";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/Components/ui/popover";
+import { useToast } from "@/Components/ui/use-toast";
 
 export default function Authenticated({
     user,
@@ -30,6 +42,73 @@ export default function Authenticated({
         useState(false);
 
     const generalStore = useGeneralStore();
+
+    const { toast } = useToast();
+    type ToastType = {
+        type: "success" | "failed";
+        title: string;
+        description: string;
+    };
+
+    const showToast = ({ type, title, description }: ToastType) => {
+        if (type === "failed") {
+            toast({
+                variant: "destructive",
+                title: title,
+                description: description,
+                className: "bg-red-100 text-red-900 font-bold",
+            });
+        }
+
+        if (type === "success") {
+            toast({
+                title: title,
+                description: description,
+                className: "bg-green-100 text-green-900 font-bold text-xl",
+            });
+        }
+    };
+
+    function handleUpdate(
+        slug: string,
+        method: "get" | "post" | "put" | "patch" | "delete",
+        onBefore?: string,
+        values?: any
+    ) {
+        router[method](
+            slug,
+            values,
+            {
+                onBefore: () => {
+                    if (onBefore) {
+                        const reply = confirm(onBefore);
+                        if (!reply) {
+                            // setLoading(false);
+                            return false;
+                        }
+                    }
+                },
+
+                onSuccess: () => {
+                    showToast({
+                        type: "success",
+                        title: "Sikeres művelet!",
+                        description: "Borító frissítve!",
+                    });
+                },
+
+                onError: (resp: any) => {
+                    showToast({
+                        type: "failed",
+                        title: "Hiba!",
+                        description: resp.errors,
+                    });
+                },
+
+                onFinish: () => {},
+            }
+        );
+    }
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -191,18 +270,181 @@ export default function Authenticated({
                     <SideBAR />
                     <div className="w-full mr-2">
                         <div className="group/header">
-                            <div className="h-[200px] bg-gradient-to-b from-blue-100 to-transparent ">
+                            <div
+                                className={`h-[200px] ${
+                                    user.header_appearance == ""
+                                        ? "bg-gradient-to-b from-green-200 to-transparent"
+                                        : user.header_appearance
+                                } border-b`}
+                            >
                                 <div className="group/edit invisible group-hover/header:visible group-hover/header:cursor-pointer flex h-full justify-center items-start">
                                     <div className="group-hover/header:text-black">
                                         <div className="bg-white text-blue-900 hover:bg-gray-50 rounded-md mt-2 p-1 text-xs">
-                                            <button>Szerkesztés</button>
+                                            <Popover>
+                                                <PopoverTrigger asChild>
+                                                    <span className="h-5 hover:cursor-pointer">
+                                                        Szerkesztés
+                                                    </span>
+                                                </PopoverTrigger>
+                                                <PopoverContent className="min-w-[400px] bg-white rounded-md">
+                                                    <div className="p-2 text-xs">
+                                                        <span className="p-1 border-b">
+                                                            Borító
+                                                            megváltoztatása
+                                                        </span>
+
+                                                        <div className="p-4 flex flex-wrap gap-2">
+                                                            <div
+                                                                className="p-12 bg-gradient-to-b from-green-200 to-transparent cursor-pointer"
+                                                                onClick={() =>
+                                                                    handleUpdate(
+                                                                        "/profile/appearance",
+                                                                        "post",
+                                                                        "",
+                                                                        {
+                                                                            appearance:
+                                                                                "bg-gradient-to-b from-green-200 to-transparent",
+                                                                        }
+                                                                    )
+                                                                }
+                                                            >
+                                                                <div>
+                                                                    {user.header_appearance ==
+                                                                    "bg-gradient-to-b from-green-200 to-transparent" ? (
+                                                                        <CheckIcon className="h-3 absolute" />
+                                                                    ) : (
+                                                                        ""
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                className="p-12 bg-gradient-to-b from-blue-200 to-transparent cursor-pointer"
+                                                                onClick={() =>
+                                                                    handleUpdate(
+                                                                        "/profile/appearance",
+                                                                        "post",
+                                                                        "",
+                                                                        {
+                                                                            appearance:
+                                                                                "bg-gradient-to-b from-blue-200 to-transparent",
+                                                                        }
+                                                                    )
+                                                                }
+                                                            >
+                                                                <div>
+                                                                    {user.header_appearance ==
+                                                                    "bg-gradient-to-b from-blue-200 to-transparent" ? (
+                                                                        <CheckIcon className="h-3 absolute" />
+                                                                    ) : (
+                                                                        ""
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                className="p-12 bg-gradient-to-b from-red-200 to-transparent cursor-pointer"
+                                                                onClick={() =>
+                                                                    handleUpdate(
+                                                                        "/profile/appearance",
+                                                                        "post",
+                                                                        "",
+                                                                        {
+                                                                            appearance:
+                                                                                "bg-gradient-to-b from-red-200 to-transparent",
+                                                                        }
+                                                                    )
+                                                                }
+                                                            >
+                                                                <div>
+                                                                    {user.header_appearance ==
+                                                                    "bg-gradient-to-b from-red-200 to-transparent" ? (
+                                                                        <CheckIcon className="h-3 absolute" />
+                                                                    ) : (
+                                                                        ""
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                className="p-12 bg-gradient-to-b from-purple-200 to-transparent cursor-pointer"
+                                                                onClick={() =>
+                                                                    handleUpdate(
+                                                                        "/profile/appearance",
+                                                                        "post",
+                                                                        "",
+                                                                        {
+                                                                            appearance:
+                                                                                "bg-gradient-to-b from-purple-200 to-transparent",
+                                                                        }
+                                                                    )
+                                                                }
+                                                            >
+                                                                <div>
+                                                                    {user.header_appearance ==
+                                                                    "bg-gradient-to-b from-purple-200 to-transparent" ? (
+                                                                        <CheckIcon className="h-3 absolute" />
+                                                                    ) : (
+                                                                        ""
+                                                                    )}
+                                                                </div>
+                                                            </div>
+
+                                                            <div
+                                                                className="p-12 bg-gradient-to-b from-yellow-200 to-transparent cursor-pointer"
+                                                                onClick={() =>
+                                                                    handleUpdate(
+                                                                        "/profile/appearance",
+                                                                        "post",
+                                                                        "",
+                                                                        {
+                                                                            appearance:
+                                                                                "bg-gradient-to-b from-yellow-200 to-transparent",
+                                                                        }
+                                                                    )
+                                                                }
+                                                            >
+                                                                <div>
+                                                                    {user.header_appearance ==
+                                                                    "bg-gradient-to-b from-yellow-200 to-transparent" ? (
+                                                                        <CheckIcon className="h-3 absolute" />
+                                                                    ) : (
+                                                                        ""
+                                                                    )}
+                                                                </div>
+                                                            </div>
+
+                                                            <div
+                                                                className="p-12 bg-gradient-to-b from-gray-200 to-transparent cursor-pointer"
+                                                                onClick={() =>
+                                                                    handleUpdate(
+                                                                        "/profile/appearance",
+                                                                        "post",
+                                                                        "",
+                                                                        {
+                                                                            appearance:
+                                                                                "bg-gradient-to-b from-gray-200 to-transparent",
+                                                                        }
+                                                                    )
+                                                                }
+                                                            >
+                                                                <div>
+                                                                    {user.header_appearance ==
+                                                                    "bg-gradient-to-b from-gray-200 to-transparent" ? (
+                                                                        <CheckIcon className="h-3 absolute" />
+                                                                    ) : (
+                                                                        ""
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </PopoverContent>
+                                            </Popover>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className=" overflow-x-auto">
+                        <div className=" overflow-x-auto ml-12 mr-12">
                             {header && (
                                 <div>
                                     <span>{header}</span>

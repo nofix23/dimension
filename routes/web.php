@@ -72,6 +72,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
         Route::get('/all', [AdminController::class, 'getProfiles']);
 
+        Route::post('/appearance', [AdminController::class, 'setAppearance']);
+
 
     });
 

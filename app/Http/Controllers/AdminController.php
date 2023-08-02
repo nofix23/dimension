@@ -151,4 +151,12 @@ class AdminController extends Controller
             "users" => $users
         ]);
     }
+
+    public function setAppearance(Request $request){
+        $user = User::find(Auth::user()->id);
+        $user->header_appearance = $request->appearance;
+        $user->save();
+
+        return Redirect::back();
+    }
 }

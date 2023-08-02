@@ -6,6 +6,7 @@ export interface User {
     password: string;
     password_confirmation: string;
     role: string;
+    header_appearance: string;
 }
 
 export type Company = {

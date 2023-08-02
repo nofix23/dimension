@@ -337,7 +337,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
         <AdminAuthLayout
             user={auth.user}
             header={
-                <div className="flex flex-row gap-4 mt-4 items-center font-semibold text-2xl text-blue-500 leading-tight p-2">
+                <div className="flex flex-row gap-4 mt-4 items-center font-semibold text-2xl text-gray-600 leading-tight p-2">
                     <BuildingOffice2Icon className="h-12" />
                     <span>Cégek</span>
                 </div>

@@ -9,6 +9,9 @@ type GeneralStoreType = {
 
     isSubmitted: boolean;
     setSubmitted: (state: boolean) => void;
+
+    headerPalette: string;
+    setHeaderPalette: (state: string) => void;
 };
 
 export const useGeneralStore = create<GeneralStoreType>((set) => ({
@@ -25,5 +28,10 @@ export const useGeneralStore = create<GeneralStoreType>((set) => ({
     isSubmitted: false,
     setSubmitted: () => {
         set((state: any) => ({ isSubmitted: state }));
+    },
+
+    headerPalette: "",
+    setHeaderPalette: () => {
+        set((state: any) => ({ headerPalette: state }));
     },
 }));
