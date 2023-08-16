@@ -113,17 +113,17 @@ export default function Authenticated({
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
             <nav className="bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700">
-                <div className="mx-auto ml-8 mr-8">
+                <div className="mx-auto ml-4 mr-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            <div className="flex flex-row items-center gap-4 cursor-pointer">
+                            <div className="flex flex-row items-center gap-4 cursor-pointer mr-8 max-sm:hidden">
                                 <ArrowsRightLeftIcon
                                     className="h-6"
                                     onClick={generalStore.setShowSidebar}
                                 />
                             </div>
 
-                            <div className="flex flex-row items-center ml-8 text-xl">
+                            <div className="flex flex-row justify-start items-center text-xl">
                                 <div className="bg-gray-200 rounded-2xl p-1">
                                     <Link href="/dashboard">
                                         <CubeTransparentIcon className="h-8" />
@@ -271,7 +271,7 @@ export default function Authenticated({
                     <div className="w-full mr-2">
                         <div className="group/header">
                             <div
-                                className={`h-[200px] ${
+                                className={`h-[150px] ${
                                     user.header_appearance == ""
                                         ? "bg-gradient-to-b from-green-200 to-transparent"
                                         : user.header_appearance
@@ -444,7 +444,7 @@ export default function Authenticated({
                             </div>
                         </div>
 
-                        <div className=" overflow-x-auto ml-12 mr-12">
+                        <div className=" mb-[100px] overflow-x-auto ml-12 mr-12">
                             {header && (
                                 <div>
                                     <span>{header}</span>

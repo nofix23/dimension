@@ -48,6 +48,12 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
+    Route::prefix('/user')->group(function () {
+
+        Route::post('/delete', [AdminController::class, 'deleteUser']);
+    });
+
+
     // Routes for company
 
     Route::prefix('/company')->group(function () {

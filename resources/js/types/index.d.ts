@@ -6,7 +6,9 @@ export interface User {
     password: string;
     password_confirmation: string;
     role: string;
+    created_at: string;
     header_appearance: string;
+    company: Company;
 }
 
 export type Company = {
@@ -22,6 +24,7 @@ export type Company = {
     phone_number: string;
     active: number;
     comment: string;
+    created_at: string;
     user_id: number;
     user: User;
 };

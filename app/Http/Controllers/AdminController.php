@@ -59,7 +59,6 @@ class AdminController extends Controller
 
     public function updateCompany(UpdateCompanyRequest $request){
         try {
-
             $updateModelService = new UpdateModel(Company::query()->find($request->id), $request->validated());
 
             $updateModelService->updateModel();
@@ -67,6 +66,21 @@ class AdminController extends Controller
             return Redirect::back();
         } catch (Exception $e) {
             return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
+        }
+    }
+
+    public function deleteUser(Request $request){
+        try {
+            $user = User::find($request->user_id);
+
+            if(!$user){
+                return Redirect::back()->withErrors(["errors" => "Nem létező felhasználó!"]);
+            }
+            $user->delete();
+            return Redirect::back();
+        } catch (Exception $e) {
+            return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
+
         }
     }
 
@@ -145,7 +159,7 @@ class AdminController extends Controller
     }
 
     public function getProfiles(Request $request){
-        $users = User::all();
+        $users = User::with(['Company'])->get();
 
         return Inertia::render('Profile/Accounts', [
             "users" => $users

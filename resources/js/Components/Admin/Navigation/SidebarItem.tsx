@@ -31,7 +31,7 @@ function SidebarItem({
                         {type === "link" ? (
                             <Link
                                 href={href}
-                                className={`p-2 flex text-xs flex-row items-center gap-4 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer
+                                className={`pt-4 pb-4 flex text-md flex-row justify-start items-center gap-4 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer
                                 ${
                                     routeName && route().current(routeName)
                                         ? "bg-gray-50/20"
@@ -40,11 +40,11 @@ function SidebarItem({
 
                             `}
                             >
-                                {Icon && <Icon className="h-4" />}
+                                {Icon && <Icon className="h-6" />}
                                 <span>{text}</span>
                             </Link>
                         ) : (
-                            <div className="p-2 flex flex-row items-center gap-4 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer">
+                            <div className="p-2 flex flex-row items-center justify-start gap-4 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer">
                                 <div
                                     className={` flex flex-row gap-3
                                 ${
