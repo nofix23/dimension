@@ -4,6 +4,7 @@ import { PageProps } from '@/types';
 import { useEffect } from 'react';
 import { useGeneralStore } from '@/store/GeneralStore';
 import { HomeIcon } from 'lucide-react';
+import Calendar from '@/Components/Admin/Dashboard/Calendar';
 
 export default function Dashboard({ auth }: PageProps) {
 
@@ -20,7 +21,7 @@ export default function Dashboard({ auth }: PageProps) {
             <Head title="Vezérlőpult" />
 
             <div className="mt-8">
-                <h1>Content</h1>
+                <Calendar />
             </div>
         </AdminAuthLayout>
     );

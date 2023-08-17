@@ -6,6 +6,6 @@ export const initialValues = () => {
         email: "",
         password: "",
         password_confirmation: "",
-        role: "",
+        role: "admin",
     };
 };

@@ -20,7 +20,7 @@ function Groups() {
     );
 
     return (
-        <div>
+        <div className="">
             <div className="flex flex-wrap gap-8">
                 <Group groupName="Adminisztrátor" users={admin_accounts} />
                 <Group groupName="Alkalmazott" users={employee_accounts} />

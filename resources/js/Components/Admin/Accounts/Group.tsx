@@ -13,7 +13,7 @@ function Group({ groupName, users }: Props) {
         <div className="flex flex-col w-[250px]">
             <div>
                 <div className="border-b p-2">
-                    <span>
+                    <span className="font-bold">
                         {groupName} ({users.length})
                     </span>
                 </div>

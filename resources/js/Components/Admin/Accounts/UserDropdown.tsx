@@ -86,8 +86,17 @@ function UserDropdown({ user, children} :PropsWithChildren<Props>) {
                   </DropdownMenuLabel>
                   <hr></hr>
                   <div>
-                      
-                      <div className="flex flex-row gap-2 items-center hover:bg-gray-50 hover:cursor-pointer p-2 text-sm" onClick={() => handleDeleteUser("/user/delete", "post", "Biztosan törlöd ezt a hozzáférést?", {user_id: user.id})}>
+                      <div
+                          className="flex flex-row gap-2 items-center hover:bg-red-200 bg-red-100 text-red-900 hover:cursor-pointer p-2 text-sm"
+                          onClick={() =>
+                              handleDeleteUser(
+                                  "/user/delete",
+                                  "post",
+                                  "Biztosan törlöd ezt a hozzáférést?",
+                                  { user_id: user.id }
+                              )
+                          }
+                      >
                           <TrashIcon className="h-4" />
                           <span>Hozzáférés törlése</span>
                       </div>

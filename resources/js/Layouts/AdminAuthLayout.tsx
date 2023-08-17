@@ -444,7 +444,7 @@ export default function Authenticated({
                             </div>
                         </div>
 
-                        <div className=" mb-[100px] overflow-x-auto ml-12 mr-12">
+                        <div className=" mb-[100px] overflow-x-auto ml-8 md:ml-12 md:mr-12">
                             {header && (
                                 <div>
                                     <span>{header}</span>

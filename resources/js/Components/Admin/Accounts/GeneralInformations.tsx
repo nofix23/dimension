@@ -7,7 +7,7 @@ type Props = {
 function GeneralInformations({ count}: Props) {
   return (
     <div className="text-xl ml-2 mb-4">
-        <span>Összes: {count}</span>
+        <span className="font-bold">Összes: {count}</span>
     </div>
   )
 }

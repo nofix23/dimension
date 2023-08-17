@@ -264,7 +264,7 @@ function CompanySheet({
                                         <hr></hr>
                                         <div>
                                             <div
-                                                className="flex flex-row gap-2 items-center hover:bg-gray-50 hover:cursor-pointer p-2 text-sm"
+                                                className="flex flex-row gap-2 items-center hover:bg-red-200 hover:cursor-pointer p-2 text-sm bg-red-100 text-red-900"
                                                 onClick={() =>
                                                     handleDeleteCompanySubmit(
                                                         "/company/delete",
@@ -279,7 +279,7 @@ function CompanySheet({
                                                 }
                                             >
                                                 <TrashIcon className="h-4" />
-                                                <span>Törlés</span>
+                                                <span>Cég törlése</span>
                                             </div>
                                         </div>
                                     </DropdownMenuContent>

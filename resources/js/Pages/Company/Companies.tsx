@@ -191,7 +191,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                     handleDeleteCompanySubmit(
                                         "/company/delete",
                                         "post",
-                                        "",
+                                        "Biztosan törlöd a kijelölt cégeket?",
                                         {
                                             type: "multiple",
                                             selectedItems: selectedItems,
@@ -286,19 +286,27 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     </Dialog>
                 </div>
             </div>
-            <div className="min-w-[1500px]">
+            <div className="max-w-[1300px]">
                 <Table className=" text-gray-500 mt-6">
                     <TableHeader>
                         <TableRow>
                             <TableHead></TableHead>
-                            <TableHead>Cég neve</TableHead>
-                            <TableHead>Státusz</TableHead>
-                            <TableHead>Ország</TableHead>
+                            <TableHead className="font-extrabold">
+                                Cég neve
+                            </TableHead>
+                            <TableHead className="font-extrabold">
+                                E-mail cím
+                            </TableHead>
+                            <TableHead className="font-extrabold">
+                                Státusz
+                            </TableHead>
+                            {/* <TableHead>Ország</TableHead>
                             <TableHead>Város</TableHead>
                             <TableHead>Irányítószám</TableHead>
-                            <TableHead>Utca</TableHead>
-                            <TableHead>E-mail cím</TableHead>
-                            <TableHead>Profilhoz csatolt</TableHead>
+                            <TableHead>Utca</TableHead> */}
+                            <TableHead className="font-extrabold">
+                                Hozzáférés beállítva
+                            </TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody className="">
@@ -339,6 +347,9 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 <TableCell className="font-medium">
                                     {company.company_name}
                                 </TableCell>
+                                <TableCell className="font-medium">
+                                    {company.email_address}
+                                </TableCell>
                                 <TableCell className="font-medium flex">
                                     {company.active === 1 && (
                                         <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl p-2">
@@ -352,21 +363,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                         </div>
                                     )}
                                 </TableCell>
-                                <TableCell className="font-medium">
-                                    {company.country}
-                                </TableCell>
-                                <TableCell className="font-medium">
-                                    {company.city}
-                                </TableCell>
-                                <TableCell className="font-medium">
-                                    {company.postal_code}
-                                </TableCell>
-                                <TableCell className="font-medium">
-                                    {company.street}
-                                </TableCell>
-                                <TableCell className="font-medium">
-                                    {company.email_address}
-                                </TableCell>
+
                                 <TableCell className="font-medium">
                                     {company.user_id ? (
                                         <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl justify-center flex flex-row">

@@ -15,7 +15,7 @@ type GeneralStoreType = {
 };
 
 export const useGeneralStore = create<GeneralStoreType>((set) => ({
-    showSidebar: true,
+    showSidebar: false,
     setShowSidebar: () => {
         set((state: any) => ({ showSidebar: !state.showSidebar }));
     },
