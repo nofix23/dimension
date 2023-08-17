@@ -4,18 +4,18 @@ import interactionPlugin from "@fullcalendar/interaction";
 import huLocale from "@fullcalendar/core/locales/hu";
 import { useState } from "react";
 import ProjectSheet from "./ProjectSheet";
-import AddEvent from "./AddEvent";
+import AddEvent from "./AddEventSheet";
 import { set } from "react-hook-form";
+import AddEventSheet from "./AddEventSheet";
 
 function Calendar() {
+    const [selectedDate, setSelectedDate] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [show, setShow] = useState<boolean>(false);
-
-    function handleAddClick() {
-        setShow(!show);
-    }
-
-
+    const handleDateClick = (info: any) => {
+        setSelectedDate(info.dateStr);
+        setIsModalOpen(true);
+    };
 
     function renderEventContent(eventInfo: any) {
         return (
@@ -43,7 +43,8 @@ function Calendar() {
                 eventClassNames={
                     "bg-green-400 hover:bg-green-500 border-none cursor-pointer"
                 }
-                dateClick={handleAddClick}
+                dayCellClassNames={"cursor-pointer hover:bg-green-100"}
+                dateClick={handleDateClick}
                 viewClassNames={"bg-gray-50"}
                 locale={huLocale}
                 eventContent={renderEventContent}
@@ -66,13 +67,10 @@ function Calendar() {
                     },
                 ]}
             />
-            <AddEvent show={show} setShow={() => handleAddClick()} />;
+
+            {isModalOpen ? <AddEventSheet show={isModalOpen} setShow={setIsModalOpen}/> : ""}
         </>
     );
 }
-
-
-
-
 
 export default Calendar;

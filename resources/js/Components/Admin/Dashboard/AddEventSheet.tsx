@@ -1,22 +1,28 @@
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/Components/ui/sheet';
-import { PropsWithChildren } from 'react';
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/Components/ui/sheet";
+import { PropsWithChildren } from "react";
 
 type Props = {
-    projectId: string;
+    show: boolean;
+    setShow: (value: boolean) => void;
 };
 
-function ProjectSheet({ projectId, children }: PropsWithChildren<Props>) {
-
+function AddEventSheet({ show, setShow, children }: PropsWithChildren<Props>) {
     return (
         <div>
-            <Sheet>
-                <SheetTrigger asChild>{children}</SheetTrigger>
+            <Sheet open={show} onOpenChange={() => setShow(false)}>
                 <SheetContent
-                    side="left"
+                    side="right"
                     className="w-[400px] md:min-w-[800px] bg-white overflow-y-auto"
                 >
                     <SheetHeader>
-                        <SheetTitle>{projectId}</SheetTitle>
+                        <SheetTitle>Új esemény hozzáadása a naptárhoz!</SheetTitle>
                         <SheetDescription>
                             This action cannot be undone. This will permanently
                             delete your account and remove your data from our
@@ -29,4 +35,4 @@ function ProjectSheet({ projectId, children }: PropsWithChildren<Props>) {
     );
 }
 
-export default ProjectSheet
+export default AddEventSheet;
