@@ -132,13 +132,13 @@ export default function Companies({ auth, companies, users }: PageProps) {
         >
             <Head title="Cégek" />
 
-            <div className="flex flex-wrap sm:flex-row justify-between mt-8 pb-1 border-b w-full min-w-full">
+            <div className="flex flex-wrap sm:flex-row justify-between mt-8 pb-1 border-b w-full min-w-full text-xs">
                 <div className="flex flex-row items-center">
                     {selectedItems.length > 0 ? (
                         <div className="flex gap-2">
                             <div className="flex flex-row items-center p-2 hover:cursor-pointer bg-[#01A2D6] text-white hover:bg-blue-400 border-slate-300">
                                 <CheckBadgeIcon className="h-4" />
-                                <span>{selectedItems.length} Selected</span>
+                                <span>{selectedItems.length} kiválasztva</span>
                             </div>
 
                             <div
@@ -167,7 +167,10 @@ export default function Companies({ auth, companies, users }: PageProps) {
                 <div className="flex flex-row justify-end items-center">
                     <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
                         <Popover>
-                            <PopoverTrigger asChild>
+                            <PopoverTrigger
+                                asChild
+                                className="flex items-center"
+                            >
                                 <span className="h-5 hover:cursor-pointer">
                                     Filter
                                 </span>
@@ -236,6 +239,9 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 E-mail cím
                             </TableHead>
                             <TableHead className="font-extralight">
+                                Kapcsolattartók száma
+                            </TableHead>
+                            <TableHead className="font-extralight">
                                 Státusz
                             </TableHead>
                             {/* <TableHead>Ország</TableHead>
@@ -287,6 +293,9 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 </TableCell>
                                 <TableCell className="font-medium">
                                     {company.email_address}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    { company.contacts.length }
                                 </TableCell>
                                 <TableCell className="font-medium flex">
                                     {company.active === 1 && (

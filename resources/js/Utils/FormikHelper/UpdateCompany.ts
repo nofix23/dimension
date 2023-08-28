@@ -12,8 +12,10 @@ export const initialValues = (initValues: Company | null) => {
         door_bell: initValues?.door_bell,
         email_address: initValues?.email_address,
         phone_number: initValues?.phone_number,
+        website: initValues?.website,
         active: initValues?.active,
         comment: initValues?.comment,
+        ranking: initValues?.ranking,
         user_id: initValues?.user_id,
         user: initValues?.user
     };

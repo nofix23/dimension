@@ -75,7 +75,9 @@ function CreateCompanyForm() {
                 door_bell: values.door_bell,
                 email_address: values.email_address,
                 phone_number: values.phone_number,
+                website: values.website,
                 active: values.active,
+                ranking: values.ranking,
                 comment: values.comment,
             },
             {
@@ -213,6 +215,24 @@ function CreateCompanyForm() {
 
                                             <div className="grid grid-cols-4 items-center gap-4">
                                                 <Label
+                                                    htmlFor="website"
+                                                    className="text-right"
+                                                >
+                                                    Weboldal:
+                                                </Label>
+                                                <FormikField
+                                                    id="website"
+                                                    name="website"
+                                                    type="text"
+                                                    required={false}
+                                                    placeholder=""
+                                                    readOnly={false}
+                                                    className="col-span-3"
+                                                />
+                                            </div>
+
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label
                                                     htmlFor="country"
                                                     className="text-right"
                                                 >
@@ -319,6 +339,7 @@ function CreateCompanyForm() {
                                                 />
                                             </div>
 
+                                            
                                             <div className="grid grid-cols-4 items-center gap-4">
                                                 <Label
                                                     htmlFor="comment"

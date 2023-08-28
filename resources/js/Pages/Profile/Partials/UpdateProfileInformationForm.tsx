@@ -37,7 +37,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="name"
-                        className="mt-1 block w-full h-[50px] pl-3 border-[#01A2D6] border-2"
+                        className="mt-1 block w-full h-[50px] pl-3 border-[#01A2D6] border-2 font-bold"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         required
@@ -54,7 +54,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     <TextInput
                         id="email"
                         type="email"
-                        className="mt-1 block w-full h-[50px] pl-3 border-[#01A2D6] border-2"
+                        className="mt-1 block w-full h-[50px] pl-3 border-[#01A2D6] border-2 font-bold"
                         value={data.email}
                         onChange={(e) => setData("email", e.target.value)}
                         required

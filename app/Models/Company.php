@@ -19,13 +19,20 @@ class Company extends Model
         'door_bell',
         'email_address',
         'phone_number',
+        'website',
         'user_id',
         'comment',
+        'ranking',
         'active',
     ];
 
     public function User()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function Contacts()
+    {
+        return $this->hasMany(CompanyContact::class, 'company_id', 'id');
     }
 }

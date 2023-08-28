@@ -12,12 +12,12 @@ function AccountData({ user}: Props) {
               <span>Általános adatok</span>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 text-left">
               <div className="flex flex-row items-center gap-3 ml-4">
                   <div className="w-[200px]">
                       <span>Név:</span>
                   </div>
-                  <div className="bg-gray-50 p-2 w-[300px] rounded-xl">
+                  <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                       <span className="ml-2">{user.name}</span>
                   </div>
               </div>
@@ -26,7 +26,7 @@ function AccountData({ user}: Props) {
                   <div className="w-[200px]">
                       <span>E-mail:</span>
                   </div>
-                  <div className="bg-gray-50 p-2 w-[300px] rounded-xl">
+                  <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                       <span className="ml-2">{user.email}</span>
                   </div>
               </div>
@@ -35,7 +35,7 @@ function AccountData({ user}: Props) {
                   <div className="w-[200px]">
                       <span>Jogosultság:</span>
                   </div>
-                  <div className="bg-gray-50 p-2 w-[300px] rounded-xl">
+                  <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                       <span className="ml-2">
                           {user.role == "admin" ? "Adminisztrátor" : ""}
                           {user.role == "employee" ? "Alkalmazott" : ""}
@@ -49,7 +49,7 @@ function AccountData({ user}: Props) {
                   <div className="w-[200px]">
                       <span>Létrehozás dátuma:</span>
                   </div>
-                  <div className="bg-gray-50 p-2 w-[300px] rounded-xl">
+                  <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                       <span className="ml-2">
                           {new Date(user.created_at).toLocaleString()}
                       </span>

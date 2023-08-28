@@ -22,8 +22,11 @@ return new class extends Migration
             $table->text("door_bell")->nullable();
             $table->text("email_address")->nullable();
             $table->text("phone_number")->nullable();
+            $table->text("website")->nullable();
             $table->boolean("active")->default(false);
             $table->text("comment")->nullable();
+            $table->integer("ranking")->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

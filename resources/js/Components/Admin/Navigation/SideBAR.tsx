@@ -138,7 +138,7 @@ function SideBAR() {
                         </div>
                     </div>
                 ) : (
-                    <div className="flex flex-col ml-4 gap-8 mt-8 font-semibold">
+                    <div className="flex flex-col ml-2 gap-8 mt-8 font-semibold">
                         <div className="cursor-pointer group/item flex flex-row">
                             <Link href="/dashboard">
                                 <HomeIcon className="h-6" />

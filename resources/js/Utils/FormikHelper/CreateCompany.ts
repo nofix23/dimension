@@ -12,8 +12,10 @@ export const initialValues = () => {
         door_bell: "",
         email_address: "",
         phone_number: "",
+        website: "",
         active: "",
         comment: "",
+        ranking: "",
         user_id: "",
         user: "",
     };

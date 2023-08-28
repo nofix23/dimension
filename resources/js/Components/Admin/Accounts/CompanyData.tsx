@@ -15,12 +15,12 @@ function CompanyData({ user, users }: Props) {
                 <span>Általános adatok</span>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 text-left">
                 <div className="flex flex-row items-center gap-3 ml-4">
-                    <div className="md:w-[200px]">
+                    <div className="w-[200px]">
                         <span>Cég:</span>
                     </div>
-                    <div className="bg-gray-50 p-2 md:w-[300px] rounded-xl">
+                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                         <span className="ml-2">
                             {user.company.company_name}
                         </span>
@@ -28,10 +28,10 @@ function CompanyData({ user, users }: Props) {
                 </div>
 
                 <div className="flex flex-row items-center gap-3 ml-4">
-                    <div className="md:w-[200px]">
+                    <div className="w-[200px]">
                         <span>E-mail:</span>
                     </div>
-                    <div className="bg-gray-50 p-2 md:w-[300px] rounded-xl">
+                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                         <span className="ml-2">
                             {user.company.email_address}
                         </span>
@@ -39,10 +39,10 @@ function CompanyData({ user, users }: Props) {
                 </div>
 
                 <div className="flex flex-row items-center gap-3 ml-4">
-                    <div className="md:w-[200px]">
+                    <div className="w-[200px]">
                         <span>Telefonszám:</span>
                     </div>
-                    <div className="bg-gray-50 p-2 md:w-[300px] rounded-xl">
+                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                         <span className="ml-2">
                             {user.company.phone_number}
                         </span>
@@ -50,10 +50,25 @@ function CompanyData({ user, users }: Props) {
                 </div>
 
                 <div className="flex flex-row items-center gap-3 ml-4">
-                    <div className="md:w-[200px]">
+                    <div className="w-[200px]">
+                        <span>Weboldal:</span>
+                    </div>
+                    <div className="bg-gray-50 p-4 w-[500px] rounded-xl overflow-x-auto">
+                            <a
+                                className="underline text-blue-400"
+                                href={user.company.website}
+                                target="_blank"
+                            >
+                                {user.company.website}
+                            </a>
+                    </div>
+                </div>
+
+                <div className="flex flex-row items-center gap-3 ml-4">
+                    <div className="w-[200px]">
                         <span>Létrehozás dátuma:</span>
                     </div>
-                    <div className="bg-gray-50 p-2 md:w-[300px] rounded-xl">
+                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                         <span className="ml-2">
                             {new Date(user.company.created_at).toLocaleString()}
                         </span>
@@ -61,12 +76,12 @@ function CompanyData({ user, users }: Props) {
                 </div>
 
                 <div className="flex flex-row items-center gap-3 ml-4">
-                    <div className="md:w-[200px]">
+                    <div className="w-[200px]">
                         <span>Cég státusz:</span>
                     </div>
                     <div
                         className={twMerge(
-                            "bg-gray-100 p-2 md:w-[300px] rounded-xl",
+                            "bg-gray-100 p-2 w-[500px] rounded-xl",
                             user.company.active == 1
                                 ? "bg-green-100"
                                 : "bg-red-100"
@@ -78,7 +93,12 @@ function CompanyData({ user, users }: Props) {
                     </div>
                 </div>
                 <div className="">
-                    <UpdateCompanyForm company={user.company} users={users} user={user} triggerText="Szerkesztés" />
+                    <UpdateCompanyForm
+                        company={user.company}
+                        users={users}
+                        user={user}
+                        triggerText="Szerkesztés"
+                    />
                 </div>
             </div>
         </div>

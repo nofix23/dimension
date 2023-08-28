@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
+use App\Models\CompanyContact;
 use App\Models\User;
 use App\Services\CreateModel;
 use App\Services\UpdateModel;
@@ -47,7 +48,7 @@ class AdminController extends Controller
 
     public function getCompanies(Request $request)
     {
-        $companies = Company::with(['User'])->get();
+        $companies = Company::with(['User', 'Contacts'])->get();
 
         $users = User::all();
 
@@ -58,6 +59,7 @@ class AdminController extends Controller
     }
 
     public function updateCompany(UpdateCompanyRequest $request){
+
         try {
             $updateModelService = new UpdateModel(Company::query()->find($request->id), $request->validated());
 
@@ -172,5 +174,32 @@ class AdminController extends Controller
         $user->save();
 
         return Redirect::back();
+    }
+
+    public function addContact(Request $request){
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'phone_number' => 'max:255',
+                'email_address' => 'required|string|email|max:255',
+                'type' => 'required|string|max:255',
+                'company_id' => 'required'
+            ]);
+
+            $createModelService = new CreateModel(new CompanyContact, $validated);
+
+            $createModelService->createModelFromRequest();
+
+            return Redirect::back();
+        } catch (Exception $e) {
+            return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
+        }    }
+
+    public function updateContact(Request $request)
+    {
+    }
+
+    public function deleteContact(Request $request)
+    {
     }
 }

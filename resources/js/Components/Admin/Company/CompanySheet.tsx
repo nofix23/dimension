@@ -62,6 +62,8 @@ import {
     SheetTrigger,
 } from "@/Components/ui/sheet";
 import { Toaster } from "@/Components/ui/toaster";
+import CreateCompanyContactForm from "../Forms/CreateCompanyContactForm";
+import Contacts from "./Contacts";
 
 type Props = {
     side: "left" | "right" | "top" | "bottom";
@@ -123,6 +125,7 @@ function CompanySheet({
                 company_name: values.company_name,
                 email_address: values.email_address,
                 phone_number: values.phone_number,
+                website: values.website,
                 comment: values.comment,
                 active: values.active,
             },
@@ -268,7 +271,7 @@ function CompanySheet({
                                     {company.company_name} adatai
                                 </span>
                                 <DropdownMenu>
-                                    <DropdownMenuTrigger className="">
+                                    <DropdownMenuTrigger>
                                         <EllipsisHorizontalIcon className="h-6" />
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent className="bg-white w-64">
@@ -314,9 +317,11 @@ function CompanySheet({
                             >
                                 {({ isValid, values }) => (
                                     <Form>
-                                        <div className="flex flex-col gap-5 text-md">
-                                            <div className="flex flex-row gap-8 items-center">
-                                                <span>Cég neve:</span>
+                                        <div className="flex flex-col gap-5 text-md ml-2">
+                                            <div className="flex flex-row items-center">
+                                                <div className="w-40 sm:w-45">
+                                                    <span>Cég neve:</span>
+                                                </div>
                                                 <FormikField
                                                     id="company_name"
                                                     name="company_name"
@@ -324,11 +329,13 @@ function CompanySheet({
                                                     required={false}
                                                     placeholder=""
                                                     readOnly={false}
-                                                    className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
+                                                    className="hover:bg-gray-50 w-[500px] text-[#01A2D6] font-bold"
                                                 />
                                             </div>
-                                            <div className="flex flex-row gap-8 items-center">
-                                                <span>E-mail cím:</span>
+                                            <div className="flex flex-row items-center">
+                                                <div className="w-40 sm:w-45">
+                                                    <span>E-mail cím:</span>
+                                                </div>
                                                 <FormikField
                                                     id="email_address"
                                                     name="email_address"
@@ -336,11 +343,13 @@ function CompanySheet({
                                                     required={false}
                                                     placeholder=""
                                                     readOnly={false}
-                                                    className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
+                                                    className="hover:bg-gray-50 w-[500px] text-[#01A2D6] font-bold"
                                                 />
                                             </div>
-                                            <div className="flex flex-row gap-8 items-center">
-                                                <span>Telefonszám: </span>
+                                            <div className="flex flex-row items-center">
+                                                <div className="w-40 sm:w-45">
+                                                    <span>Telefonszám:</span>
+                                                </div>
                                                 <FormikField
                                                     id="phone_number"
                                                     name="phone_number"
@@ -348,12 +357,29 @@ function CompanySheet({
                                                     required={false}
                                                     placeholder=""
                                                     readOnly={false}
-                                                    className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
+                                                    className="hover:bg-gray-50 w-[500px] text-[#01A2D6] font-bold"
                                                 />
                                             </div>
 
-                                            <div className="flex flex-row gap-8 items-center">
-                                                <span>Aktív: </span>
+                                            <div className="flex flex-row items-center">
+                                                <div className="w-40 sm:w-45">
+                                                    <span>Weboldal:</span>
+                                                </div>
+                                                <FormikField
+                                                    id="website"
+                                                    name="website"
+                                                    type="text"
+                                                    required={false}
+                                                    placeholder=""
+                                                    readOnly={false}
+                                                    className="hover:bg-gray-50 w-[500px] text-[#01A2D6] font-bold"
+                                                />
+                                            </div>
+
+                                            <div className="flex flex-row items-center">
+                                                <div className="w-40 sm:w-45">
+                                                    <span>Aktív:</span>
+                                                </div>
                                                 <Field
                                                     id="active"
                                                     name="active"
@@ -362,7 +388,7 @@ function CompanySheet({
                                                     placeholder=""
                                                     readOnly={false}
                                                     as="select"
-                                                    className="p-3 focus:outline-none hover:bg-gray-50 cursor-pointer min-w-[100px] text-[#01A2D6]"
+                                                    className="p-3 focus:outline-none hover:bg-gray-50 cursor-pointer w-full sm:w-[100px] text-[#01A2D6] font-bold"
                                                 >
                                                     <option value={1}>
                                                         <div>
@@ -377,11 +403,12 @@ function CompanySheet({
                                                 </Field>
                                             </div>
 
-                                            <div className="flex flex-row gap-8 items-center">
-                                                <span className="">
-                                                    Felhasználói profil
-                                                    társítása:
-                                                </span>
+                                            <div className="flex flex-row gap-2 items-center">
+                                                <div className="w-40 sm:w-45">
+                                                    <span>
+                                                        Felhasználói profil:
+                                                    </span>
+                                                </div>
 
                                                 <div className="">
                                                     <Popover>
@@ -397,7 +424,7 @@ function CompanySheet({
                                                                         <ArrowDownIcon className="h-5 " />
                                                                     </div>
                                                                 ) : (
-                                                                    <div className="flex flex-row gap-3 p-1  bg-red-100 text-red-900 hover:cursor-pointer">
+                                                                    <div className="flex flex-row gap-3 p-1  bg-red-100 text-red-900 hover:cursor-pointer sm:w-[500px]">
                                                                         <span>
                                                                             Nincs
                                                                             párosítva
@@ -602,7 +629,7 @@ function CompanySheet({
                                                                                 readOnly={
                                                                                     false
                                                                                 }
-                                                                                className="col-span-3 text-[#01A2D6]"
+                                                                                className="col-span-3 text-[#01A2D6] font-bold"
                                                                             />
                                                                         </div>
 
@@ -624,7 +651,7 @@ function CompanySheet({
                                                                                 readOnly={
                                                                                     false
                                                                                 }
-                                                                                className="col-span-3 text-[#01A2D6]"
+                                                                                className="col-span-3 text-[#01A2D6] font-bold"
                                                                             />
                                                                         </div>
 
@@ -647,7 +674,7 @@ function CompanySheet({
                                                                                     false
                                                                                 }
                                                                                 as="select"
-                                                                                className="col-span-3 text-[#01A2D6]"
+                                                                                className="col-span-3 text-[#01A2D6] font-bold"
                                                                             >
                                                                                 <option value="employee">
                                                                                     Alkalmazott
@@ -678,7 +705,9 @@ function CompanySheet({
                                             </div>
 
                                             <div className="flex flex-col gap-4">
-                                                <span>Megjegyzés:</span>
+                                                <div className="flex flex-col items-start">
+                                                    <span>Megjegyzés:</span>
+                                                </div>
 
                                                 <FormikField
                                                     id="comment"
@@ -688,7 +717,7 @@ function CompanySheet({
                                                     placeholder=""
                                                     readOnly={false}
                                                     as="textarea"
-                                                    className="border-gray-50 border-2 p-4 min-h-[100px] hover:bg-gray-50 text-[#01A2D6]"
+                                                    className="border-gray-50 border-2 p-4 min-h-[100px] hover:bg-gray-50 text-[#01A2D6] font-bold"
                                                 />
                                             </div>
 
@@ -706,6 +735,10 @@ function CompanySheet({
                             </Formik>
                         </SheetDescription>
                     </SheetHeader>
+                    <CreateCompanyContactForm>
+                        <Contacts contacts={company?.contacts} />
+                    </CreateCompanyContactForm>
+
                     <Toaster />
                 </SheetContent>
             </Sheet>

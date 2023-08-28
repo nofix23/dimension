@@ -22,11 +22,22 @@ export type Company = {
     door_bell: string;
     email_address: string;
     phone_number: string;
+    website: string;
     active: number;
     comment: string;
+    ranking: number;
     created_at: string;
     user_id: number;
     user: User;
+    contacts: CompanyContact[];
+};
+
+export type CompanyContact = {
+    company_id: number;
+    name: string;
+    phone_number: string;
+    email_address: string;
+    type: string;
 };
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {

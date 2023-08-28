@@ -73,7 +73,17 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
         Route::post('/delete', [AdminController::class, 'deleteCompany']);
 
+        Route::prefix('/contact')->group(function () {
 
+            Route::post('/create', [AdminController::class, 'addContact']);
+
+            Route::post('/update', [AdminController::class, 'updateContact']);
+
+            Route::post('/delete', [AdminController::class, 'deleteContact']);
+
+
+
+        });
 
     });
 

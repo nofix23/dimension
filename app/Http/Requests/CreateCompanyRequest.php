@@ -34,6 +34,8 @@ class CreateCompanyRequest extends FormRequest
             'door_bell' => 'max:255',
             'email_address' => 'required|email|max:255',
             'phone_number' => 'required|max:255',
+            'website' => 'nullable',
+            'ranking' => 'nullable',
             'comment' => '',
         ];
     }

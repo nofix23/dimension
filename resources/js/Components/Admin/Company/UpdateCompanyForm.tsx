@@ -73,6 +73,7 @@ function UpdateCompanyForm({ company, user, triggerText, TriggerIcon }: Props) {
                 company_name: values.company_name,
                 email_address: values.email_address,
                 phone_number: values.phone_number,
+                website: values.website,
                 comment: values.comment,
                 active: values.active,
             },
@@ -158,7 +159,7 @@ function UpdateCompanyForm({ company, user, triggerText, TriggerIcon }: Props) {
                                                 required={false}
                                                 placeholder=""
                                                 readOnly={false}
-                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
+                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6] font-bold"
                                             />
                                         </div>
                                         <div className="flex flex-row gap-8 items-center">
@@ -170,7 +171,7 @@ function UpdateCompanyForm({ company, user, triggerText, TriggerIcon }: Props) {
                                                 required={false}
                                                 placeholder=""
                                                 readOnly={false}
-                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
+                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6] font-bold"
                                             />
                                         </div>
                                         <div className="flex flex-row gap-8 items-center">
@@ -182,7 +183,20 @@ function UpdateCompanyForm({ company, user, triggerText, TriggerIcon }: Props) {
                                                 required={false}
                                                 placeholder=""
                                                 readOnly={false}
-                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
+                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6] font-bold"
+                                            />
+                                        </div>
+
+                                        <div className="flex flex-row gap-8 items-center">
+                                            <span>Weboldal: </span>
+                                            <FormikField
+                                                id="website"
+                                                name="website"
+                                                type="text"
+                                                required={false}
+                                                placeholder=""
+                                                readOnly={false}
+                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6] font-bold"
                                             />
                                         </div>
 
@@ -196,7 +210,7 @@ function UpdateCompanyForm({ company, user, triggerText, TriggerIcon }: Props) {
                                                 placeholder=""
                                                 readOnly={false}
                                                 as="select"
-                                                className="p-3 focus:outline-none hover:bg-gray-50 min-w-[100px] text-[#01A2D6]"
+                                                className="p-3 focus:outline-none hover:bg-gray-50 min-w-[100px] text-[#01A2D6] font-bold"
                                             >
                                                 <option value={1}>
                                                     <div>
@@ -222,7 +236,7 @@ function UpdateCompanyForm({ company, user, triggerText, TriggerIcon }: Props) {
                                                 placeholder=""
                                                 readOnly={false}
                                                 as="textarea"
-                                                className="border-gray-50 border-2 p-4 min-h-[100px] hover:bg-gray-50 text-[#01A2D6]"
+                                                className="border-gray-50 border-2 p-4 min-h-[100px] hover:bg-gray-50 text-[#01A2D6] font-bold"
                                             />
                                         </div>
 

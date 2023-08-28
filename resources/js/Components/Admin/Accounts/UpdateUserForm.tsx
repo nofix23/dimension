@@ -152,7 +152,7 @@ function UpdateUserForm({ user, triggerText, TriggerIcon }: Props) {
                                             required={true}
                                             placeholder=""
                                             readOnly={false}
-                                            className="col-span-3 text-[#01A2D6]"
+                                            className="col-span-3 text-[#01A2D6] font-bold"
                                         />
                                     </div>
 
@@ -170,7 +170,7 @@ function UpdateUserForm({ user, triggerText, TriggerIcon }: Props) {
                                             required={true}
                                             placeholder=""
                                             readOnly={false}
-                                            className="col-span-3 text-[#01A2D6]"
+                                            className="col-span-3 text-[#01A2D6] font-bold"
                                         />
                                     </div>
 
@@ -189,7 +189,7 @@ function UpdateUserForm({ user, triggerText, TriggerIcon }: Props) {
                                             placeholder=""
                                             readOnly={false}
                                             as="select"
-                                            className="col-span-3 text-[#01A2D6]"
+                                            className="col-span-3 text-[#01A2D6] font-bold"
                                         >
                                             <option value="employee">
                                                 Alkalmazott
