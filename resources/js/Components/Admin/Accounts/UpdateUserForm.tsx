@@ -15,7 +15,6 @@ import {
     DialogTrigger,
 } from "@/Components/ui/dialog";
 import { UserIcon } from "@heroicons/react/24/outline";
-import PrimaryButton from "@/Components/PrimaryButton";
 import { useState } from "react";
 
 type Props = {

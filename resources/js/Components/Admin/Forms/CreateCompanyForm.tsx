@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import { Input } from "@/Components/ui/input";
 import { useForm } from "react-hook-form";
 import { router } from "@inertiajs/react";
@@ -24,7 +22,6 @@ import {
     DialogTrigger,
 } from "@/Components/ui/dialog";
 import { BuildingOfficeIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { DialogClose } from "@radix-ui/react-dialog";
 
 function CreateCompanyForm() {
     const form = useForm();

@@ -8,67 +8,26 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/Components/ui/popover";
-import { Button } from "@/Components/ui/button";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/Components/ui/table";
-import {
-    AlignRightIcon,
-    ArrowRightIcon,
-    CheckIcon,
-    CircleIcon,
-    Edit2Icon,
-    Edit3Icon,
-    EyeIcon,
-    PlusIcon,
-    TrashIcon,
-    UserCircle,
-    UserCircleIcon,
-    UserIcon,
-} from "lucide-react";
+import { CheckIcon, EyeIcon, TrashIcon } from "lucide-react";
 import {
     BuildingOffice2Icon,
-    BuildingOfficeIcon,
     CheckBadgeIcon,
     EllipsisHorizontalIcon,
-    MagnifyingGlassCircleIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
-import {
-    ArrowDownIcon,
-    MagnifyingGlassIcon,
-    Pencil2Icon,
-} from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
-import { Field, Form, Formik } from "formik";
-
-
-import { useForm } from "react-hook-form";
 import { useToast } from "@/Components/ui/use-toast";
-import { initialValues } from "@/Utils/FormikHelper/UpdateCompany";
-import { initialValues as initCreateProfileValues } from "@/Utils/FormikHelper/CreateProfile";
-import { initialValues as initUpdateProfileValues } from "@/Utils/FormikHelper/UpdateProfile";
-
-import FormikField from "@/Components/FormikField";
 import CreateCompanyForm from "@/Components/Admin/Forms/CreateCompanyForm";
-import { Label } from "@/Components/ui/label";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/Components/ui/dropdown-menu";
-
 import { Checkbox } from "@/Components/ui/checkbox";
-import CreateProfile from "@/Components/Admin/Forms/CreateProfile";
 import CompanySheet from "@/Components/Admin/Company/CompanySheet";
 
 export default function Companies({ auth, companies, users }: PageProps) {
@@ -93,7 +52,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
 
     useEffect(() => {
         setCompanyItems(companies);
-    }, [ companies ])
+    }, [companies]);
 
     type ToastType = {
         type: "success" | "failed";
@@ -154,12 +113,12 @@ export default function Companies({ auth, companies, users }: PageProps) {
             },
 
             onFinish: () => {
-                setSelectedItem(selectedItems.splice(selectedItems.length-1, 1));
+                setSelectedItem(
+                    selectedItems.splice(selectedItems.length - 1, 1)
+                );
             },
         });
     }
-
-
 
     return (
         <AdminAuthLayout
