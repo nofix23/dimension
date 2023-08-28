@@ -261,7 +261,7 @@ export default function Authenticated({
             <div>
                 <div className="flex flex-row">
                     <SideBAR />
-                    <div className="w-full mr-2 overflow-y-auto max-h-screen">
+                    <div className="w-full mr-2 overflow-y-auto max-h-screen pb-[200px]">
                         {/* <div className="group/header">
                             <div
                                 className={`h-[100px] md:h-[150px] ${
@@ -437,7 +437,7 @@ export default function Authenticated({
                             </div>
                         </div> */}
 
-                        <div className="ml-8 md:ml-12 md:mr-12 min-w-screen h-full mb-[500px]">
+                        <div className="ml-8 md:ml-12 md:mr-12 min-w-screen">
                             {header && (
                                 <div>
                                     <span>{header}</span>

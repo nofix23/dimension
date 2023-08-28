@@ -173,7 +173,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
         >
             <Head title="Cégek" />
 
-            <div className="flex flex-row justify-between mt-8 pb-1 border-b w-full min-w-full">
+            <div className="flex flex-wrap sm:flex-row justify-between mt-8 pb-1 border-b w-full min-w-full">
                 <div className="flex flex-row items-center">
                     {selectedItems.length > 0 ? (
                         <div className="flex gap-2">
@@ -292,7 +292,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                         {companyItems.map((company) => (
                             <TableRow
                                 key={company.id}
-                                className="group/item hover:bg-[#01A2D6]/10 hover:cursor-pointer"
+                                className="group/item hover:bg-[#01A2D6]/10 hover:cursor-pointer hover:text-[#01A2D6]"
                             >
                                 <TableCell className="">
                                     <div className="flex flex-row gap-3">
@@ -304,7 +304,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                                 user={company.user}
                                             >
                                                 <div className="flex flex-row items-center justify-center gap-2 group/edit invisible group-hover/item:visible">
-                                                    <EyeIcon className="group-hover/edit:text-gray-700 h-5 text-gray-400 " />
+                                                    <EyeIcon className="h-5 text-[#01A2D6] " />
                                                 </div>
                                             </CompanySheet>
                                         </div>
