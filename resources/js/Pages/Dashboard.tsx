@@ -12,13 +12,13 @@ export default function Dashboard({ auth }: PageProps) {
         <AdminAuthLayout
             user={auth.user}
             header={
-                <div className="flex flex-row gap-4 mt-4 items-center font-semibold text-2xl text-gray-600 leading-tight p-2">
+                <div className="flex flex-row gap-4 mt-8 items-center font-semibold text-2xl text-gray-600 leading-tight p-2">
                     <HomeIcon className="h-12" />
-                    <span>Vezérlőpult</span>
+                    <span>Irányítópult</span>
                 </div>
             }
         >
-            <Head title="Vezérlőpult" />
+            <Head title="Irányítópult" />
 
             <div className="mt-8">
                 <Calendar />

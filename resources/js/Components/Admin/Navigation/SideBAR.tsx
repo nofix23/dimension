@@ -1,10 +1,13 @@
 import { useGeneralStore } from "@/store/GeneralStore";
 import {
+    ArrowLeftCircleIcon,
     ArrowLeftIcon,
     BoltIcon,
     BuildingOfficeIcon,
+    Cog6ToothIcon,
     HomeIcon,
     TableCellsIcon,
+    TruckIcon,
     UserIcon,
     UsersIcon,
 } from "@heroicons/react/24/outline";
@@ -24,8 +27,8 @@ function SideBAR() {
     const { showSidebar } = useGeneralStore();
 
     return (
-        <div>
-            <div className="bg-white h-screen border-r pr-2 max-sm:hidden text-gray-700">
+        <div className="bg-[#01A2D6] sm:border-blue-200 sm:border-t">
+            <div className="bg-[#01A2D6] h-screen pr-2 max-sm:hidden text-slate-50">
                 {/* Sidebar teljes */}
                 {showSidebar ? (
                     <div className="md:w-[250px] ml-4 flex flex-col mt-3 font-semibold">
@@ -35,22 +38,20 @@ function SideBAR() {
                                 href="/dashboard"
                                 routeName="dashboard"
                                 Icon={HomeIcon}
-                                text="Vezérlőpult"
+                                text="Irányítópult"
                                 full
+                                className="pl-3"
                             />
                         </div>
 
-                        <Accordion
-                            type="multiple"
-                            defaultValue={["item-1", "item-2", "item-3"]}
-                        >
+                        <Accordion type="multiple" defaultValue={[]}>
                             <AccordionItem
                                 value="item-1"
                                 className="border-none"
                             >
-                                <div className="flex flex-row items-center hover:bg-gray-100 hover:cursor-pointer">
-                                    <BoltIcon className="h-6" />
-                                    <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline text-md">
+                                <div className="flex flex-row items-center hover:bg-gray-100 hover:text-gray-900 cursor-pointer pl-3">
+                                    <BoltIcon className="h-5" />
+                                    <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline text-sm">
                                         <span>Megrendelések</span>
                                     </AccordionTrigger>
                                 </div>
@@ -62,12 +63,14 @@ function SideBAR() {
                                             href="#"
                                             text="Aktív árajánlatok"
                                             full
+                                            className="pl-3"
                                         />
                                         <SidebarItem
                                             type="link"
-                                            href="#"
-                                            text="Összes árajánlat"
+                                            href="/projects"
+                                            text="Összes"
                                             full
+                                            className="pl-3"
                                         />
                                     </div>
                                 </AccordionContent>
@@ -77,9 +80,9 @@ function SideBAR() {
                                 value="item-2"
                                 className="border-none"
                             >
-                                <div className="flex flex-row items-center hover:bg-gray-100 hover:cursor-pointer">
-                                    <BuildingOfficeIcon className="h-6" />{" "}
-                                    <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline text-md">
+                                <div className="flex flex-row items-center hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer pl-3">
+                                    <BuildingOfficeIcon className="h-5" />{" "}
+                                    <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline text-sm">
                                         <span>Céges beállítások</span>{" "}
                                     </AccordionTrigger>
                                 </div>
@@ -91,6 +94,7 @@ function SideBAR() {
                                             href="/company/all"
                                             text="Cégek"
                                             full
+                                            className="pl-3"
                                         />
                                     </div>
                                 </AccordionContent>
@@ -100,9 +104,9 @@ function SideBAR() {
                                 value="item-3"
                                 className="border-none"
                             >
-                                <div className="flex flex-row items-center hover:bg-gray-100 hover:cursor-pointer">
-                                    <UserIcon className="h-6" />{" "}
-                                    <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline text-md">
+                                <div className="flex flex-row items-center hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer pl-3">
+                                    <UserIcon className="h-5" />
+                                    <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline text-sm">
                                         <span>Hozzáférések kezelése</span>
                                     </AccordionTrigger>
                                 </div>
@@ -114,11 +118,24 @@ function SideBAR() {
                                             href="/profile/all"
                                             text="Hozzáférések"
                                             full
+                                            className="pl-3"
                                         />
                                     </div>
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
+
+                        <div className="">
+                            <SidebarItem
+                                type="link"
+                                href="#"
+                                routeName="dashboard"
+                                Icon={Cog6ToothIcon}
+                                text="Beállítások"
+                                full
+                                className="pl-3"
+                            />
+                        </div>
                     </div>
                 ) : (
                     <div className="flex flex-col ml-4 gap-8 mt-8 font-semibold">
@@ -127,18 +144,44 @@ function SideBAR() {
                                 <HomeIcon className="h-6" />
                             </Link>
 
-                            <div className="group/edit invisible group-hover/item:visible absolute left-20">
-                                <span className="group-hover/edit:text-gray-700 ">
-                                    Vezérlőpult
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                                <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
+                                    <ArrowLeftIcon className="h-4" />
+                                    Irányítópult
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="cursor-pointer group/item flex flex-row">
+                            <Link href="/company/all">
+                                <BoltIcon className="h-6" />
+                            </Link>
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                                <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
+                                    <ArrowLeftIcon className="h-4" />
+                                    Aktív árajánlatok
                                 </span>
                             </div>
                         </div>
                         <div className="cursor-pointer group/item flex flex-row">
+                            <Link href="/projects">
+                                <TruckIcon className="h-6" />
+                            </Link>
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                                <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
+                                    <ArrowLeftIcon className="h-4" />
+                                    Megrendelések
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="cursor-pointer group/item flex flex-row">
                             <Link href="/company/all">
                                 <BuildingOfficeIcon className="h-6" />
                             </Link>
-                            <div className="group/edit invisible group-hover/item:visible absolute left-20">
-                                <span className="group-hover/edit:text-gray-700 ">
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                                <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
+                                    <ArrowLeftIcon className="h-4" />
                                     Cégek
                                 </span>
                             </div>
@@ -148,9 +191,22 @@ function SideBAR() {
                             <Link href="/profile/all">
                                 <UsersIcon className="h-6" />
                             </Link>
-                            <div className="group/edit invisible group-hover/item:visible absolute left-20">
-                                <span className="group-hover/edit:text-gray-700 ">
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                                <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
+                                    <ArrowLeftIcon className="h-4" />
                                     Hozzáférések
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="cursor-pointer group/item flex flex-row">
+                            <Link href="#">
+                                <Cog6ToothIcon className="h-6" />
+                            </Link>
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                                <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
+                                    <ArrowLeftIcon className="h-4" />
+                                    Beállítások
                                 </span>
                             </div>
                         </div>
@@ -158,16 +214,25 @@ function SideBAR() {
                 )}
             </div>
 
-            <div className="fixed bottom-0 sm:hidden bg-black text-white w-full">
-                <div className="flex flex-row gap-12 m-4">
+            <div className="fixed bottom-0 sm:hidden z-50 bg-[#01A2D6] text-white w-full mt-[200px]">
+                <div className="flex flex-row justify-between gap-6 m-4">
                     <Link href="/dashboard">
-                        <HomeIcon className="h-8" />
+                        <HomeIcon className="h-6" />
+                    </Link>
+                    <Link href="#">
+                        <BoltIcon className="h-6" />
+                    </Link>
+                    <Link href="/projects">
+                        <TruckIcon className="h-6" />
                     </Link>
                     <Link href="/company/all">
-                        <BuildingOfficeIcon className="h-8" />
+                        <BuildingOfficeIcon className="h-6" />
                     </Link>
                     <Link href="/profile/all">
-                        <UsersIcon className="h-8" />
+                        <UsersIcon className="h-6" />
+                    </Link>
+                    <Link href="#">
+                        <Cog6ToothIcon className="h-6" />
                     </Link>
                 </div>
             </div>

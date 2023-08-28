@@ -15,7 +15,8 @@ import {
     navigationMenuTriggerStyle,
 } from "@/Components/ui/navigation-menu";
 import { Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
-import { BellIcon, Sidebar } from "lucide-react";
+
+import { BellIcon, Briefcase, Sidebar } from "lucide-react";
 import SideBAR from "@/Components/Admin/Navigation/SideBAR";
 import { useGeneralStore } from "@/store/GeneralStore";
 import { Toaster } from "@/Components/ui/toaster";
@@ -32,6 +33,7 @@ import {
     PopoverTrigger,
 } from "@/Components/ui/popover";
 import { useToast } from "@/Components/ui/use-toast";
+import Logo from "../../../storage/app/public/img/logo.jpg";
 
 export default function Authenticated({
     user,
@@ -75,44 +77,40 @@ export default function Authenticated({
         onBefore?: string,
         values?: any
     ) {
-        router[method](
-            slug,
-            values,
-            {
-                onBefore: () => {
-                    if (onBefore) {
-                        const reply = confirm(onBefore);
-                        if (!reply) {
-                            // setLoading(false);
-                            return false;
-                        }
+        router[method](slug, values, {
+            onBefore: () => {
+                if (onBefore) {
+                    const reply = confirm(onBefore);
+                    if (!reply) {
+                        // setLoading(false);
+                        return false;
                     }
-                },
+                }
+            },
 
-                onSuccess: () => {
-                    showToast({
-                        type: "success",
-                        title: "Sikeres művelet!",
-                        description: "Borító frissítve!",
-                    });
-                },
+            onSuccess: () => {
+                showToast({
+                    type: "success",
+                    title: "Sikeres művelet!",
+                    description: "Borító frissítve!",
+                });
+            },
 
-                onError: (resp: any) => {
-                    showToast({
-                        type: "failed",
-                        title: "Hiba!",
-                        description: resp.errors,
-                    });
-                },
+            onError: (resp: any) => {
+                showToast({
+                    type: "failed",
+                    title: "Hiba!",
+                    description: resp.errors,
+                });
+            },
 
-                onFinish: () => {},
-            }
-        );
+            onFinish: () => {},
+        });
     }
 
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-900">
-            <nav className="bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700">
+        <div className="min-h-screen bg-white fixed w-full">
+            <nav className="bg-[#01A2D6] text-white border-white">
                 <div className="mx-auto ml-4 mr-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
@@ -123,16 +121,19 @@ export default function Authenticated({
                                 />
                             </div>
 
-                            <div className="flex flex-row justify-start items-center text-xl">
-                                <div className="bg-gray-200 rounded-2xl p-1">
-                                    <Link href="/dashboard">
-                                        <CubeTransparentIcon className="h-8" />
-                                    </Link>
-                                </div>
+                            <div className="flex items-center justify-center">
+                                <Link href="/dashboard">
+                                    <div className="">
+                                        <img
+                                            src={Logo}
+                                            className="h-20 p-3"
+                                        />
+                                    </div>
+                                </Link>
                             </div>
                         </div>
 
-                        <div className="hidden sm:flex sm:items-center sm:ml-6">
+                        <div className="hidden sm:flex sm:items-center sm:ml-12 gap-8">
                             <div className="hover:cursor-pointer">
                                 <BellIcon className="h-5" />
                             </div>
@@ -187,7 +188,7 @@ export default function Authenticated({
                                         (previousState) => !previousState
                                     )
                                 }
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-white dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
                             >
                                 <svg
                                     className="h-6 w-6"
@@ -231,14 +232,6 @@ export default function Authenticated({
                         " sm:hidden bg-white"
                     }
                 >
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={route().current("dashboard")}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                         <div className="px-4">
@@ -252,14 +245,14 @@ export default function Authenticated({
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route("profile.edit")}>
-                                Profile
+                                Profil
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"
                                 href={route("logout")}
                                 as="button"
                             >
-                                Log Out
+                                Kijelentkezés
                             </ResponsiveNavLink>
                         </div>
                     </div>
@@ -268,10 +261,10 @@ export default function Authenticated({
             <div>
                 <div className="flex flex-row">
                     <SideBAR />
-                    <div className="w-full mr-2">
-                        <div className="group/header">
+                    <div className="w-full mr-2 overflow-y-auto max-h-screen">
+                        {/* <div className="group/header">
                             <div
-                                className={`h-[150px] ${
+                                className={`h-[100px] md:h-[150px] ${
                                     user.header_appearance == ""
                                         ? "bg-gradient-to-b from-green-200 to-transparent"
                                         : user.header_appearance
@@ -442,16 +435,16 @@ export default function Authenticated({
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className=" mb-[100px] overflow-x-auto ml-8 md:ml-12 md:mr-12">
+                        <div className="ml-8 md:ml-12 md:mr-12 min-w-screen h-full mb-[500px]">
                             {header && (
                                 <div>
                                     <span>{header}</span>
                                 </div>
                             )}
 
-                            <main>{children}</main>
+                            <main className="">{children}</main>
                             <Toaster />
                         </div>
                     </div>

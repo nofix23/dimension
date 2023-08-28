@@ -1,7 +1,7 @@
 import AdminAuthLayout from "@/Layouts/AdminAuthLayout";
 import { Head, router } from "@inertiajs/react";
 import { PageProps } from "@/types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCompanyStore } from "@/store/CompanyStore";
 import {
     Popover,
@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 import {
     BuildingOffice2Icon,
+    BuildingOfficeIcon,
     CheckBadgeIcon,
     EllipsisHorizontalIcon,
     MagnifyingGlassCircleIcon,
@@ -47,15 +48,7 @@ import {
 
 import { Field, Form, Formik } from "formik";
 
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/Components/ui/dialog";
+
 import { useForm } from "react-hook-form";
 import { useToast } from "@/Components/ui/use-toast";
 import { initialValues } from "@/Utils/FormikHelper/UpdateCompany";
@@ -100,7 +93,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
 
     useEffect(() => {
         setCompanyItems(companies);
-    }, [])
+    }, [ companies ])
 
     type ToastType = {
         type: "success" | "failed";
@@ -164,11 +157,13 @@ export default function Companies({ auth, companies, users }: PageProps) {
         });
     }
 
+
+
     return (
         <AdminAuthLayout
             user={auth.user}
             header={
-                <div className="flex flex-row gap-4 mt-4 items-center font-semibold text-2xl text-gray-600 leading-tight p-2">
+                <div className="flex flex-row gap-4 mt-8 items-center font-semibold text-2xl text-gray-600 leading-tight p-2">
                     <BuildingOffice2Icon className="h-12" />
                     <span>Cégek</span>
                 </div>
@@ -263,27 +258,9 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
                         <EllipsisHorizontalIcon className="h-6" />
                     </div>
-                    <Dialog>
-                        <DialogTrigger>
-                            <Button className="bg-blue-100 hover:bg-blue-200 text-blue-900 rounded-xl">
-                                <div className="flex flex-row justify-center items-center">
-                                    <PlusIcon className="h-4" />
-                                    <span>Hozzáadás</span>
-                                </div>
-                            </Button>
-                        </DialogTrigger>
-
-                        <DialogContent className="min-w-[600px] bg-white">
-                            <DialogHeader>
-                                <DialogTitle className="mb-8">
-                                    Cég hozzáadása a rendszerhez
-                                </DialogTitle>
-                                <DialogDescription>
-                                    <CreateCompanyForm />
-                                </DialogDescription>
-                            </DialogHeader>
-                        </DialogContent>
-                    </Dialog>
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
+                        <CreateCompanyForm />
+                    </div>
                 </div>
             </div>
             <div className="max-w-[1300px]">

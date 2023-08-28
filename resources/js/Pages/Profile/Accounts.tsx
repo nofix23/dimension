@@ -11,7 +11,7 @@ import GeneralInformations from "@/Components/Admin/Accounts/GeneralInformations
 export default function Accounts({ auth, users }: PageProps) {
 
     const { userItems, setUserItems} = useUserStore();
-    
+
     useEffect(() => {
         setUserItems(users);
     }, [users])
@@ -20,7 +20,7 @@ export default function Accounts({ auth, users }: PageProps) {
         <AdminAuthLayout
             user={auth.user}
             header={
-                <div className="flex flex-row gap-4 mt-4 items-center font-semibold text-2xl text-gray-600 leading-tight p-2">
+                <div className="flex flex-row gap-4 mt-8 items-center font-semibold text-2xl text-gray-600 leading-tight p-2">
                     <UsersIcon className="h-12" />
                     <span>Hozzáférések</span>
                 </div>

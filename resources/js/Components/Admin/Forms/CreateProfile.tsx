@@ -10,12 +10,13 @@ import {
 import { PlusIcon, UserPlusIcon } from "@heroicons/react/24/outline";
 import { initialValues as initCreateProfileValues } from "@/Utils/FormikHelper/CreateProfile";
 import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { router } from "@inertiajs/react";
 import { useToast } from "@/Components/ui/use-toast";
 import { Label } from "@radix-ui/react-label";
 import FormikField from "@/Components/FormikField";
 import { DialogClose } from "@radix-ui/react-dialog";
+import PrimaryButton from "@/Components/PrimaryButton";
 
 type Props = {
     triggerText: string;
@@ -24,8 +25,6 @@ type Props = {
 
 function CreateProfile({ triggerText, TriggerIcon }: Props) {
     const { toast } = useToast();
-
-    const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
     type ToastType = {
         type: "success" | "failed";
@@ -39,7 +38,7 @@ function CreateProfile({ triggerText, TriggerIcon }: Props) {
                 variant: "destructive",
                 title: title,
                 description: description,
-                className: "bg-red-100 text-red-900 font-bold",
+                className: "bg-red-100 text-red-900 font-bold border-none",
             });
         }
 
@@ -94,14 +93,18 @@ function CreateProfile({ triggerText, TriggerIcon }: Props) {
                     });
                 },
 
-                onFinish: () => {},
+                onFinish: () => {
+                    setDialogOpen(false);
+                },
             }
         );
     }
 
+    const [ isDialogOpen, setDialogOpen ] = useState<boolean>(false);
+
     return (
         <div>
-            <Dialog>
+            <Dialog open={isDialogOpen} onOpenChange={() => setDialogOpen(!isDialogOpen)}>
                 <DialogTrigger asChild>
                     <Button className="">
                         <div className="flex flex-row gap-2">
@@ -120,7 +123,7 @@ function CreateProfile({ triggerText, TriggerIcon }: Props) {
                     </DialogHeader>
                     <div className="flex flex-col justify-center sm:flex-row items-center">
                         <div className="w-1/2">
-                            <UserPlusIcon className="h-24 text-gray-400"/>
+                            <UserPlusIcon className="h-24 text-gray-400" />
                         </div>
                         <div className="grid gap-4 py-4">
                             <Formik
@@ -243,7 +246,7 @@ function CreateProfile({ triggerText, TriggerIcon }: Props) {
                                         <div className="flex justify-center mt-5">
                                             <Button
                                                 type="submit"
-                                                className="bg-green-100 hover:bg-green-200 "
+                                                className="bg-[#01A2D6] hover:bg-blue-400 text-white"
                                             >
                                                 Hozzáférés létrehozása
                                             </Button>

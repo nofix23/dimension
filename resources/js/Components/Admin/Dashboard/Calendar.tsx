@@ -31,21 +31,22 @@ function Calendar() {
     }
 
     return (
-        <>
+        <div className="md:w-[1400px]">
             <FullCalendar
                 plugins={[dayGridPlugin, interactionPlugin]}
-                initialView="dayGridMonth"
+                initialView="dayGridWeek"
                 headerToolbar={{
                     left: "prev,next",
                     center: "title",
                     right: "dayGridMonth,dayGridWeek,dayGridDay",
                 }}
                 eventClassNames={
-                    "bg-green-400 hover:bg-green-500 border-none cursor-pointer"
+                    "bg-[#01A2D6] hover:bg-[#01A2D6]/80 border-none cursor-pointer"
                 }
-                dayCellClassNames={"cursor-pointer hover:bg-green-100"}
+                dayCellClassNames={"cursor-pointer hover:bg-[#01A2D6]/10"}
                 dateClick={handleDateClick}
-                viewClassNames={"bg-gray-50"}
+                viewClassNames={"bg-gray-50 text-xs sm:text-lg"}
+                
                 locale={huLocale}
                 eventContent={renderEventContent}
                 events={[
@@ -68,8 +69,12 @@ function Calendar() {
                 ]}
             />
 
-            {isModalOpen ? <AddEventSheet show={isModalOpen} setShow={setIsModalOpen}/> : ""}
-        </>
+            {isModalOpen ? (
+                <AddEventSheet show={isModalOpen} setShow={setIsModalOpen} />
+            ) : (
+                ""
+            )}
+        </div>
     );
 }
 

@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fc .fc-button-primary {
+    color: #FFFFF;
+    background-color: #01A2D6 !important;
+    border: transparent !important;
+    margin: 2px;
+}
+
+.fc .fc-button-primary:focus {
+   border: none !important;
+}
+
+.fc .fc-button-primary:active {
+    border: none !important;
+}
+
+.fc .fc-button-primary:hover {
+    background-color: #53B5D5 !important;
+}
+
+.fc-toolbar {
+
+}
+
+@media screen and (max-width: 600px) {
+    .fc-toolbar-title {
+        font-size: 12px !important;
+        margin: 0px 8px 0px 8px !important;
+        font-weight: bold !important;
+    }
+}
+

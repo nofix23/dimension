@@ -3,6 +3,7 @@ import { Link } from "@inertiajs/react";
 import React, { useEffect } from "react";
 import CreateCompanyForm from "../Forms/CreateCompanyForm";
 import MySheet from "../Sheets/MySheet";
+import { twMerge } from "tailwind-merge";
 
 type SidebarItemType = {
     type: "link" | "button";
@@ -11,6 +12,7 @@ type SidebarItemType = {
     Icon?: any;
     text: string;
     full: boolean;
+    className?: string;
 };
 
 function SidebarItem({
@@ -20,6 +22,7 @@ function SidebarItem({
     Icon,
     text,
     full,
+    className
 }: SidebarItemType) {
 
 
@@ -31,29 +34,31 @@ function SidebarItem({
                         {type === "link" ? (
                             <Link
                                 href={href}
-                                className={`pt-4 pb-4 flex text-md flex-row justify-start items-center gap-4 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer
+                                className={twMerge(`flex flex-row items-center text-sm gap-4 hover:bg-gray-100 duration-100 transition-all hover:text-gray-900 hover:cursor-pointer
                                 ${
                                     routeName && route().current(routeName)
                                         ? "bg-gray-50/20"
                                         : ""
                                 }
 
-                            `}
+                            `, className)}
                             >
-                                {Icon && <Icon className="h-6" />}
-                                <span>{text}</span>
+                                <div className="flex flex-row justify-center items-center gap-3 h-[45px]">
+                                    {Icon && <Icon className="h-5" />}
+                                    <span>{text}</span>
+                                </div>
                             </Link>
                         ) : (
-                            <div className="p-2 flex flex-row items-center justify-start gap-4 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer">
+                            <div className="p-2 flex flex-row items-center gap-4 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer">
                                 <div
-                                    className={` flex flex-row gap-3
+                                    className={twMerge(`flex flex-row gap-3
                                 ${
                                     routeName && route().current(routeName)
                                         ? "bg-gray-50/20"
                                         : ""
                                 }
 
-                            `}
+                            `, className)}
                                 >
                                     {Icon && <Icon className="h-4" />}
                                     <MySheet

@@ -1,6 +1,6 @@
 import { Head, router } from "@inertiajs/react";
 import { Company, PageProps, User } from "@/types";
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { useCompanyStore } from "@/store/CompanyStore";
 import {
     Popover,
@@ -62,6 +62,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/Components/ui/sheet";
+import { Toaster } from "@/Components/ui/toaster";
 
 type Props = {
     side: "left" | "right" | "top" | "bottom";
@@ -153,7 +154,9 @@ function CompanySheet({
                     });
                 },
 
-                onFinish: () => {},
+                onFinish: () => {
+                    setShowSheet(false);
+                },
             }
         );
     }
@@ -191,7 +194,9 @@ function CompanySheet({
                 });
             },
 
-            onFinish: () => {},
+            onFinish: () => {
+                setShowSheet(false);
+            },
         });
     }
 
@@ -236,16 +241,26 @@ function CompanySheet({
                     });
                 },
 
-                onFinish: () => {},
+                onFinish: () => {
+                    setShowSheet(false);
+                },
             }
         );
     }
 
+    const [showSheet, setShowSheet] = useState<boolean>(false);
+
     return (
         <div>
-            <Sheet>
+            <Sheet
+                open={showSheet}
+                onOpenChange={() => setShowSheet(!showSheet)}
+            >
                 <SheetTrigger asChild>{children}</SheetTrigger>
-                <SheetContent side={side} className="bg-white md:min-w-[800px]">
+                <SheetContent
+                    side={side}
+                    className="w-[400px] md:min-w-[800px] bg-white overflow-y-auto"
+                >
                     <SheetHeader>
                         <SheetTitle className="mb-3">
                             <div className="flex flex-row items-center gap-5 border-b p-2">
@@ -393,7 +408,10 @@ function CompanySheet({
                                                                 )}
                                                             </div>
                                                         </PopoverTrigger>
-                                                        <PopoverContent className="overflow-y-auto w-[600px] max-h-[800px] sm:max-h-[1000px] bg-white" sideOffset={-300}>
+                                                        <PopoverContent
+                                                            className="overflow-y-auto w-[600px] max-h-[800px] sm:max-h-[1000px] bg-white"
+                                                            sideOffset={-300}
+                                                        >
                                                             <div className="flex flex-col w-full">
                                                                 {users.map(
                                                                     (user) => (
@@ -678,7 +696,7 @@ function CompanySheet({
                                             <div className="mt-8">
                                                 <Button
                                                     type="submit"
-                                                    className="bg-green-100 hover:bg-green-200 text-green-900"
+                                                    className="bg-[#01A2D6] hover:bg-blue-400 text-white"
                                                 >
                                                     Mentés
                                                 </Button>
@@ -689,6 +707,7 @@ function CompanySheet({
                             </Formik>
                         </SheetDescription>
                     </SheetHeader>
+                    <Toaster />
                 </SheetContent>
             </Sheet>
         </div>

@@ -228,7 +228,7 @@ function UpdateCompanyForm({
                                         <div className="mt-8">
                                             <Button
                                                 type="submit"
-                                                className="bg-green-100 hover:bg-green-200 text-green-900"
+                                                className="bg-[#01A2D6] hover:bg-blue-400 text-white"
                                             >
                                                 Mentés
                                             </Button>

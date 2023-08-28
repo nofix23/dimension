@@ -15,18 +15,17 @@ import {
     DialogTrigger,
 } from "@/Components/ui/dialog";
 import { UserIcon } from "@heroicons/react/24/outline";
+import PrimaryButton from "@/Components/PrimaryButton";
+import { useState } from "react";
 
 type Props = {
     user: User;
     triggerText: string;
     TriggerIcon?: any;
-
 };
 
-function UpdateUserForm({user, triggerText, TriggerIcon}:Props) {
-
+function UpdateUserForm({ user, triggerText, TriggerIcon }: Props) {
     const { toast } = useToast();
-
 
     type ToastType = {
         type: "success" | "failed";
@@ -52,9 +51,6 @@ function UpdateUserForm({user, triggerText, TriggerIcon}:Props) {
             });
         }
     };
-
-
-
 
     function handleUpdateProfileSubmit(
         slug: string,
@@ -97,14 +93,18 @@ function UpdateUserForm({user, triggerText, TriggerIcon}:Props) {
                     });
                 },
 
-                onFinish: () => {},
+                onFinish: () => {
+                    setDialogOpen(false);
+                },
             }
         );
     }
 
+    const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
+
     return (
         <div>
-            <Dialog>
+            <Dialog open={isDialogOpen} onOpenChange={() => setDialogOpen(!isDialogOpen)}>
                 <DialogTrigger asChild>
                     <Button className="">
                         <div className="flex flex-row gap-2">
@@ -116,9 +116,7 @@ function UpdateUserForm({user, triggerText, TriggerIcon}:Props) {
                 <DialogContent className="md:min-w-[700px] bg-white">
                     <DialogHeader>
                         <DialogTitle>Hozzáférés szerkesztése</DialogTitle>
-                        <DialogDescription>
-
-                        </DialogDescription>
+                        <DialogDescription></DialogDescription>
                     </DialogHeader>
                     <div className="flex flex-col justify-center sm:flex-row items-center">
                         <div className="w-1/3">
@@ -202,7 +200,7 @@ function UpdateUserForm({user, triggerText, TriggerIcon}:Props) {
                                         </Field>
                                     </div>
                                     <div className="flex justify-center mt-5">
-                                        <Button className="bg-green-100 hover:bg-green-200 ">
+                                        <Button className="bg-[#01A2D6] hover:bg-blue-400 text-white">
                                             Változtatások mentése
                                         </Button>
                                     </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\AuthenticationException;
+use Inertia\Inertia;
 
 class RoleMiddleware
 {
@@ -16,7 +17,7 @@ class RoleMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
 
-    public function handle(Request $request, Closure $next, $roles): Response
+    public function handle(Request $request, Closure $next, $roles)
     {
 
         $rolesArray = explode('|', $roles);
@@ -24,7 +25,7 @@ class RoleMiddleware
         if (!in_array(Auth::user()->role, $rolesArray)) {
             $msg = ["error" => "You do not have permission to reach '" . $request->path() . "' url"];
             // return  redirect()->route("dashboard")->with("error", $msg);
-            abort(404);
+            return Inertia::render("Error/NotAuthorized");
         }
 
         foreach ($rolesArray as $role) {

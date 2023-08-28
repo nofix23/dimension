@@ -9,7 +9,7 @@ import {
 } from "@/Components/ui/sheet";
 import { User } from "@/types";
 import { UserIcon } from "@heroicons/react/24/outline";
-import { PropsWithChildren, ReactNode } from "react";
+import { PropsWithChildren, ReactNode, useState } from "react";
 import UserDropdown from "./UserDropdown";
 import AccountData from "./AccountData";
 import CompanyData from "./CompanyData";
@@ -20,6 +20,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/Components/ui/accordion";
+import { Toaster } from "@/Components/ui/toaster";
 
 type Props = {
     side: "left" | "right" | "top" | "bottom";
@@ -28,9 +29,14 @@ type Props = {
 };
 
 function UserSheet({ side, user, users, children }: PropsWithChildren<Props>) {
+    const [showSheet, setShowSheet] = useState<boolean>(false);
+
     return (
         <div>
-            <Sheet>
+            <Sheet
+                open={showSheet}
+                onOpenChange={() => setShowSheet(!showSheet)}
+            >
                 <SheetTrigger asChild>{children}</SheetTrigger>
                 <SheetContent
                     className="w-[400px] md:min-w-[800px] bg-white overflow-y-auto"
@@ -43,7 +49,11 @@ function UserSheet({ side, user, users, children }: PropsWithChildren<Props>) {
                                 <span className="text-3xl font-bold">
                                     {user.name}
                                 </span>
-                                <UserDropdown user={user}/>
+                                <UserDropdown
+                                    user={user}
+                                    showFeet={showSheet}
+                                    setShowSheet={() => setShowSheet(showSheet)}
+                                />
                             </div>
                         </SheetTitle>
                         <SheetDescription>
@@ -63,10 +73,7 @@ function UserSheet({ side, user, users, children }: PropsWithChildren<Props>) {
                                 </Accordion>
                                 {user.company && (
                                     <div className="flex flex-col gap-14">
-                                        <Accordion
-                                            type="multiple"
-
-                                        >
+                                        <Accordion type="multiple">
                                             <AccordionItem value="item-2">
                                                 <AccordionTrigger className="max-w-[100px]">
                                                     <div>Cég</div>
@@ -80,10 +87,7 @@ function UserSheet({ side, user, users, children }: PropsWithChildren<Props>) {
                                             </AccordionItem>
                                         </Accordion>
 
-                                        <Accordion
-                                            type="multiple"
-
-                                        >
+                                        <Accordion type="multiple">
                                             <AccordionItem value="item-3">
                                                 <AccordionTrigger className="max-w-[100px]">
                                                     <div>Projektek</div>
@@ -98,6 +102,7 @@ function UserSheet({ side, user, users, children }: PropsWithChildren<Props>) {
                             </div>
                         </SheetDescription>
                     </SheetHeader>
+                    <Toaster />
                 </SheetContent>
             </Sheet>
         </div>

@@ -8,8 +8,10 @@ import React, { PropsWithChildren } from 'react'
 
 type Props = {
     user: User;
+    showFeet: boolean;
+    setShowSheet: (state: boolean) => void;
 }
-function UserDropdown({ user, children} :PropsWithChildren<Props>) {
+function UserDropdown({ user, showFeet, setShowSheet, children} :PropsWithChildren<Props>) {
 
     const { toast } = useToast();
 
@@ -71,7 +73,9 @@ function UserDropdown({ user, children} :PropsWithChildren<Props>) {
                 });
             },
 
-            onFinish: () => {},
+            onFinish: () => {
+                setShowSheet(!showFeet);
+            },
         });
     }
   return (

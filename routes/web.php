@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -52,6 +53,12 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
         Route::post('/delete', [AdminController::class, 'deleteUser']);
     });
+
+    Route::prefix('/projects')->group(function () {
+
+        Route::get('/', [ProjectsController::class, 'getProjects']);
+    });
+
 
 
     // Routes for company
