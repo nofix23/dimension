@@ -16,7 +16,7 @@ import FormikField from "@/Components/FormikField";
 import { UserIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/Components/ui/button";
 import { useCompanyStore } from "@/store/CompanyStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
     company: Company;
@@ -26,12 +26,7 @@ type Props = {
     TriggerIcon?: any;
 };
 
-function UpdateCompanyForm({
-    company,
-    user,
-    triggerText,
-    TriggerIcon,
-}: Props) {
+function UpdateCompanyForm({ company, user, triggerText, TriggerIcon }: Props) {
     const { setUserProfile } = useCompanyStore();
     const { toast } = useToast();
 
@@ -108,16 +103,22 @@ function UpdateCompanyForm({
                     });
                 },
 
-                onFinish: () => {},
+                onFinish: () => {
+                    setDialogOpen(false);
+                },
             }
         );
     }
+    const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
 
     return (
         <div>
-            <Dialog>
+            <Dialog
+                open={isDialogOpen}
+                onOpenChange={() => setDialogOpen(!isDialogOpen)}
+            >
                 <DialogTrigger asChild>
-                    <Button className="">
+                    <Button className="ml-4 bg-[#01A2D6] text-white hover:bg-blue-400">
                         <div className="flex flex-row gap-2">
                             {TriggerIcon && <TriggerIcon className="h-4" />}
                             {triggerText && <span>{triggerText}</span>}
@@ -157,7 +158,7 @@ function UpdateCompanyForm({
                                                 required={false}
                                                 placeholder=""
                                                 readOnly={false}
-                                                className="hover:bg-gray-50 hover:cursor-pointer min-w-[300px]"
+                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
                                             />
                                         </div>
                                         <div className="flex flex-row gap-8 items-center">
@@ -169,7 +170,7 @@ function UpdateCompanyForm({
                                                 required={false}
                                                 placeholder=""
                                                 readOnly={false}
-                                                className="hover:bg-gray-50 hover:cursor-pointer min-w-[300px]"
+                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
                                             />
                                         </div>
                                         <div className="flex flex-row gap-8 items-center">
@@ -181,7 +182,7 @@ function UpdateCompanyForm({
                                                 required={false}
                                                 placeholder=""
                                                 readOnly={false}
-                                                className="hover:bg-gray-50 hover:cursor-pointer min-w-[300px]"
+                                                className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
                                             />
                                         </div>
 
@@ -195,7 +196,7 @@ function UpdateCompanyForm({
                                                 placeholder=""
                                                 readOnly={false}
                                                 as="select"
-                                                className="p-3 focus:outline-none hover:bg-gray-50 hover:cursor-pointer min-w-[100px]"
+                                                className="p-3 focus:outline-none hover:bg-gray-50 min-w-[100px] text-[#01A2D6]"
                                             >
                                                 <option value={1}>
                                                     <div>
@@ -221,7 +222,7 @@ function UpdateCompanyForm({
                                                 placeholder=""
                                                 readOnly={false}
                                                 as="textarea"
-                                                className="border-gray-50 border-2 p-4 min-h-[100px] hover:bg-gray-50 hover:cursor-pointer"
+                                                className="border-gray-50 border-2 p-4 min-h-[100px] hover:bg-gray-50 text-[#01A2D6]"
                                             />
                                         </div>
 

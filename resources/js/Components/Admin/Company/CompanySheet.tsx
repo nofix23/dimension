@@ -269,7 +269,7 @@ function CompanySheet({
                                     {company.company_name} adatai
                                 </span>
                                 <DropdownMenu>
-                                    <DropdownMenuTrigger>
+                                    <DropdownMenuTrigger className="">
                                         <EllipsisHorizontalIcon className="h-6" />
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent className="bg-white w-64">
@@ -325,7 +325,7 @@ function CompanySheet({
                                                     required={false}
                                                     placeholder=""
                                                     readOnly={false}
-                                                    className="hover:bg-gray-50 hover:cursor-pointer min-w-[300px]"
+                                                    className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
                                                 />
                                             </div>
                                             <div className="flex flex-row gap-8 items-center">
@@ -337,7 +337,7 @@ function CompanySheet({
                                                     required={false}
                                                     placeholder=""
                                                     readOnly={false}
-                                                    className="hover:bg-gray-50 hover:cursor-pointer min-w-[300px]"
+                                                    className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
                                                 />
                                             </div>
                                             <div className="flex flex-row gap-8 items-center">
@@ -349,7 +349,7 @@ function CompanySheet({
                                                     required={false}
                                                     placeholder=""
                                                     readOnly={false}
-                                                    className="hover:bg-gray-50 hover:cursor-pointer min-w-[300px]"
+                                                    className="hover:bg-gray-50 min-w-[300px] text-[#01A2D6]"
                                                 />
                                             </div>
 
@@ -363,7 +363,7 @@ function CompanySheet({
                                                     placeholder=""
                                                     readOnly={false}
                                                     as="select"
-                                                    className="p-3 focus:outline-none hover:bg-gray-50 hover:cursor-pointer min-w-[100px]"
+                                                    className="p-3 focus:outline-none hover:bg-gray-50 cursor-pointer min-w-[100px] text-[#01A2D6]"
                                                 >
                                                     <option value={1}>
                                                         <div>
@@ -603,7 +603,7 @@ function CompanySheet({
                                                                                 readOnly={
                                                                                     false
                                                                                 }
-                                                                                className="col-span-3"
+                                                                                className="col-span-3 text-[#01A2D6]"
                                                                             />
                                                                         </div>
 
@@ -625,7 +625,7 @@ function CompanySheet({
                                                                                 readOnly={
                                                                                     false
                                                                                 }
-                                                                                className="col-span-3"
+                                                                                className="col-span-3 text-[#01A2D6]"
                                                                             />
                                                                         </div>
 
@@ -648,7 +648,7 @@ function CompanySheet({
                                                                                     false
                                                                                 }
                                                                                 as="select"
-                                                                                className="col-span-3"
+                                                                                className="col-span-3 text-[#01A2D6]"
                                                                             >
                                                                                 <option value="employee">
                                                                                     Alkalmazott
@@ -665,7 +665,7 @@ function CompanySheet({
                                                                             </Field>
                                                                         </div>
                                                                         <div className="flex justify-center mt-5">
-                                                                            <Button className="bg-green-100 hover:bg-green-200 ">
+                                                                            <Button className="bg-[#01A2D6] hover:bg-blue-400 text-white">
                                                                                 Változtatások
                                                                                 mentése
                                                                             </Button>
@@ -689,7 +689,7 @@ function CompanySheet({
                                                     placeholder=""
                                                     readOnly={false}
                                                     as="textarea"
-                                                    className="border-gray-50 border-2 p-4 min-h-[100px] hover:bg-gray-50 hover:cursor-pointer"
+                                                    className="border-gray-50 border-2 p-4 min-h-[100px] hover:bg-gray-50 text-[#01A2D6]"
                                                 />
                                             </div>
 

@@ -104,9 +104,12 @@ function UpdateUserForm({ user, triggerText, TriggerIcon }: Props) {
 
     return (
         <div>
-            <Dialog open={isDialogOpen} onOpenChange={() => setDialogOpen(!isDialogOpen)}>
+            <Dialog
+                open={isDialogOpen}
+                onOpenChange={() => setDialogOpen(!isDialogOpen)}
+            >
                 <DialogTrigger asChild>
-                    <Button className="">
+                    <Button className="ml-4 bg-[#01A2D6] text-white hover:bg-blue-400">
                         <div className="flex flex-row gap-2">
                             {TriggerIcon && <TriggerIcon className="h-4" />}
                             {triggerText && <span>{triggerText}</span>}
@@ -150,7 +153,7 @@ function UpdateUserForm({ user, triggerText, TriggerIcon }: Props) {
                                             required={true}
                                             placeholder=""
                                             readOnly={false}
-                                            className="col-span-3"
+                                            className="col-span-3 text-[#01A2D6]"
                                         />
                                     </div>
 
@@ -168,7 +171,7 @@ function UpdateUserForm({ user, triggerText, TriggerIcon }: Props) {
                                             required={true}
                                             placeholder=""
                                             readOnly={false}
-                                            className="col-span-3"
+                                            className="col-span-3 text-[#01A2D6]"
                                         />
                                     </div>
 
@@ -187,7 +190,7 @@ function UpdateUserForm({ user, triggerText, TriggerIcon }: Props) {
                                             placeholder=""
                                             readOnly={false}
                                             as="select"
-                                            className="col-span-3"
+                                            className="col-span-3 text-[#01A2D6]"
                                         >
                                             <option value="employee">
                                                 Alkalmazott

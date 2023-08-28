@@ -7,7 +7,7 @@ type Props = {
 }
 function AccountData({ user}: Props) {
   return (
-      <div className="group/item">
+      <div className="">
           <div className="mb-4 text-lg font-bold">
               <span>Általános adatok</span>
           </div>
@@ -55,7 +55,7 @@ function AccountData({ user}: Props) {
                       </span>
                   </div>
               </div>
-              <div className="group/edit invisible group-hover/item:visible">
+              <div className="">
                   <UpdateUserForm user={user} triggerText="Szerkesztés" />
               </div>
           </div>

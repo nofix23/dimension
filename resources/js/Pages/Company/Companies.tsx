@@ -153,7 +153,9 @@ export default function Companies({ auth, companies, users }: PageProps) {
                 });
             },
 
-            onFinish: () => {},
+            onFinish: () => {
+                setSelectedItem(selectedItems.splice(selectedItems.length-1, 1));
+            },
         });
     }
 
@@ -174,14 +176,14 @@ export default function Companies({ auth, companies, users }: PageProps) {
             <div className="flex flex-row justify-between mt-8 pb-1 border-b w-full min-w-full">
                 <div className="flex flex-row items-center">
                     {selectedItems.length > 0 ? (
-                        <div className="flex">
-                            <div className="flex flex-row items-center gap-2 bg-blue-100 text-blue-900  p-2 hover:cursor-pointer hover:bg-blue-200 rounded-xl">
+                        <div className="flex gap-2">
+                            <div className="flex flex-row items-center p-2 hover:cursor-pointer bg-[#01A2D6] text-white hover:bg-blue-400 border-slate-300">
                                 <CheckBadgeIcon className="h-4" />
                                 <span>{selectedItems.length} Selected</span>
                             </div>
 
                             <div
-                                className="flex flex-row items-center bg-gray-50 p-2 hover:cursor-pointer hover:bg-gray-100 rounded-xl"
+                                className="flex flex-row items-center p-2 hover:cursor-pointer hover:bg-red-200 bg-red-100 text-red-900"
                                 onClick={() =>
                                     handleDeleteCompanySubmit(
                                         "/company/delete",
@@ -204,7 +206,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                 </div>
 
                 <div className="flex flex-row justify-end items-center">
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
                         <Popover>
                             <PopoverTrigger asChild>
                                 <span className="h-5 hover:cursor-pointer">
@@ -249,16 +251,16 @@ export default function Companies({ auth, companies, users }: PageProps) {
                             </PopoverContent>
                         </Popover>
                     </div>
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
                         <span>Rendezés</span>
                     </div>
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
                         <MagnifyingGlassIcon className="h-6" />
                     </div>
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
+                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2">
                         <EllipsisHorizontalIcon className="h-6" />
                     </div>
-                    <div className="hover:bg-gray-100 hover:cursor-pointer p-2 rounded-2xl">
+                    <div className="hover:cursor-pointer p-2">
                         <CreateCompanyForm />
                     </div>
                 </div>
@@ -268,20 +270,20 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     <TableHeader>
                         <TableRow>
                             <TableHead></TableHead>
-                            <TableHead className="font-extrabold">
+                            <TableHead className="font-extralight">
                                 Cég neve
                             </TableHead>
-                            <TableHead className="font-extrabold">
+                            <TableHead className="font-extralight">
                                 E-mail cím
                             </TableHead>
-                            <TableHead className="font-extrabold">
+                            <TableHead className="font-extralight">
                                 Státusz
                             </TableHead>
                             {/* <TableHead>Ország</TableHead>
                             <TableHead>Város</TableHead>
                             <TableHead>Irányítószám</TableHead>
                             <TableHead>Utca</TableHead> */}
-                            <TableHead className="font-extrabold">
+                            <TableHead className="font-extralight">
                                 Hozzáférés beállítva
                             </TableHead>
                         </TableRow>
@@ -290,7 +292,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                         {companyItems.map((company) => (
                             <TableRow
                                 key={company.id}
-                                className="group/item hover:bg-gray-50 hover:cursor-pointer"
+                                className="group/item hover:bg-[#01A2D6]/10 hover:cursor-pointer"
                             >
                                 <TableCell className="">
                                     <div className="flex flex-row gap-3">
@@ -329,13 +331,13 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 </TableCell>
                                 <TableCell className="font-medium flex">
                                     {company.active === 1 && (
-                                        <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl p-2">
+                                        <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl p-2 h-6 flex items-center">
                                             Aktív
                                         </div>
                                     )}
 
                                     {company.active === 0 && (
-                                        <div className="bg-red-100 text-red-900 max-w-[100px] rounded-xl p-2">
+                                        <div className="bg-red-100 text-red-900 max-w-[100px] rounded-xl p-2 h-6 flex items-center">
                                             Inaktív
                                         </div>
                                     )}
@@ -343,12 +345,12 @@ export default function Companies({ auth, companies, users }: PageProps) {
 
                                 <TableCell className="font-medium">
                                     {company.user_id ? (
-                                        <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl justify-center flex flex-row">
-                                            <CheckIcon className="h-6" />
+                                        <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl justify-center items-center flex flex-row h-6">
+                                            <CheckIcon className="h-4" />
                                         </div>
                                     ) : (
-                                        <div className="bg-red-100 text-red-900 max-w-[100px] rounded-xl justify-center flex flex-row">
-                                            <XMarkIcon className="h-6" />
+                                        <div className="bg-red-100 text-red-900 max-w-[100px] rounded-xl justify-center items-center flex flex-row h-6">
+                                            <XMarkIcon className="h-4" />
                                         </div>
                                     )}
                                 </TableCell>

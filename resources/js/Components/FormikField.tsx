@@ -22,7 +22,7 @@ function FormikField({
     readOnly = false,
     as="input",
 }: PropsType) {
-    const fieldClass = `${className} rounded-lg h-9 focus:outline-none bg-gray-50
+    const fieldClass = `${className} rounded-lg h-9 focus:outline-none bg-gray-50 pl-3
     ${readOnly ? "border-2 border-[#CC8513]" : ""}
     `;
     return (

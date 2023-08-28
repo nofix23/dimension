@@ -10,7 +10,7 @@ type Props = {
 };
 function CompanyData({ user, users }: Props) {
     return (
-        <div className="group/item">
+        <div className="">
             <div className="mb-4 text-lg font-bold">
                 <span>Általános adatok</span>
             </div>
@@ -77,7 +77,7 @@ function CompanyData({ user, users }: Props) {
                         </span>
                     </div>
                 </div>
-                <div className="group/edit invisible group-hover/item:visible">
+                <div className="">
                     <UpdateCompanyForm company={user.company} users={users} user={user} triggerText="Szerkesztés" />
                 </div>
             </div>

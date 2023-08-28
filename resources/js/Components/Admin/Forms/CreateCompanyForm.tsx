@@ -127,7 +127,7 @@ function CreateCompanyForm() {
                 onOpenChange={() => setDialogOpen(!isDialogOpen)}
             >
                 <DialogTrigger>
-                    <Button className="bg-blue-100 hover:bg-blue-200 text-blue-900 rounded-xl">
+                    <Button className="bg-[#01A2D6] text-white hover:bg-blue-400 border-slate-300">
                         <div className="flex flex-row justify-center items-center">
                             <PlusIcon className="h-4" />
                             <span>Hozzáadás</span>
