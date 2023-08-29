@@ -242,6 +242,9 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 Kapcsolattartók száma
                             </TableHead>
                             <TableHead className="font-extralight">
+                                Projektek száma
+                            </TableHead>
+                            <TableHead className="font-extralight">
                                 Státusz
                             </TableHead>
                             {/* <TableHead>Ország</TableHead>
@@ -295,7 +298,10 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                     {company.email_address}
                                 </TableCell>
                                 <TableCell className="font-medium">
-                                    { company.contacts.length }
+                                    {company.contacts.length}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    0
                                 </TableCell>
                                 <TableCell className="font-medium flex">
                                     {company.active === 1 && (
