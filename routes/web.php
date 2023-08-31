@@ -35,11 +35,12 @@ Route::middleware('auth')->group(function () {
 
 // System routes guest
 
-Route::middleware('guest')->group(function () {
 
-    Route::get('/', [IndexController::class, 'index']);
+Route::get('/', [IndexController::class, 'index']);
 
-});
+Route::post('/customer/request', [IndexController::class, 'handleCustomerRequest']);
+
+
 
 
 
@@ -57,6 +58,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::prefix('/projects')->group(function () {
 
         Route::get('/', [ProjectsController::class, 'getProjects']);
+
+        Route::get('/unacknowledge', [ProjectsController::class, 'getActiveRequests']);
+
     });
 
 

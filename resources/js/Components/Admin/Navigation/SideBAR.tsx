@@ -60,7 +60,7 @@ function SideBAR() {
                                     <div className="flex flex-col gap-2 ml-6">
                                         <SidebarItem
                                             type="link"
-                                            href="#"
+                                            href="/projects/unacknowledge"
                                             text="Aktív árajánlatok"
                                             full
                                             className="pl-3"
@@ -153,7 +153,7 @@ function SideBAR() {
                         </div>
 
                         <div className="cursor-pointer group/item flex flex-row">
-                            <Link href="/company/all">
+                            <Link href="/projects/unacknowledge">
                                 <BoltIcon className="h-6" />
                             </Link>
                             <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
@@ -219,7 +219,7 @@ function SideBAR() {
                     <Link href="/dashboard">
                         <HomeIcon className="h-6" />
                     </Link>
-                    <Link href="#">
+                    <Link href="/projects/unacknowledge">
                         <BoltIcon className="h-6" />
                     </Link>
                     <Link href="/projects">

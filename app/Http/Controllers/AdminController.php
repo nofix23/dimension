@@ -37,12 +37,8 @@ class AdminController extends Controller
             $createNewModelService->createModelFromRequest();
 
             return Redirect::back();
-
-        }
-
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
-
         }
     }
 
@@ -58,7 +54,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function updateCompany(UpdateCompanyRequest $request){
+    public function updateCompany(UpdateCompanyRequest $request)
+    {
 
         try {
             $updateModelService = new UpdateModel(Company::query()->find($request->id), $request->validated());
@@ -71,18 +68,18 @@ class AdminController extends Controller
         }
     }
 
-    public function deleteUser(Request $request){
+    public function deleteUser(Request $request)
+    {
         try {
             $user = User::find($request->user_id);
 
-            if(!$user){
+            if (!$user) {
                 return Redirect::back()->withErrors(["errors" => "Nem létező felhasználó!"]);
             }
             $user->delete();
             return Redirect::back();
         } catch (Exception $e) {
             return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
-
         }
     }
 
@@ -90,15 +87,12 @@ class AdminController extends Controller
     {
         try {
 
-            if($request->type === 'single'){
+            if ($request->type === 'single') {
                 $company = Company::find($request->selectedItems['id']);
 
                 $company->delete();
-
-            }
-
-            elseif($request->type === 'multiple'){
-                foreach($request->selectedItems as $item){
+            } elseif ($request->type === 'multiple') {
+                foreach ($request->selectedItems as $item) {
                     $company = Company::find($item['id']);
                     $company->delete();
                 }
@@ -106,15 +100,14 @@ class AdminController extends Controller
 
 
             return Redirect::back();
-
-
         } catch (Exception $e) {
             return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
         }
     }
 
-    public function createProfile(Request $request){
-        try{
+    public function createProfile(Request $request)
+    {
+        try {
             $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:' . User::class,
@@ -132,17 +125,13 @@ class AdminController extends Controller
             event(new Registered($user));
 
             return Redirect::back();
-
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
         }
-
-
-
     }
 
-    public function updateProfile(Request $request){
+    public function updateProfile(Request $request)
+    {
         try {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -160,7 +149,8 @@ class AdminController extends Controller
         }
     }
 
-    public function getProfiles(Request $request){
+    public function getProfiles(Request $request)
+    {
         $users = User::with(['Company'])->get();
 
         return Inertia::render('Profile/Accounts', [
@@ -168,7 +158,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function setAppearance(Request $request){
+    public function setAppearance(Request $request)
+    {
         $user = User::find(Auth::user()->id);
         $user->header_appearance = $request->appearance;
         $user->save();
@@ -176,7 +167,8 @@ class AdminController extends Controller
         return Redirect::back();
     }
 
-    public function addContact(Request $request){
+    public function addContact(Request $request)
+    {
         try {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -193,7 +185,8 @@ class AdminController extends Controller
             return Redirect::back();
         } catch (Exception $e) {
             return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
-        }    }
+        }
+    }
 
     public function updateContact(Request $request)
     {

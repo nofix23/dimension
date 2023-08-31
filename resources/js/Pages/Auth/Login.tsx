@@ -27,7 +27,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
     };
 
     return (
-        <GuestLayout>
+        <GuestLayout comment="A folytatáshoz jelentkezz be!">
             <Head title="Bejelentkezés" />
 
             {status && (

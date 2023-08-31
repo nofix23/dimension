@@ -187,22 +187,34 @@ function CreateCompanyContactForm({ children }: PropsWithChildren) {
                                                     </div>
                                                 )}
                                             </div>
-                                            <div className="flex flex-row items-center gap-4">
+                                            <div className="flex flex-row items-center gap-4 w-full">
                                                 <InputLabel
-                                                    htmlFor="name"
+                                                    htmlFor="type"
                                                     value="Típus"
                                                     className="w-[80px]"
                                                 />
-                                                <Input
-                                                    type="text"
-                                                    value={data.type}
+                                                <select
+                                                    name="type"
+                                                    id="type"
                                                     onChange={(e) =>
                                                         setData(
                                                             "type",
                                                             e.target.value
                                                         )
                                                     }
-                                                />
+                                                >
+                                                    <option selected>
+                                                        - Válassz -
+                                                    </option>
+                                                    <option value="responsible">
+                                                        Felelős
+                                                    </option>
+                                                    <option
+                                                        value="deputy"
+                                                    >
+                                                        Helyettes
+                                                    </option>
+                                                </select>
                                                 {errors.type && (
                                                     <div>{errors.type}</div>
                                                 )}

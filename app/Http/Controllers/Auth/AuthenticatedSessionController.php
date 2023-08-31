@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Session;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -34,6 +35,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $session = Session::where('email', $request->email)->first();
+
+        if(!$session){
+            $session = new Session();
+            $session->email = $request->email;
+
+            $session->save();
+        }
+
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -42,6 +53,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $session = Session::where('email', Auth::user()->email)->first();
+        if ($session) {
+            $session->delete();
+        }
+        
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

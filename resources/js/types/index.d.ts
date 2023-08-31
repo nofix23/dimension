@@ -39,6 +39,30 @@ export type CompanyContact = {
     email_address: string;
     type: string;
 };
+
+export type CustomerRequest = {
+    accept: number;
+    accepted_by: string;
+    subject: string;
+    materials: string;
+    sizes: string;
+    name: string;
+    email_address: string;
+    phone_number: string;
+    comments: string;
+    status: number;
+    user_id: number;
+    shipping: number;
+    country: string;
+    city: string;
+    postal_code: string;
+    street_number: string;
+    house_number: string;
+    door_bell: string;
+    created_at: string;
+    updated_at: string;
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User;
@@ -47,4 +71,6 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     companies: Company[];
 
     users: User[];
+
+    customer_requests: CustomerRequest[];
 };
