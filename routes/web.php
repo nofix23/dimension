@@ -84,11 +84,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
             Route::post('/update', [AdminController::class, 'updateContact']);
 
             Route::post('/delete', [AdminController::class, 'deleteContact']);
-
-
-
         });
-
     });
 
     Route::prefix('/profile')->group(function () {
@@ -100,13 +96,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
         Route::get('/all', [AdminController::class, 'getProfiles']);
 
         Route::post('/appearance', [AdminController::class, 'setAppearance']);
-
-
     });
-
-
-
-
 });
 
 
@@ -117,9 +107,7 @@ Route::middleware(['auth', 'verified', 'role:customer'])->group(function () {
     Route::prefix('/customer')->group(function () {
 
         Route::get('/', [CustomerController::class, 'index']);
-
     });
-
 });
 
 // System routes for company
@@ -144,4 +132,4 @@ Route::middleware(['auth', 'verified', 'role:employee'])->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
