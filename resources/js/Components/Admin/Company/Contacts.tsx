@@ -6,7 +6,6 @@ type Props = {
 };
 
 function Contacts({ contacts }: Props) {
-    console.log(contacts);
 
     return (
         <div>

@@ -63,6 +63,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
         Route::post('/customer-request/acknowledge', [ProjectsController::class, 'acknowledgeCustomerRequest']);
 
+        Route::post('/customer-request/reject', [ProjectsController::class, 'rejectCustomerRequest']);
+
+
     });
 
 

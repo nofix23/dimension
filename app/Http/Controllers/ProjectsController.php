@@ -35,4 +35,12 @@ class ProjectsController extends Controller
         return Redirect::back();
 
     }
+
+    public function rejectCustomerRequest(Request $request)
+    {
+        $customer_request = CustomerRequest::find($request->customer_request['id']);
+        $customer_request->status = -1;
+        $customer_request->save();
+        return Redirect::back();
+    }
 }

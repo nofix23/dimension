@@ -100,6 +100,46 @@ function CompanyRequestSheet({
         );
     }
 
+    function handleRejectSubmit(onBefore?: string) {
+        router.post(
+            "/projects/customer-request/reject",
+            {
+                user_id: auth.user.id,
+                user_name: auth.user.name,
+                customer_request: selectedItem,
+            },
+            {
+                onBefore: () => {
+                    if (onBefore) {
+                        const reply = confirm(onBefore);
+                        if (!reply) {
+                            // setLoading(false);
+                            return false;
+                        }
+                    }
+                },
+
+                onSuccess: () => {
+                    showToast({
+                        type: "success",
+                        title: "Sikeres művelet!",
+                        description: "Feladat felvéve",
+                    });
+                },
+
+                onError: (resp: any) => {
+                    showToast({
+                        type: "failed",
+                        title: "Hiba!",
+                        description: resp.errors,
+                    });
+                },
+
+                onFinish: () => {},
+            }
+        );
+    }
+
     return (
         <div>
             <Sheet>
@@ -236,7 +276,8 @@ function CompanyRequestSheet({
                                             "bg-[#01A2D6] hover:bg-blue-400 text-white"
                                         )}
                                         disabled={
-                                            selectedItem?.accept == 0
+                                            selectedItem?.accept == 0 ||
+                                            selectedItem?.status === -1
                                                 ? true
                                                 : false
                                         }
@@ -248,8 +289,10 @@ function CompanyRequestSheet({
                                         className={twMerge(
                                             "bg-red-100 hover:bg-red-200 text-red-900"
                                         )}
+                                        onClick={() => handleRejectSubmit()}
                                         disabled={
-                                            selectedItem?.accept == 0
+                                            selectedItem?.accept == 0 ||
+                                            selectedItem?.status === -1
                                                 ? true
                                                 : false
                                         }
