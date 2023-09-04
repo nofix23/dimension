@@ -33,22 +33,40 @@ function NewCustomerRequestsTable() {
                         <TableHead className="font-extralight">
                             Beérkezés dátuma
                         </TableHead>
+                        <TableHead className="font-extralight">
+                            Feladat ügyintézője
+                        </TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {customerRequestItems.map((request: CustomerRequest) => (
                         <TableRow className="hover:bg-[#01A2D6]/10 hover:cursor-pointer hover:text-[#01A2D6]">
                             <TableCell>
-                                <CompanyRequestSheet side="left" title="Beérkezett árajánlat">
-                                    <EyeIcon className="h-5 "onClick={() => setSelectedItem(request)}/>
+                                <CompanyRequestSheet
+                                    side="left"
+                                    title="Beérkezett árajánlat"
+                                >
+                                    <EyeIcon
+                                        className="h-5 "
+                                        onClick={() => setSelectedItem(request)}
+                                    />
                                 </CompanyRequestSheet>
                             </TableCell>
                             <TableCell>{request.name}</TableCell>
-                            <TableCell>{request.email_address}</TableCell>{" "}
-                            <TableCell>{request.subject}</TableCell>{" "}
-                            <TableCell>{request.status}</TableCell>{" "}
+                            <TableCell>{request.email_address}</TableCell>
+                            <TableCell>{request.subject}</TableCell>
+                            <TableCell>
+                                <div>{request.status == 0 && (
+                                    <span className="flex justify-center bg-blue-100 p-2 text-blue-600 w-1/2 rounded-xl">Árajánlatra vár</span>
+                                )}</div>
+                            </TableCell>
                             <TableCell>
                                 {new Date(request.created_at).toLocaleString()}
+                            </TableCell>
+                            <TableCell>
+                                <div className="flex justify-center bg-green-100 text-green-600 p-2 w-1/2 rounded-xl">
+                                    {request.accepted_by}
+                                </div>
                             </TableCell>
                         </TableRow>
                     ))}

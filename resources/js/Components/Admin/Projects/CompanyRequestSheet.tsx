@@ -14,6 +14,9 @@ import { RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { useCustomerRequestStore } from "@/store/CustomerRequestStore";
 import { Button } from "@/Components/ui/button";
 import { twMerge } from "tailwind-merge";
+import { useToast } from "@/Components/ui/use-toast";
+import { router, usePage } from "@inertiajs/react";
+import { User } from "@/types";
 
 type Props = {
     side?: "left" | "right" | "top" | "bottom";
@@ -27,7 +30,75 @@ function CompanyRequestSheet({
 }: PropsWithChildren<Props>) {
     const { selectedItem } = useCustomerRequestStore();
 
+    const { toast } = useToast();
 
+    const { auth }: any = usePage().props;
+
+    type ToastType = {
+        type: "success" | "failed";
+        title: string;
+        description: string;
+    };
+
+    const showToast = ({ type, title, description }: ToastType) => {
+        if (type === "failed") {
+            toast({
+                variant: "destructive",
+                title: title,
+                description: description,
+                className: "bg-red-100 text-red-900 font-bold border-none",
+            });
+        }
+
+        if (type === "success") {
+            toast({
+                title: title,
+                description: description,
+                className:
+                    "bg-green-100 text-green-900 font-bold text-xl border-none",
+            });
+        }
+    };
+
+    function handleAcceptSubmit(onBefore?: string) {
+        router.post(
+            "/projects/customer-request/acknowledge",
+            {
+                user_id: auth.user.id,
+                user_name: auth.user.name,
+                customer_request: selectedItem,
+            },
+            {
+                onBefore: () => {
+                    if (onBefore) {
+                        const reply = confirm(onBefore);
+                        if (!reply) {
+                            // setLoading(false);
+                            return false;
+                        }
+                    }
+                },
+
+                onSuccess: () => {
+                    showToast({
+                        type: "success",
+                        title: "Sikeres művelet!",
+                        description: "Feladat felvéve",
+                    });
+                },
+
+                onError: (resp: any) => {
+                    showToast({
+                        type: "failed",
+                        title: "Hiba!",
+                        description: resp.errors,
+                    });
+                },
+
+                onFinish: () => {},
+            }
+        );
+    }
 
     return (
         <div>
@@ -52,6 +123,17 @@ function CompanyRequestSheet({
                             </div>
 
                             <div className="flex flex-col gap-4 text-left">
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Feladat ügyintézője:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.accepted_by}
+                                        </span>
+                                    </div>
+                                </div>
+
                                 <div className="flex flex-row items-center gap-3 ml-4">
                                     <div className="w-[200px]">
                                         <span>Név:</span>
@@ -135,28 +217,42 @@ function CompanyRequestSheet({
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row gap-2">
-                                    <Button className="bg-green-100 hover:bg-green-200 text-green-900">
+                                    <Button
+                                        className={twMerge(
+                                            "bg-green-100 hover:bg-green-200 text-green-900"
+                                        )}
+                                        onClick={() => handleAcceptSubmit()}
+                                        disabled={
+                                            selectedItem?.accept == 1
+                                                ? true
+                                                : false
+                                        }
+                                    >
                                         Feladat felvétele
                                     </Button>
 
                                     <Button
                                         className={twMerge(
-                                            "bg-[#01A2D6] hover:bg-blue-400 text-white",
-                                            selectedItem?.status == 0
-                                                ? " opacity-50 cursor-not-allowed"
-                                                : ""
+                                            "bg-[#01A2D6] hover:bg-blue-400 text-white"
                                         )}
+                                        disabled={
+                                            selectedItem?.accept == 0
+                                                ? true
+                                                : false
+                                        }
                                     >
                                         Árajánlat készítése
                                     </Button>
 
                                     <Button
                                         className={twMerge(
-                                            "bg-red-100 hover:bg-red-200 text-red-900",
-                                            selectedItem?.status == 0
-                                                ? " opacity-50 cursor-not-allowed"
-                                                : ""
+                                            "bg-red-100 hover:bg-red-200 text-red-900"
                                         )}
+                                        disabled={
+                                            selectedItem?.accept == 0
+                                                ? true
+                                                : false
+                                        }
                                     >
                                         Kérés elutasítása
                                     </Button>
