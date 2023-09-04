@@ -214,7 +214,7 @@ function SideBAR() {
                 )}
             </div>
 
-            <div className="fixed bottom-0 sm:hidden z-50 bg-[#01A2D6] text-white w-full mt-[200px]">
+            <div className="fixed bottom-0 sm:hidden z-50 bg-white text-black w-full mt-[200px] border-t border-2">
                 <div className="flex flex-row justify-between gap-6 m-4">
                     <Link href="/dashboard">
                         <HomeIcon className="h-6" />
