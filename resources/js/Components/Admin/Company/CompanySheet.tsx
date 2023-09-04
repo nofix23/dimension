@@ -308,7 +308,7 @@ function CompanySheet({
                             <CompanyData user={company.user} users={users} company={company} type="company" />
                         </SheetDescription>
                     </SheetHeader>
-                    <CreateCompanyContactForm>
+                    <CreateCompanyContactForm company_id={company.id}>
                         <Contacts contacts={company?.contacts} />
                     </CreateCompanyContactForm>
 

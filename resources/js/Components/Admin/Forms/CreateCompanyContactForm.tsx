@@ -5,7 +5,6 @@ import {
     AccordionTrigger,
 } from "@/Components/ui/accordion";
 import React, { PropsWithChildren, useEffect, useState } from "react";
-import CompanyData from "../Accounts/CompanyData";
 import { useForm } from "@inertiajs/react";
 import {
     Dialog,
@@ -28,7 +27,6 @@ type Props = {
 }
 
 function CreateCompanyContactForm({ company_id, children }: PropsWithChildren<Props>) {
-    const { selectedItem } = useCompanyStore();
 
     const { data, setData, post, processing, errors } = useForm({
         company_id: company_id,
@@ -39,7 +37,6 @@ function CreateCompanyContactForm({ company_id, children }: PropsWithChildren<Pr
         type: "",
         image_url: null,
     });
-
 
     const { toast } = useToast();
 

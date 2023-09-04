@@ -300,9 +300,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 <TableCell className="font-medium">
                                     {company?.contacts?.length}
                                 </TableCell>
-                                <TableCell className="font-medium">
-                                    0
-                                </TableCell>
+                                <TableCell className="font-medium">0</TableCell>
                                 <TableCell className="font-medium flex">
                                     {company.active === 1 && (
                                         <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl p-2 h-6 flex items-center">
