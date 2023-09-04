@@ -7,13 +7,17 @@ import { UserIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { useUserStore } from "@/store/UserStore";
 import Groups from "@/Components/Admin/Accounts/Groups";
 import GeneralInformations from "@/Components/Admin/Accounts/GeneralInformations";
+import { useCompanyStore } from "@/store/CompanyStore";
 
-export default function Accounts({ auth, users }: PageProps) {
+export default function Accounts({ auth, users, companies }: PageProps) {
 
     const { userItems, setUserItems} = useUserStore();
 
+    const { setCompanyItems } = useCompanyStore();
+
     useEffect(() => {
         setUserItems(users);
+        setCompanyItems(companies);
     }, [users])
 
     return (

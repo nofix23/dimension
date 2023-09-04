@@ -298,7 +298,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                     {company.email_address}
                                 </TableCell>
                                 <TableCell className="font-medium">
-                                    {company.contacts.length}
+                                    {company?.contacts?.length}
                                 </TableCell>
                                 <TableCell className="font-medium">
                                     0

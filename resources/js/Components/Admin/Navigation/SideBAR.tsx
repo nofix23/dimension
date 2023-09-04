@@ -44,7 +44,7 @@ function SideBAR() {
                             />
                         </div>
 
-                        <Accordion type="multiple" defaultValue={[]}>
+                        <Accordion type="multiple" defaultValue={[ 'item-1', 'item-2', 'item-3']}>
                             <AccordionItem
                                 value="item-1"
                                 className="border-none"

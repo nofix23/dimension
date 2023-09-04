@@ -113,6 +113,7 @@ class AdminController extends Controller
                 'email' => 'required|string|email|max:255|unique:' . User::class,
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'role' => 'required|string',
+                'company_id' => 'nullable'
             ]);
 
             $user = User::create([
@@ -120,6 +121,7 @@ class AdminController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
+                'company_id' => $request->company_id
             ]);
 
             event(new Registered($user));
@@ -152,9 +154,11 @@ class AdminController extends Controller
     public function getProfiles(Request $request)
     {
         $users = User::with(['Company'])->get();
+        $companies = Company::all();
 
         return Inertia::render('Profile/Accounts', [
-            "users" => $users
+            "users" => $users,
+            "companies" => $companies
         ]);
     }
 

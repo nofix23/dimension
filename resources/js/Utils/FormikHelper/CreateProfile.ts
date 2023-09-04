@@ -7,5 +7,6 @@ export const initialValues = () => {
         password: "",
         password_confirmation: "",
         role: "admin",
+        company_id: 0
     };
 };

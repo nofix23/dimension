@@ -17,6 +17,8 @@ import { Label } from "@radix-ui/react-label";
 import FormikField from "@/Components/FormikField";
 import { DialogClose } from "@radix-ui/react-dialog";
 import PrimaryButton from "@/Components/PrimaryButton";
+import { useCompanyStore } from "@/store/CompanyStore";
+import { Company } from "@/types";
 
 type Props = {
     triggerText: string;
@@ -25,6 +27,8 @@ type Props = {
 
 function CreateProfile({ triggerText, TriggerIcon }: Props) {
     const { toast } = useToast();
+
+    const { companyItems } = useCompanyStore();
 
     type ToastType = {
         type: "success" | "failed";
@@ -65,6 +69,7 @@ function CreateProfile({ triggerText, TriggerIcon }: Props) {
                 password: values.password,
                 password_confirmation: values.password_confirmation,
                 role: values.role,
+                company_id: values.company_id
             },
             {
                 onBefore: () => {
@@ -100,11 +105,14 @@ function CreateProfile({ triggerText, TriggerIcon }: Props) {
         );
     }
 
-    const [ isDialogOpen, setDialogOpen ] = useState<boolean>(false);
+    const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
 
     return (
         <div>
-            <Dialog open={isDialogOpen} onOpenChange={() => setDialogOpen(!isDialogOpen)}>
+            <Dialog
+                open={isDialogOpen}
+                onOpenChange={() => setDialogOpen(!isDialogOpen)}
+            >
                 <DialogTrigger asChild>
                     <Button className="">
                         <div className="flex flex-row gap-2">
@@ -242,6 +250,44 @@ function CreateProfile({ triggerText, TriggerIcon }: Props) {
                                                 </option>
                                             </Field>
                                         </div>
+
+                                        {values.role === "company" && (
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label
+                                                    htmlFor="company_id"
+                                                    className="text-right"
+                                                >
+                                                    Cég
+                                                </Label>
+                                                <Field
+                                                    id="company_id"
+                                                    name="company_id"
+                                                    required={true}
+                                                    placeholder=""
+                                                    readOnly={false}
+                                                    as="select"
+                                                    className="col-span-3"
+                                                >
+                                                    <option value={-1}>
+                                                        Válassz
+                                                    </option>
+
+                                                    {companyItems.map(
+                                                        (company: Company) => (
+                                                            <option
+                                                                value={
+                                                                    company.id
+                                                                }
+                                                            >
+                                                                {
+                                                                    company.company_name
+                                                                }
+                                                            </option>
+                                                        )
+                                                    )}
+                                                </Field>
+                                            </div>
+                                        )}
 
                                         <div className="flex justify-center mt-5">
                                             <Button

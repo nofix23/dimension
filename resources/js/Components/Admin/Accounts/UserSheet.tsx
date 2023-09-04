@@ -82,6 +82,8 @@ function UserSheet({ side, user, users, children }: PropsWithChildren<Props>) {
                                                     <CompanyData
                                                         user={user}
                                                         users={users}
+                                                        company={null}
+                                                        type="user"
                                                     />
                                                 </AccordionContent>
                                             </AccordionItem>

@@ -9,6 +9,7 @@ export interface User {
     created_at: string;
     header_appearance: string;
     company: Company;
+    company_id: number;
 }
 
 export type Company = {
