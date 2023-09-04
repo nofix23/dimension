@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->boolean("accept")->default(false);
             $table->text("accepted_by")->nullable();
+            $table->text("accepted_at")->nullable();
+            $table->text("reverted_by")->nullable();
+            $table->text("reverted_at")->nullable();
             $table->text("subject")->nullable();
             $table->text("materials")->nullable();
             $table->text("sizes")->nullable();

@@ -43,6 +43,9 @@ export type CompanyContact = {
 export type CustomerRequest = {
     accept: number;
     accepted_by: string;
+    accepted_at: string;
+    reverted_by: string;
+    reverted_at: string;
     subject: string;
     materials: string;
     sizes: string;

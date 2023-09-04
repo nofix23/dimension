@@ -10,6 +10,7 @@ import { useCustomerRequestStore } from "@/store/CustomerRequestStore";
 import { CustomerRequest } from "@/types";
 import { EyeIcon } from "lucide-react";
 import CompanyRequestSheet from "./CompanyRequestSheet";
+import { twMerge } from "tailwind-merge";
 
 function NewCustomerRequestsTable() {
     const { customerRequestItems, setSelectedItem } = useCustomerRequestStore();
@@ -75,7 +76,14 @@ function NewCustomerRequestsTable() {
                                 {new Date(request.created_at).toLocaleString()}
                             </TableCell>
                             <TableCell>
-                                <div className="flex justify-center bg-green-100 text-green-600 p-2 sm:w-1/2 rounded-xl">
+                                <div
+                                    className={twMerge(
+                                        "flex justify-center p-2 sm:w-1/2 rounded-xl",
+                                        request.accepted_by ?
+                                            "bg-green-100 text-green-600"
+                                            :""
+                                    )}
+                                >
                                     {request.accepted_by}
                                 </div>
                             </TableCell>

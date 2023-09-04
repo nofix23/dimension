@@ -100,6 +100,46 @@ function CompanyRequestSheet({
         );
     }
 
+    function handleRevertAcceptSubmit(onBefore?: string) {
+        router.post(
+            "/projects/customer-request/revert-accept",
+            {
+                user_id: auth.user.id,
+                user_name: auth.user.name,
+                customer_request: selectedItem,
+            },
+            {
+                onBefore: () => {
+                    if (onBefore) {
+                        const reply = confirm(onBefore);
+                        if (!reply) {
+                            // setLoading(false);
+                            return false;
+                        }
+                    }
+                },
+
+                onSuccess: () => {
+                    showToast({
+                        type: "success",
+                        title: "Sikeres művelet!",
+                        description: "Feladat felvéve",
+                    });
+                },
+
+                onError: (resp: any) => {
+                    showToast({
+                        type: "failed",
+                        title: "Hiba!",
+                        description: resp.errors,
+                    });
+                },
+
+                onFinish: () => {},
+            }
+        );
+    }
+
     function handleRejectSubmit(onBefore?: string) {
         router.post(
             "/projects/customer-request/reject",
@@ -173,6 +213,42 @@ function CompanyRequestSheet({
                                         </span>
                                     </div>
                                 </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>
+                                            Feladat felvételének dátuma:
+                                        </span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.accepted_at}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Feladatot leadta:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.reverted_by}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Feladat leadásának dátuma:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.reverted_at}
+                                        </span>
+                                    </div>
+                                </div>
+                                <hr></hr>
 
                                 <div className="flex flex-row items-center gap-3 ml-4">
                                     <div className="w-[200px]">
@@ -269,6 +345,22 @@ function CompanyRequestSheet({
                                         }
                                     >
                                         Feladat felvétele
+                                    </Button>
+
+                                    <Button
+                                        className={twMerge(
+                                            "bg-orange-100 hover:bg-orange-200 text-orange-900"
+                                        )}
+                                        onClick={() =>
+                                            handleRevertAcceptSubmit()
+                                        }
+                                        disabled={
+                                            selectedItem?.accept == 1
+                                                ? false
+                                                : true
+                                        }
+                                    >
+                                        Feladat leadása
                                     </Button>
 
                                     <Button
