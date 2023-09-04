@@ -61,7 +61,7 @@ function SideBAR() {
                                         <SidebarItem
                                             type="link"
                                             href="/projects/unacknowledge"
-                                            text="Aktív árajánlatok"
+                                            text="Megrendelői árajánlatok"
                                             full
                                             className="pl-3"
                                         />
@@ -159,7 +159,7 @@ function SideBAR() {
                             <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
                                 <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
                                     <ArrowLeftIcon className="h-4" />
-                                    Aktív árajánlatok
+                                    Megrendelői árajánlatok
                                 </span>
                             </div>
                         </div>

@@ -45,7 +45,7 @@ function NewCustomerRequestsTable() {
                             <TableCell>
                                 <CompanyRequestSheet
                                     side="left"
-                                    title="Beérkezett árajánlat"
+                                    title="Megrendelői árajánlat"
                                 >
                                     <EyeIcon
                                         className="h-5 "

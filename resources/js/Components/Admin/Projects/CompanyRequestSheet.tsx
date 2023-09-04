@@ -332,6 +332,17 @@ function CompanyRequestSheet({
                                     </div>
                                 </div>
 
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Megrendelői árajánlat beérkezésének dátuma:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {new Date(selectedItem?.created_at).toLocaleString()}
+                                        </span>
+                                    </div>
+                                </div>
+
                                 <div className="flex flex-col sm:flex-row gap-2">
                                     <Button
                                         className={twMerge(
