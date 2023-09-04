@@ -15,8 +15,16 @@ import { useCustomerRequestStore } from "@/store/CustomerRequestStore";
 import { Button } from "@/Components/ui/button";
 import { twMerge } from "tailwind-merge";
 import { useToast } from "@/Components/ui/use-toast";
-import { router, usePage } from "@inertiajs/react";
+import { router, useForm, usePage } from "@inertiajs/react";
 import { User } from "@/types";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/Components/ui/dialog";
 
 type Props = {
     side?: "left" | "right" | "top" | "bottom";
@@ -33,6 +41,10 @@ function CompanyRequestSheet({
     const { toast } = useToast();
 
     const { auth }: any = usePage().props;
+
+    const { data, setData, post, processing, errors } = useForm({
+        reject_comment: "",
+    });
 
     type ToastType = {
         type: "success" | "failed";
@@ -147,6 +159,7 @@ function CompanyRequestSheet({
                 user_id: auth.user.id,
                 user_name: auth.user.name,
                 customer_request: selectedItem,
+                reject_comment: data.reject_comment
             },
             {
                 onBefore: () => {
@@ -248,6 +261,42 @@ function CompanyRequestSheet({
                                         </span>
                                     </div>
                                 </div>
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Megrendelést elutasította:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.rejected_by}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>
+                                            Megrendelés elutasításának dátuma:
+                                        </span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.rejected_at}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>
+                                            Megrendelés elutasításának oka:
+                                        </span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.reject_comment}
+                                        </span>
+                                    </div>
+                                </div>
                                 <hr></hr>
 
                                 <div className="flex flex-row items-center gap-3 ml-4">
@@ -334,11 +383,16 @@ function CompanyRequestSheet({
 
                                 <div className="flex flex-row items-center gap-3 ml-4">
                                     <div className="w-[200px]">
-                                        <span>Megrendelői árajánlat beérkezésének dátuma:</span>
+                                        <span>
+                                            Megrendelői árajánlat beérkezésének
+                                            dátuma:
+                                        </span>
                                     </div>
                                     <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                                         <span className="ml-2">
-                                            {new Date(selectedItem?.created_at).toLocaleString()}
+                                            {new Date(
+                                                selectedItem?.created_at
+                                            ).toLocaleString()}
                                         </span>
                                     </div>
                                 </div>
@@ -388,20 +442,74 @@ function CompanyRequestSheet({
                                         Árajánlat készítése
                                     </Button>
 
-                                    <Button
-                                        className={twMerge(
-                                            "bg-red-100 hover:bg-red-200 text-red-900"
-                                        )}
-                                        onClick={() => handleRejectSubmit()}
-                                        disabled={
-                                            selectedItem?.accept == 0 ||
-                                            selectedItem?.status === -1
-                                                ? true
-                                                : false
-                                        }
-                                    >
-                                        Kérés elutasítása
-                                    </Button>
+                                    <Dialog>
+                                        <DialogTrigger
+                                            disabled={
+                                                selectedItem?.accept == 0 ||
+                                                selectedItem?.status === -1
+                                                    ? true
+                                                    : false
+                                            }
+                                        >
+                                            <Button
+                                                className={twMerge(
+                                                    "bg-red-100 hover:bg-red-200 text-red-900"
+                                                )}
+                                                disabled={
+                                                    selectedItem?.accept == 0 ||
+                                                    selectedItem?.status === -1
+                                                        ? true
+                                                        : false
+                                                }
+                                            >
+                                                Kérés elutasítása
+                                            </Button>
+                                        </DialogTrigger>
+                                        <DialogContent className="md:min-w-[700px] bg-white">
+                                            <DialogHeader>
+                                                <DialogTitle>
+                                                    Biztosan elutasítod ezt a
+                                                    megrendelést?
+                                                </DialogTitle>
+                                                <DialogDescription>
+                                                    A megrendelés elutasítását
+                                                    követően a megrendelő
+                                                    e-mailben tájékoztatást kap!
+                                                </DialogDescription>
+                                            </DialogHeader>
+                                            <div>
+                                                <form
+                                                    className="flex flex-col gap-4 "
+                                                    onSubmit={() =>
+                                                        handleRejectSubmit()
+                                                    }
+                                                >
+                                                    <label className="font-bold">
+                                                        Elutasítás oka:
+                                                    </label>
+                                                    <textarea
+                                                        className="border-2 p-3"
+                                                        value={
+                                                            data.reject_comment
+                                                        }
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "reject_comment",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+
+                                                    <Button
+                                                        className="bg-red-600 hover:bg-red-500 text-white w-52"
+                                                        type="submit"
+                                                    >
+                                                        Megrendelés elutasítása
+                                                    </Button>
+                                                </form>
+                                            </div>
+                                        </DialogContent>
+                                    </Dialog>
                                 </div>
                             </div>
                         </SheetDescription>

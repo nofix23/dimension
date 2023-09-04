@@ -18,6 +18,9 @@ return new class extends Migration
             $table->text("accepted_at")->nullable();
             $table->text("reverted_by")->nullable();
             $table->text("reverted_at")->nullable();
+            $table->text("rejected_by")->nullable();
+            $table->text("rejected_at")->nullable();
+            $table->text("reject_comment")->nullable();
             $table->text("subject")->nullable();
             $table->text("materials")->nullable();
             $table->text("sizes")->nullable();

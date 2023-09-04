@@ -55,6 +55,9 @@ class ProjectsController extends Controller
     {
         $customer_request = CustomerRequest::find($request->customer_request['id']);
         $customer_request->status = -1;
+        $customer_request->rejected_by = $request->user_name;
+        $customer_request->rejected_at = Carbon::now();
+        $customer_request->reject_comment = $request->reject_comment;
         $customer_request->save();
         return Redirect::back();
     }

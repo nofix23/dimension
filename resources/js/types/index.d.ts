@@ -46,6 +46,9 @@ export type CustomerRequest = {
     accepted_at: string;
     reverted_by: string;
     reverted_at: string;
+    rejected_by: string;
+    rejected_at: string;
+    reject_comment: string;
     subject: string;
     materials: string;
     sizes: string;
