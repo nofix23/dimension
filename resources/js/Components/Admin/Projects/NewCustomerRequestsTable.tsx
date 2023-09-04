@@ -12,7 +12,7 @@ import { EyeIcon } from "lucide-react";
 import CompanyRequestSheet from "./CompanyRequestSheet";
 
 function NewCustomerRequestsTable() {
-    const { customerRequestItems } = useCustomerRequestStore();
+    const { customerRequestItems, setSelectedItem } = useCustomerRequestStore();
 
     return (
         <div>
@@ -40,7 +40,7 @@ function NewCustomerRequestsTable() {
                         <TableRow className="hover:bg-[#01A2D6]/10 hover:cursor-pointer hover:text-[#01A2D6]">
                             <TableCell>
                                 <CompanyRequestSheet side="left" title="Beérkezett árajánlat">
-                                    <EyeIcon className="h-5 " />
+                                    <EyeIcon className="h-5 "onClick={() => setSelectedItem(request)}/>
                                 </CompanyRequestSheet>
                             </TableCell>
                             <TableCell>{request.name}</TableCell>

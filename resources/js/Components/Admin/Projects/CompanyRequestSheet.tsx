@@ -11,13 +11,20 @@ import UserDropdown from "../Accounts/UserDropdown";
 import { WorkflowIcon } from "lucide-react";
 import { QueueListIcon } from "@heroicons/react/24/outline";
 import { RocketLaunchIcon } from "@heroicons/react/24/outline";
+import { useCustomerRequestStore } from "@/store/CustomerRequestStore";
 
 type Props = {
     side?: "left" | "right" | "top" | "bottom";
     title: string;
 };
 
-function CompanyRequestSheet({ side="left", title,  children }: PropsWithChildren<Props>) {
+function CompanyRequestSheet({
+    side = "left",
+    title,
+    children,
+}: PropsWithChildren<Props>) {
+    const { selectedItem } = useCustomerRequestStore();
+
     return (
         <div>
             <Sheet>
@@ -35,7 +42,91 @@ function CompanyRequestSheet({ side="left", title,  children }: PropsWithChildre
                                 </span>
                             </div>
                         </SheetTitle>
-                        <SheetDescription></SheetDescription>
+                        <SheetDescription>
+                            <div className="mb-4 text-lg font-bold">
+                                <span>Árajánlat adatai</span>
+                            </div>
+
+                            <div className="flex flex-col gap-4 text-left">
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Név:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.name}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>E-mail:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.email_address}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Telefonszám:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.phone_number}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Tárgy:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.subject}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Anyagok:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.materials}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Megyjezések:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.comments}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-row items-center gap-3 ml-4">
+                                    <div className="w-[200px]">
+                                        <span>Állapot:</span>
+                                    </div>
+                                    <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
+                                        <span className="ml-2">
+                                            {selectedItem?.status == 0 ? (
+                                                <span className="text-red-600">Még nem feldolgozott</span>
+                                            ): <span>Feldolgozott</span>}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </SheetDescription>
                     </SheetHeader>
                 </SheetContent>
             </Sheet>
