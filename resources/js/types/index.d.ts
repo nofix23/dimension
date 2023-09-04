@@ -33,11 +33,14 @@ export type Company = {
 };
 
 export type CompanyContact = {
+    id: number;
     company_id: number;
     name: string;
     phone_number: string;
+    secondary_phone_number: string;
     email_address: string;
     type: string;
+    image_url: string;
 };
 
 export type CustomerRequest = {

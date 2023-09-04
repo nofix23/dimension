@@ -11,8 +11,10 @@ class CompanyContact extends Model
         'name',
         'email_address',
         'phone_number',
+        'secondary_phone_number',
         'type',
-        'company_id'
+        'company_id',
+        'image_url'
     ];
 
     use HasFactory;

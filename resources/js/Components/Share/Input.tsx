@@ -2,7 +2,7 @@ import React from 'react'
 import { twMerge } from 'tailwind-merge';
 
 type Props = {
-    type: "text" | "textarea" | "select" | "number" | "email";
+    type: "text" | "textarea" | "select" | "number" | "email" | "file";
     className?: string;
     value?: any;
     onChange?: (e:any) => void;

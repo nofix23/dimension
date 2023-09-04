@@ -110,7 +110,7 @@ export default function Authenticated({
 
     return (
         <div className="min-h-screen bg-white fixed w-full">
-            <nav className="bg-[#01A2D6] text-white border-white">
+            <nav className="bg-white text-black border-b border-slate-100">
                 <div className="mx-auto ml-4 mr-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
@@ -123,11 +123,12 @@ export default function Authenticated({
 
                             <div className="flex items-center justify-center">
                                 <Link href="/dashboard">
-                                    <div className="">
-                                        <img
+                                    <div className="border-slate-100 border-2 p-2">
+                                        {/* <img
                                             src={Logo}
                                             className="h-20 p-3"
-                                        />
+                                        /> */}
+                                        <span className="text-xl"><span className="font-bold">D</span>imenzió</span>
                                     </div>
                                 </Link>
                             </div>
@@ -188,7 +189,7 @@ export default function Authenticated({
                                         (previousState) => !previousState
                                     )
                                 }
-                                className="inline-flex items-center justify-center p-2 rounded-md text-white dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-black dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
                             >
                                 <svg
                                     className="h-6 w-6"

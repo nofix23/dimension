@@ -27,8 +27,8 @@ function SideBAR() {
     const { showSidebar } = useGeneralStore();
 
     return (
-        <div className="bg-[#01A2D6] sm:border-blue-200 sm:border-t">
-            <div className="bg-[#01A2D6] h-screen pr-2 max-sm:hidden text-slate-50">
+        <div className="bg-white border-r border-slate-100 mt-6">
+            <div className="bg-white h-screen pr-2 max-sm:hidden text-black">
                 {/* Sidebar teljes */}
                 {showSidebar ? (
                     <div className="md:w-[250px] ml-4 flex flex-col mt-3 font-semibold">
@@ -144,7 +144,7 @@ function SideBAR() {
                                 <HomeIcon className="h-6" />
                             </Link>
 
-                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-white text-black p-3 rounded-xl min-w-[200px] border-2">
                                 <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
                                     <ArrowLeftIcon className="h-4" />
                                     Irányítópult
@@ -156,7 +156,7 @@ function SideBAR() {
                             <Link href="/projects/unacknowledge">
                                 <BoltIcon className="h-6" />
                             </Link>
-                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-white text-black p-3 rounded-xl min-w-[200px] border-2">
                                 <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
                                     <ArrowLeftIcon className="h-4" />
                                     Megrendelői árajánlatok
@@ -167,7 +167,7 @@ function SideBAR() {
                             <Link href="/projects">
                                 <TruckIcon className="h-6" />
                             </Link>
-                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-white text-black p-3 rounded-xl min-w-[200px] border-2">
                                 <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
                                     <ArrowLeftIcon className="h-4" />
                                     Megrendelések
@@ -179,7 +179,7 @@ function SideBAR() {
                             <Link href="/company/all">
                                 <BuildingOfficeIcon className="h-6" />
                             </Link>
-                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-white text-black p-3 rounded-xl min-w-[200px] border-2">
                                 <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
                                     <ArrowLeftIcon className="h-4" />
                                     Cégek
@@ -191,7 +191,7 @@ function SideBAR() {
                             <Link href="/profile/all">
                                 <UsersIcon className="h-6" />
                             </Link>
-                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-white text-black p-3 rounded-xl min-w-[200px] border-2">
                                 <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
                                     <ArrowLeftIcon className="h-4" />
                                     Hozzáférések
@@ -203,7 +203,7 @@ function SideBAR() {
                             <Link href="#">
                                 <Cog6ToothIcon className="h-6" />
                             </Link>
-                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-[#01A2D6] text-white p-3 rounded-xl min-w-[200px]">
+                            <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-white text-black p-3 rounded-xl min-w-[200px] border-2">
                                 <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
                                     <ArrowLeftIcon className="h-4" />
                                     Beállítások

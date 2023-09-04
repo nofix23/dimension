@@ -59,15 +59,15 @@ function NewCustomerRequestsTable() {
                             <TableCell>
                                 <div>
                                     {request.status == 0 && (
-                                        <span className="flex justify-center bg-blue-100 p-2 text-blue-600 sm:w-1/2 rounded-xl">
+                                        <span className="flex justify-center bg-blue-100 p-2 min-w-full text-blue-600 sm:w-1/2 rounded-xl">
                                             Árajánlatra vár
                                         </span>
                                     )}
                                 </div>
                                 <div>
                                     {request.status == -1 && (
-                                        <span className="flex justify-center bg-red-100 p-2 text-red-600 sm:w-1/2 rounded-xl">
-                                            Árajánlat elutasítva
+                                        <span className="flex justify-center bg-red-100 p-2 text-red-600 min-w-full sm:w-1/2 rounded-xl">
+                                            Megrendelés elutasítva
                                         </span>
                                     )}
                                 </div>
@@ -78,7 +78,7 @@ function NewCustomerRequestsTable() {
                             <TableCell>
                                 <div
                                     className={twMerge(
-                                        "flex justify-center p-2 sm:w-1/2 rounded-xl",
+                                        "flex justify-center p-2 min-w-full sm:w-1/2 rounded-xl",
                                         request.accepted_by ?
                                             "bg-green-100 text-green-600"
                                             :""

@@ -4,7 +4,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/Components/ui/accordion";
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import CompanyData from "../Accounts/CompanyData";
 import { useForm } from "@inertiajs/react";
 import {
@@ -21,16 +21,25 @@ import Input from "@/Components/Share/Input";
 import PrimaryButton from "@/Components/PrimaryButton";
 import InputLabel from "@/Components/InputLabel";
 import { useToast } from "@/Components/ui/use-toast";
+import { useCompanyStore } from "@/store/CompanyStore";
 
+type Props = {
+    company_id?: number;
+}
 
-function CreateCompanyContactForm({ children }: PropsWithChildren) {
+function CreateCompanyContactForm({ company_id, children }: PropsWithChildren<Props>) {
+    const { selectedItem } = useCompanyStore();
+
     const { data, setData, post, processing, errors } = useForm({
-        company_id: 1,
+        company_id: company_id,
         name: "",
         phone_number: "",
+        secondary_phone_number: "",
         email_address: "",
         type: "",
+        image_url: null,
     });
+
 
     const { toast } = useToast();
 
@@ -144,7 +153,7 @@ function CreateCompanyContactForm({ children }: PropsWithChildren) {
 
                                             <div className="flex flex-row items-center gap-4">
                                                 <InputLabel
-                                                    htmlFor="name"
+                                                    htmlFor="phone_number"
                                                     value="Telefonszám"
                                                     className="w-[80px]"
                                                 />
@@ -167,6 +176,33 @@ function CreateCompanyContactForm({ children }: PropsWithChildren) {
 
                                             <div className="flex flex-row items-center gap-4">
                                                 <InputLabel
+                                                    htmlFor="secondary_phone_number"
+                                                    value="Másodlagos telefonszám"
+                                                    className="w-[80px]"
+                                                />
+                                                <Input
+                                                    type="text"
+                                                    value={
+                                                        data.secondary_phone_number
+                                                    }
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "secondary_phone_number",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+                                                {errors.secondary_phone_number && (
+                                                    <div>
+                                                        {
+                                                            errors.secondary_phone_number
+                                                        }
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className="flex flex-row items-center gap-4">
+                                                <InputLabel
                                                     htmlFor="email_address"
                                                     value="E-mail"
                                                     className="w-[80px]"
@@ -183,7 +219,7 @@ function CreateCompanyContactForm({ children }: PropsWithChildren) {
                                                 />
                                                 {errors.phone_number && (
                                                     <div>
-                                                        {errors.phone_number}
+                                                        {errors.email_address}
                                                     </div>
                                                 )}
                                             </div>
@@ -209,14 +245,30 @@ function CreateCompanyContactForm({ children }: PropsWithChildren) {
                                                     <option value="responsible">
                                                         Felelős
                                                     </option>
-                                                    <option
-                                                        value="deputy"
-                                                    >
+                                                    <option value="deputy">
                                                         Helyettes
                                                     </option>
                                                 </select>
                                                 {errors.type && (
                                                     <div>{errors.type}</div>
+                                                )}
+                                            </div>
+
+                                            <div className="">
+                                                <Input
+                                                    className="h-auto"
+                                                    type="file"
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "image_url",
+                                                            e.target.files[0]
+                                                        )
+                                                    }
+                                                />
+                                                {errors.image_url && (
+                                                    <div>
+                                                        {errors.image_url}
+                                                    </div>
                                                 )}
                                             </div>
                                         </div>

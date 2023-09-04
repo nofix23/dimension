@@ -735,7 +735,7 @@ function CompanySheet({
                             </Formik>
                         </SheetDescription>
                     </SheetHeader>
-                    <CreateCompanyContactForm>
+                    <CreateCompanyContactForm company_id={company?.id}>
                         <Contacts contacts={company?.contacts} />
                     </CreateCompanyContactForm>
 

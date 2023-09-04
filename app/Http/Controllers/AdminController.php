@@ -173,14 +173,25 @@ class AdminController extends Controller
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'phone_number' => 'max:255',
+                'secondary_phone_number' => 'max:255',
                 'email_address' => 'required|string|email|max:255',
                 'type' => 'required|string|max:255',
-                'company_id' => 'required'
+                'company_id' => 'required',
+                'image_url' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             ]);
 
             $createModelService = new CreateModel(new CompanyContact, $validated);
 
-            $createModelService->createModelFromRequest();
+            $model = $createModelService->createModelFromRequest();
+
+            if($request->image_url){
+                $imageName = time() . '.' . $request->image_url->extension();
+
+                $request->image_url->move(public_path('images'), $imageName);
+
+                $model->image_url = $imageName;
+                $model->save();
+            }
 
             return Redirect::back();
         } catch (Exception $e) {
@@ -194,5 +205,11 @@ class AdminController extends Controller
 
     public function deleteContact(Request $request)
     {
+        $contact = CompanyContact::find($request->id);
+        if($contact){
+            $contact->delete();
+        }
+        return Redirect::back();
+
     }
 }

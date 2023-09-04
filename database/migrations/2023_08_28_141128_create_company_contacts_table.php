@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text("name")->nullable();
             $table->text("email_address")->nullable();
             $table->text("phone_number")->nullable();
+            $table->text("secondary_phone_number")->nullable();
+            $table->text("image_url")->nullable();
             $table->timestamps();
         });
     }
