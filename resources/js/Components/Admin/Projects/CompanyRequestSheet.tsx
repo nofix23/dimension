@@ -12,6 +12,8 @@ import { WorkflowIcon } from "lucide-react";
 import { QueueListIcon } from "@heroicons/react/24/outline";
 import { RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { useCustomerRequestStore } from "@/store/CustomerRequestStore";
+import { Button } from "@/Components/ui/button";
+import { twMerge } from "tailwind-merge";
 
 type Props = {
     side?: "left" | "right" | "top" | "bottom";
@@ -24,6 +26,8 @@ function CompanyRequestSheet({
     children,
 }: PropsWithChildren<Props>) {
     const { selectedItem } = useCustomerRequestStore();
+
+
 
     return (
         <div>
@@ -120,10 +124,42 @@ function CompanyRequestSheet({
                                     <div className="bg-gray-50 p-2 w-[500px] rounded-xl">
                                         <span className="ml-2">
                                             {selectedItem?.status == 0 ? (
-                                                <span className="text-red-600">Még nem feldolgozott</span>
-                                            ): <span>Feldolgozott</span>}
+                                                <span className="text-red-600">
+                                                    Még nem feldolgozott
+                                                </span>
+                                            ) : (
+                                                <span>Feldolgozott</span>
+                                            )}
                                         </span>
                                     </div>
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row gap-2">
+                                    <Button className="bg-green-100 hover:bg-green-200 text-green-900">
+                                        Feladat felvétele
+                                    </Button>
+
+                                    <Button
+                                        className={twMerge(
+                                            "bg-[#01A2D6] hover:bg-blue-400 text-white",
+                                            selectedItem.status == 0
+                                                ? " opacity-50 cursor-not-allowed"
+                                                : ""
+                                        )}
+                                    >
+                                        Árajánlat készítése
+                                    </Button>
+
+                                    <Button
+                                        className={twMerge(
+                                            "bg-red-100 hover:bg-red-200 text-red-900",
+                                            selectedItem.status == 0
+                                                ? " opacity-50 cursor-not-allowed"
+                                                : ""
+                                        )}
+                                    >
+                                        Kérés elutasítása
+                                    </Button>
                                 </div>
                             </div>
                         </SheetDescription>
