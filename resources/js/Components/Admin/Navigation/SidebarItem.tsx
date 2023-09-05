@@ -66,7 +66,7 @@ function SidebarItem({
                                         side="right"
                                         title="Új cég hozzáadása"
                                     >
-                                        <CreateCompanyForm />
+                                        <CreateCompanyForm triggerText="" triggerClass=""/>
                                     </MySheet>
                                 </div>
                             </div>
