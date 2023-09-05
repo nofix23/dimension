@@ -17,7 +17,7 @@ function Quickbar() {
                       <CreateProfile
                           triggerText="Felhasználó hozzáadása"
                           TriggerIcon={PlusIcon}
-                          triggerClass="bg-[#01A2D6] text-white hover:bg-[#01A2D6]/70 rounded-xl"
+                          triggerClass=""
                       />
                   </div>
 
@@ -26,15 +26,15 @@ function Quickbar() {
                       <CreateCompanyForm
                           triggerText="Cég hozzáadása"
                           TriggerIcon={PlusIcon}
-                          triggerClass="bg-[#01A2D6] text-white hover:bg-[#01A2D6]/70 rounded-xl"
+                          triggerClass=""
                       />
                   </div>
 
                   <div className="flex flex-col gap-4 items-center justify-center border-slate-200 border-2 shadow-md shadow-slate-50 rounded-xl w-full sm:w-64 cursor-pointer p-4 hover:border-[#01A2D6]">
                       <ExclamationCircleIcon className="h-8" />
-                      <div className="flex flex-row items-center gap-2 bg-[#01A2D6] text-white hover:bg-[#01A2D6]/70 p-2 text-md rounded-xl">
-                          <InformationCircleIcon className="h-5" />
-                          <Link href="/activity">Aktivitás</Link>
+                      <div className="flex flex-row items-center gap-2">
+                          <InformationCircleIcon className="h-4" />
+                          <Link href="/activity" className="font-semibold text-sm">Aktivitás</Link>
                       </div>
                   </div>
               </div>
