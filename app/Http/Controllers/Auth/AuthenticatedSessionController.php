@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Session;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,6 +45,10 @@ class AuthenticatedSessionController extends Controller
             $session->save();
         }
 
+        activity('user')->performedOn(new User())
+            ->causedBy(Auth::user())
+            ->log('Bejelentkezett a rendszerbe!');
+
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -57,7 +62,11 @@ class AuthenticatedSessionController extends Controller
         if ($session) {
             $session->delete();
         }
-        
+
+        activity('user')->performedOn(new User())
+            ->causedBy(Auth::user())
+            ->log('Kijelentkezett a rendszerből!');
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

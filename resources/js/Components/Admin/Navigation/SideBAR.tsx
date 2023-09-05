@@ -8,6 +8,7 @@ import {
     HomeIcon,
     TableCellsIcon,
     TruckIcon,
+    UserGroupIcon,
     UserIcon,
     UserPlusIcon,
     UsersIcon,
@@ -55,9 +56,9 @@ function SideBAR() {
                                 className="border-none"
                             >
                                 <div className="flex flex-row items-center hover:bg-gray-100 hover:text-gray-900 cursor-pointer pl-3">
-                                    <BoltIcon className="h-5" />
+                                    <UserGroupIcon className="h-5" />
                                     <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline text-sm">
-                                        <span>Megrendelések</span>
+                                        <span>Ügyfelek</span>
                                     </AccordionTrigger>
                                 </div>
 
@@ -65,15 +66,16 @@ function SideBAR() {
                                     <div className="flex flex-col gap-2 ml-6">
                                         <SidebarItem
                                             type="link"
-                                            href="/projects/unacknowledge"
-                                            text="Beérkezett árajánlatok"
+                                            href="/projects"
+                                            text="Megrendelések"
                                             full
                                             className="pl-3"
                                         />
+
                                         <SidebarItem
                                             type="link"
-                                            href="/projects"
-                                            text="Összes"
+                                            href="/projects/unacknowledge"
+                                            text="Beérkezett árajánlatok"
                                             full
                                             className="pl-3"
                                         />
@@ -146,12 +148,12 @@ function SideBAR() {
 
                         <div className="cursor-pointer group/item flex flex-row">
                             <Link href="/projects/unacknowledge">
-                                <BoltIcon className="h-6" />
+                                <UserGroupIcon className="h-6" />
                             </Link>
                             <div className="group/edit invisible group-hover/item:visible absolute z-50 left-20 bg-white text-black p-3 rounded-xl min-w-[200px] border-2">
                                 <span className="group-hover/edit:text-gray-700 flex flex-row gap-2 items-center">
                                     <ArrowLeftIcon className="h-4" />
-                                    Megrendelői árajánlatok
+                                    Beérkezett árajánlatok
                                 </span>
                             </div>
                         </div>
@@ -212,7 +214,7 @@ function SideBAR() {
                         <HomeIcon className="h-6" />
                     </Link>
                     <Link href="/projects/unacknowledge">
-                        <BoltIcon className="h-6" />
+                        <UserGroupIcon className="h-6" />
                     </Link>
                     <Link href="/projects">
                         <TruckIcon className="h-6" />

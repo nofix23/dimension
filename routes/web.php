@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CompanyController;
@@ -67,6 +68,12 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
         Route::post('/customer-request/reject', [ProjectsController::class, 'rejectCustomerRequest']);
 
+
+    });
+
+    Route::prefix('/activity')->group(function () {
+
+        Route::get('/', [ActivityController::class, 'getActivities']);
 
     });
 

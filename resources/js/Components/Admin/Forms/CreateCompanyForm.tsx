@@ -22,8 +22,15 @@ import {
     DialogTrigger,
 } from "@/Components/ui/dialog";
 import { BuildingOfficeIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { twMerge } from "tailwind-merge";
 
-function CreateCompanyForm() {
+type Props = {
+    triggerText: string;
+    TriggerIcon?: any;
+    triggerClass?: string;
+};
+
+function CreateCompanyForm({ triggerText, TriggerIcon, triggerClass }: Props) {
     const form = useForm();
 
     const { toast } = useToast();
@@ -50,7 +57,8 @@ function CreateCompanyForm() {
             toast({
                 title: title,
                 description: description,
-                className: "bg-green-100 text-green-900 font-bold text-xl border-none",
+                className:
+                    "bg-green-100 text-green-900 font-bold text-xl border-none",
             });
         }
     };
@@ -118,7 +126,6 @@ function CreateCompanyForm() {
 
     const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
 
-
     return (
         <>
             <Dialog
@@ -126,10 +133,10 @@ function CreateCompanyForm() {
                 onOpenChange={() => setDialogOpen(!isDialogOpen)}
             >
                 <DialogTrigger>
-                    <Button className="bg-[#01A2D6] text-white hover:bg-blue-400 border-slate-300">
-                        <div className="flex flex-row justify-center items-center">
-                            <PlusIcon className="h-4" />
-                            <span>Hozzáadás</span>
+                    <Button className={twMerge(triggerClass)}>
+                        <div className="flex flex-row items-center gap-2">
+                            {TriggerIcon && <TriggerIcon className="h-4" />}
+                            {triggerText && <span>{triggerText}</span>}
                         </div>
                     </Button>
                 </DialogTrigger>
@@ -339,7 +346,6 @@ function CreateCompanyForm() {
                                                 />
                                             </div>
 
-                                            
                                             <div className="grid grid-cols-4 items-center gap-4">
                                                 <Label
                                                     htmlFor="comment"

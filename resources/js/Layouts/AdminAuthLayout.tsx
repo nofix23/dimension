@@ -1,39 +1,16 @@
 import { useState, PropsWithChildren, ReactNode, useEffect } from "react";
-import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
-import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, router } from "@inertiajs/react";
 import { User } from "@/types";
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
-} from "@/Components/ui/navigation-menu";
-import { Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
-
 import { BellIcon, Briefcase, Sidebar } from "lucide-react";
 import SideBAR from "@/Components/Admin/Navigation/SideBAR";
 import { useGeneralStore } from "@/store/GeneralStore";
 import { Toaster } from "@/Components/ui/toaster";
 import {
     ArrowsRightLeftIcon,
-    Bars3Icon,
-    BellAlertIcon,
-    CheckIcon,
-    CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/Components/ui/popover";
 import { useToast } from "@/Components/ui/use-toast";
-import Logo from "../../../storage/app/public/img/logo.jpg";
 
 export default function Authenticated({
     user,

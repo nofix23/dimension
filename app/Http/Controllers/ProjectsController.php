@@ -6,6 +6,7 @@ use App\Models\CustomerRequest;
 use App\Models\Project;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -36,6 +37,10 @@ class ProjectsController extends Controller
         $customer_request->reverted_at = null;
         $customer_request->accepted_at = Carbon::now();
         $customer_request->save();
+
+        activity('customer_request')->performedOn($customer_request)
+            ->causedBy(Auth::user())
+            ->log('Felvett egy feladatot a beérkezett árajánlatok közül!');
         return Redirect::back();
 
     }
@@ -48,6 +53,10 @@ class ProjectsController extends Controller
         $customer_request->accepted_at = null;
         $customer_request->reverted_at = Carbon::now();
         $customer_request->save();
+
+        activity('customer_request')->performedOn($customer_request)
+            ->causedBy(Auth::user())
+            ->log('Leadta az egyik feladatát!');
         return Redirect::back();
     }
 
@@ -59,6 +68,11 @@ class ProjectsController extends Controller
         $customer_request->rejected_at = Carbon::now();
         $customer_request->reject_comment = $request->reject_comment;
         $customer_request->save();
+
+        activity('customer_request')->performedOn($customer_request)
+            ->causedBy(Auth::user())
+            ->log('Elutasított egy megrendelői árajánlatot!');
+
         return Redirect::back();
     }
 }

@@ -73,14 +73,29 @@ export type CustomerRequest = {
     updated_at: string;
 }
 
-export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
-    auth: {
-        user: User;
+export type ActivityLog = {
+    id: number;
+    log_name: string;
+    description: string;
+    subject_type: string;
+    subject_id: number;
+    causer_type: string;
+    causer_id: number;
+    properties: string;
+    created_at: string;
+}
+
+export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> =
+    T & {
+        auth: {
+            user: User;
+        };
+
+        companies: Company[];
+
+        users: User[];
+
+        customer_requests: CustomerRequest[];
+
+        activities: ActivityLog[];
     };
-
-    companies: Company[];
-
-    users: User[];
-
-    customer_requests: CustomerRequest[];
-};

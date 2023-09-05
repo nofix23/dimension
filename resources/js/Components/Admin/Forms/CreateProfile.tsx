@@ -19,13 +19,15 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { useCompanyStore } from "@/store/CompanyStore";
 import { Company } from "@/types";
+import { twMerge } from "tailwind-merge";
 
 type Props = {
     triggerText: string;
     TriggerIcon?: any;
+    triggerClass?: string;
 };
 
-function CreateProfile({ triggerText, TriggerIcon }: Props) {
+function CreateProfile({ triggerText, TriggerIcon, triggerClass }: Props) {
     const { toast } = useToast();
 
     const { companyItems } = useCompanyStore();
@@ -69,7 +71,7 @@ function CreateProfile({ triggerText, TriggerIcon }: Props) {
                 password: values.password,
                 password_confirmation: values.password_confirmation,
                 role: values.role,
-                company_id: values.company_id
+                company_id: values.company_id,
             },
             {
                 onBefore: () => {
@@ -114,8 +116,8 @@ function CreateProfile({ triggerText, TriggerIcon }: Props) {
                 onOpenChange={() => setDialogOpen(!isDialogOpen)}
             >
                 <DialogTrigger asChild>
-                    <Button className="">
-                        <div className="flex flex-row gap-2">
+                    <Button className={twMerge(triggerClass)}>
+                        <div className="flex flex-row items-center gap-2">
                             {TriggerIcon && <TriggerIcon className="h-4" />}
                             {triggerText && <span>{triggerText}</span>}
                         </div>

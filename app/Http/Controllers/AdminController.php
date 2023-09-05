@@ -34,7 +34,11 @@ class AdminController extends Controller
         try {
             $createNewModelService = new CreateModel(new Company(), $request->validated());
 
-            $createNewModelService->createModelFromRequest();
+            $model = $createNewModelService->createModelFromRequest();
+
+            activity('company')->performedOn(new Company())
+                ->causedBy(Auth::user())
+                ->log('Hozzáadta a(z) ' . $model->company_name . ' céget a rendszerhez!');
 
             return Redirect::back();
         } catch (Exception $e) {
@@ -58,9 +62,14 @@ class AdminController extends Controller
     {
 
         try {
+            $model = Company::find($request->id);
             $updateModelService = new UpdateModel(Company::query()->find($request->id), $request->validated());
 
             $updateModelService->updateModel();
+
+            activity('company')->performedOn($model)
+                ->causedBy(Auth::user())
+                ->log('Frissítette a(z) ' . $model->company_name . ' cég adatait!');
 
             return Redirect::back();
         } catch (Exception $e) {
@@ -76,6 +85,11 @@ class AdminController extends Controller
             if (!$user) {
                 return Redirect::back()->withErrors(["errors" => "Nem létező felhasználó!"]);
             }
+
+            activity('user')->performedOn($user)
+                ->causedBy(Auth::user())
+                ->log('Törölte a(z) ' . $user->name . ' felhasználót a rendszerből!');
+
             $user->delete();
             return Redirect::back();
         } catch (Exception $e) {
@@ -88,12 +102,24 @@ class AdminController extends Controller
         try {
 
             if ($request->type === 'single') {
+
                 $company = Company::find($request->selectedItems['id']);
+
+                activity('company')->performedOn($company)
+                    ->causedBy(Auth::user())
+                    ->log('Törölte a(z) ' . $company->company_name . ' céget!');
+
 
                 $company->delete();
             } elseif ($request->type === 'multiple') {
                 foreach ($request->selectedItems as $item) {
+
                     $company = Company::find($item['id']);
+
+                    activity('company')->performedOn($company)
+                        ->causedBy(Auth::user())
+                        ->log('Törölte a(z) ' . $company->company_name . ' céget!');
+
                     $company->delete();
                 }
             }
@@ -126,6 +152,10 @@ class AdminController extends Controller
 
             event(new Registered($user));
 
+            activity('user')->performedOn(new User())
+                ->causedBy(Auth::user())
+                ->log('Hozzáadta a '.$request->name.' felhasználót a rendszerhez!');
+
             return Redirect::back();
         } catch (Exception $e) {
             return Redirect::back()->withErrors(["errors" => $e->getMessage()]);
@@ -144,6 +174,12 @@ class AdminController extends Controller
             $updateModelService = new UpdateModel(User::query()->find($request->id), $validated);
 
             $updateModelService->updateModel();
+
+            $user = User::find($request->id);
+
+            activity('user')->performedOn($user)
+                ->causedBy(Auth::user())
+                ->log('Frissítette a(z) ' . $request->name . ' felhasználó adatait!');
 
             return Redirect::back();
         } catch (Exception $e) {
@@ -188,7 +224,14 @@ class AdminController extends Controller
 
             $model = $createModelService->createModelFromRequest();
 
-            if($request->image_url){
+            $company = Company::find($request->company_id);
+
+            activity('company_contact')->performedOn(new CompanyContact())
+                ->causedBy(Auth::user())
+                ->log('Kapcsolattartót állított be a(z) '.$company->company_name . ' céghez!');
+
+
+            if ($request->image_url) {
                 $imageName = time() . '.' . $request->image_url->extension();
 
                 $request->image_url->move(public_path('images'), $imageName);
@@ -210,10 +253,16 @@ class AdminController extends Controller
     public function deleteContact(Request $request)
     {
         $contact = CompanyContact::find($request->id);
-        if($contact){
+
+        $company = Company::find($contact->company_id);
+
+        activity('company_contact')->performedOn($contact)
+            ->causedBy(Auth::user())
+            ->log('Törölte a(z) ' . $company->company_name . ' cég '.$contact->name.' nevű kapcsolattartóját!');
+
+        if ($contact) {
             $contact->delete();
         }
         return Redirect::back();
-
     }
 }

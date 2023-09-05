@@ -21,6 +21,7 @@ import {
     BuildingOffice2Icon,
     CheckBadgeIcon,
     EllipsisHorizontalIcon,
+    PlusIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
@@ -226,11 +227,15 @@ export default function Companies({ auth, companies, users }: PageProps) {
                         <EllipsisHorizontalIcon className="h-6" />
                     </div>
                     <div className="hover:cursor-pointer p-2">
-                        <CreateCompanyForm />
+                        <CreateCompanyForm
+                            triggerText="Cég hozzáadása"
+                            TriggerIcon={PlusIcon}
+                            triggerClass="bg-[#01A2D6] text-white hover:bg-[#01A2D6]/70"
+                        />
                     </div>
                 </div>
             </div>
-            <div className="sm:w-[1400px] bg-white shadow-lg shadow-slate-200 sm:p-8">
+            <div className="sm:w-[1400px] bg-white shadow-lg shadow-slate-200 p-8">
                 <Table className=" text-gray-500 mt-6">
                     <TableHeader>
                         <TableRow>
@@ -241,9 +246,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                             <TableHead className="font-extralight">
                                 E-mail cím
                             </TableHead>
-                            <TableHead className="font-extralight">
-                                Kapcsolattartók száma
-                            </TableHead>
+
                             <TableHead className="font-extralight">
                                 Projektek száma
                             </TableHead>
@@ -254,9 +257,6 @@ export default function Companies({ auth, companies, users }: PageProps) {
                             <TableHead>Város</TableHead>
                             <TableHead>Irányítószám</TableHead>
                             <TableHead>Utca</TableHead> */}
-                            <TableHead className="font-extralight">
-                                Hozzáférés beállítva
-                            </TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody className="">
@@ -300,9 +300,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                 <TableCell className="font-medium">
                                     {company.email_address}
                                 </TableCell>
-                                <TableCell className="font-medium">
-                                    {company?.contacts?.length}
-                                </TableCell>
+
                                 <TableCell className="font-medium">0</TableCell>
                                 <TableCell className="font-medium flex">
                                     {company.active === 1 && (
@@ -314,18 +312,6 @@ export default function Companies({ auth, companies, users }: PageProps) {
                                     {company.active === 0 && (
                                         <div className="bg-red-100 text-red-900 max-w-[100px] rounded-xl p-2 h-6 flex items-center">
                                             Inaktív
-                                        </div>
-                                    )}
-                                </TableCell>
-
-                                <TableCell className="font-medium">
-                                    {company.user_id ? (
-                                        <div className="bg-green-100 text-green-900 max-w-[100px] rounded-xl justify-center items-center flex flex-row h-6">
-                                            <CheckIcon className="h-4" />
-                                        </div>
-                                    ) : (
-                                        <div className="bg-red-100 text-red-900 max-w-[100px] rounded-xl justify-center items-center flex flex-row h-6">
-                                            <XMarkIcon className="h-4" />
                                         </div>
                                     )}
                                 </TableCell>
