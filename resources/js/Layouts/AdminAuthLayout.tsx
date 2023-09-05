@@ -86,7 +86,7 @@ export default function Authenticated({
     }
 
     return (
-        <div className="min-h-screen bg-[#F6F6F6] fixed w-full">
+        <div className="min-h-screen bg-[#F6F6F6] fixed w-full font-extralight">
             <nav className="bg-white text-black border-b border-slate-100">
                 <div className="mx-auto ml-4 mr-8">
                     <div className="flex justify-between h-16">

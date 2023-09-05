@@ -33,7 +33,7 @@ function SideBAR() {
             <div className="bg-white h-screen pr-2 max-sm:hidden text-black">
                 {/* Sidebar teljes */}
                 {showSidebar ? (
-                    <div className="md:w-[200px] flex flex-col gap-4 mt-3 font-semibold">
+                    <div className="md:w-[200px] flex flex-col gap-4 mt-3 font-extralight">
                         <div className="">
                             <SidebarItem
                                 type="link"
