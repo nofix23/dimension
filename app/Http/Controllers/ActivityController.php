@@ -10,7 +10,14 @@ use Inertia\Inertia;
 class ActivityController extends Controller
 {
     public function getActivities(Request $request){
-        $activities = DB::table("activity_log")->orderBy('created_at', 'desc')->get();
+        $user_id = $request->query('user');
+
+        if($user_id && $user_id != "null"){
+            $activities = DB::table("activity_log")->where("causer_id", $user_id)->orderBy('created_at', 'desc')->get();
+        }
+        else {
+            $activities = DB::table("activity_log")->orderBy('created_at', 'desc')->get();
+        }
         $users = User::all();
 
         return Inertia::render('Activity/Page', [

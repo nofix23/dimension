@@ -1,6 +1,7 @@
 import { useActivityLogStore } from "@/store/ActivityLogStore";
 import { useUserStore } from "@/store/UserStore";
 import { ActivityLog, User } from "@/types";
+import ActivityFilter from "./ActivityFilter";
 
 function Activities() {
     const { activityLogItems } = useActivityLogStore();
@@ -18,6 +19,8 @@ function Activities() {
                 <span className="text-xl">Felhasználói aktivitás</span>
             </div>
 
+            <ActivityFilter />
+            
             <div className="flex flex-col gap-6 mt-8">
                 {activityLogItems.map((item: ActivityLog) => (
                     <div className="flex flex-row items-center gap-6">
