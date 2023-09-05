@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useGeneralStore } from '@/store/GeneralStore';
 import { HomeIcon } from 'lucide-react';
 import Calendar from '@/Components/Admin/Dashboard/Calendar';
+import Quickbar from '@/Components/Admin/Shared/Quickbar';
 
 export default function Dashboard({ auth }: PageProps) {
 
@@ -20,7 +21,8 @@ export default function Dashboard({ auth }: PageProps) {
         >
             <Head title="Irányítópult" />
 
-            <div className="mt-8">
+            <div className="flex flex-col gap-8 mt-8">
+                <Quickbar />
                 <Calendar />
             </div>
         </AdminAuthLayout>

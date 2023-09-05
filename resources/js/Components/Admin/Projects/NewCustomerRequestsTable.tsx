@@ -16,7 +16,10 @@ function NewCustomerRequestsTable() {
     const { customerRequestItems, setSelectedItem } = useCustomerRequestStore();
 
     return (
-        <div>
+        <div className="sm:w-[1400px] bg-white shadow-lg shadow-slate-200 p-8">
+            <div className="border-b pb-8 ">
+                <span className="text-xl">Megrendelői árajánlatok</span>
+            </div>
             <Table className=" text-gray-500 mt-6">
                 <TableHeader>
                     <TableRow>
@@ -79,9 +82,9 @@ function NewCustomerRequestsTable() {
                                 <div
                                     className={twMerge(
                                         "flex justify-center p-2 min-w-full sm:w-1/2 rounded-xl",
-                                        request.accepted_by ?
-                                            "bg-green-100 text-green-600"
-                                            :""
+                                        request.accepted_by
+                                            ? "bg-green-100 text-green-600"
+                                            : ""
                                     )}
                                 >
                                     {request.accepted_by}

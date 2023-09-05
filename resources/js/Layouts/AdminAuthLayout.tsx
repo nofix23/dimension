@@ -109,7 +109,7 @@ export default function Authenticated({
     }
 
     return (
-        <div className="min-h-screen bg-white fixed w-full">
+        <div className="min-h-screen bg-[#F6F6F6] fixed w-full">
             <nav className="bg-white text-black border-b border-slate-100">
                 <div className="mx-auto ml-4 mr-8">
                     <div className="flex justify-between h-16">
@@ -128,7 +128,10 @@ export default function Authenticated({
                                             src={Logo}
                                             className="h-20 p-3"
                                         /> */}
-                                        <span className="text-xl"><span className="font-bold">D</span>imenzió</span>
+                                        <span className="text-xl">
+                                            <span className="font-bold">D</span>
+                                            imenzió
+                                        </span>
                                     </div>
                                 </Link>
                             </div>
@@ -233,7 +236,6 @@ export default function Authenticated({
                         " sm:hidden bg-white"
                     }
                 >
-
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800 dark:text-gray-200">
@@ -438,12 +440,12 @@ export default function Authenticated({
                             </div>
                         </div> */}
 
-                        <div className="ml-8 md:ml-12 md:mr-12 min-w-screen">
-                            {header && (
+                        <div className="md:ml-12 md:mr-12">
+                            {/* {header && (
                                 <div>
                                     <span>{header}</span>
                                 </div>
-                            )}
+                            )} */}
 
                             <main className="">{children}</main>
                             <Toaster />

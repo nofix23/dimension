@@ -20,8 +20,11 @@ function Groups() {
     );
 
     return (
-        <div className="">
-            <div className="flex flex-wrap gap-8">
+        <div className="bg-white p-8 rounded-xl sm:w-[1400px]">
+            <div>
+                <span className="text-xl">Hozzáférések</span>
+            </div>
+            <div className="flex flex-wrap gap-8 mt-8">
                 <Group groupName="Adminisztrátor" users={admin_accounts} />
                 <Group groupName="Alkalmazott" users={employee_accounts} />
                 <Group groupName="Cég" users={company_accounts} />

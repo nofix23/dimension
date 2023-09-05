@@ -9,6 +9,7 @@ import {
     TableCellsIcon,
     TruckIcon,
     UserIcon,
+    UserPlusIcon,
     UsersIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "@inertiajs/react";
@@ -27,11 +28,11 @@ function SideBAR() {
     const { showSidebar } = useGeneralStore();
 
     return (
-        <div className="bg-white border-r border-slate-100 mt-6">
+        <div className="bg-white border-r border-slate-100">
             <div className="bg-white h-screen pr-2 max-sm:hidden text-black">
                 {/* Sidebar teljes */}
                 {showSidebar ? (
-                    <div className="md:w-[250px] ml-4 flex flex-col mt-3 font-semibold">
+                    <div className="md:w-[200px] flex flex-col gap-4 mt-3 font-semibold">
                         <div className="">
                             <SidebarItem
                                 type="link"
@@ -44,7 +45,11 @@ function SideBAR() {
                             />
                         </div>
 
-                        <Accordion type="multiple" defaultValue={[ 'item-1', 'item-2', 'item-3']}>
+                        <Accordion
+                            type="multiple"
+                            defaultValue={["item-1", "item-2"]}
+                            className="flex flex-col gap-4"
+                        >
                             <AccordionItem
                                 value="item-1"
                                 className="border-none"
@@ -99,31 +104,18 @@ function SideBAR() {
                                     </div>
                                 </AccordionContent>
                             </AccordionItem>
-
-                            <AccordionItem
-                                value="item-3"
-                                className="border-none"
-                            >
-                                <div className="flex flex-row items-center hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer pl-3">
-                                    <UserIcon className="h-5" />
-                                    <AccordionTrigger className="ml-2 flex justify-start gap-3 hover:no-underline text-sm">
-                                        <span>Hozzáférések kezelése</span>
-                                    </AccordionTrigger>
-                                </div>
-
-                                <AccordionContent>
-                                    <div className="flex flex-col gap-2 ml-6">
-                                        <SidebarItem
-                                            type="link"
-                                            href="/profile/all"
-                                            text="Hozzáférések"
-                                            full
-                                            className="pl-3"
-                                        />
-                                    </div>
-                                </AccordionContent>
-                            </AccordionItem>
                         </Accordion>
+
+                        <div className="">
+                            <SidebarItem
+                                type="link"
+                                href="/profile/all"
+                                text="Hozzáférések"
+                                Icon={UsersIcon}
+                                full
+                                className="pl-3"
+                            />
+                        </div>
 
                         <div className="">
                             <SidebarItem

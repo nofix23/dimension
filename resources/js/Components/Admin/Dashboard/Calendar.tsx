@@ -76,30 +76,35 @@ function Calendar() {
     };
 
     return (
-        <div className="md:w-[1400px]">
-            <FullCalendar
-                plugins={[dayGridPlugin, interactionPlugin]}
-                initialView="dayGridMonth"
-                headerToolbar={{
-                    left: "prev,next",
-                    center: "title",
-                    right: "dayGridMonth,dayGridWeek,dayGridDay",
-                }}
-                eventClassNames={
-                    "bg-[#01A2D6] hover:bg-[#01A2D6]/80 border-none"
-                }
-                dayCellClassNames={" hover:bg-[#01A2D6]/10"}
-                dateClick={handleDateClick}
-                viewClassNames={"bg-gray-50 text-xs sm:text-lg"}
-                locale={huLocale}
-                eventContent={renderEventContent}
-                rerenderDelay={10}
-                editable
-                droppable
-                dragScroll
-                events={events}
-                eventDrop={handleEventDrop}
-            />
+        <div className="md:w-[1400px] bg-white p-8 rounded-xl shadow-lg shadow-slate-200">
+            <div>
+                <span className="text-xl">Naptár</span>
+            </div>
+            <div className="mt-8">
+                <FullCalendar
+                    plugins={[dayGridPlugin, interactionPlugin]}
+                    initialView="dayGridWeek"
+                    headerToolbar={{
+                        left: "prev,next",
+                        center: "title",
+                        right: "dayGridMonth,dayGridWeek,dayGridDay",
+                    }}
+                    eventClassNames={
+                        "bg-[#01A2D6] hover:bg-[#01A2D6]/80 border-none"
+                    }
+                    dayCellClassNames={" hover:bg-[#01A2D6]/10"}
+                    dateClick={handleDateClick}
+                    viewClassNames={"bg-gray-50 text-xs sm:text-lg"}
+                    locale={huLocale}
+                    eventContent={renderEventContent}
+                    rerenderDelay={10}
+                    editable
+                    droppable
+                    dragScroll
+                    events={events}
+                    eventDrop={handleEventDrop}
+                />
+            </div>
 
             {isModalOpen ? (
                 <AddEventSheet show={isModalOpen} setShow={setIsModalOpen} />

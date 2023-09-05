@@ -32,8 +32,8 @@ export default function Accounts({ auth, users, companies }: PageProps) {
         >
             <Head title="Hozzáférések" />
 
-            <div className="mt-8">
-                <GeneralInformations count={userItems.length}/>
+            <div className="flex flex-col gap-8 mt-8">
+                {/* <GeneralInformations count={userItems.length}/> */}
                 <Groups />
             </div>
         </AdminAuthLayout>

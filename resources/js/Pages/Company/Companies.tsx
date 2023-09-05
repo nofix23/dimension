@@ -132,7 +132,10 @@ export default function Companies({ auth, companies, users }: PageProps) {
         >
             <Head title="Cégek" />
 
-            <div className="flex flex-wrap sm:flex-row justify-between mt-8 pb-1 border-b w-full min-w-full text-xs">
+            <div className="flex flex-wrap sm:flex-row justify-between mt-8 pb-1 border-b sm:w-[1400px] text-xs bg-white p-8">
+                <div>
+                    <span className="text-xl">Cégek</span>
+                </div>
                 <div className="flex flex-row items-center">
                     {selectedItems.length > 0 ? (
                         <div className="flex gap-2">
@@ -227,7 +230,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
                     </div>
                 </div>
             </div>
-            <div className="max-w-[1300px]">
+            <div className="sm:w-[1400px] bg-white shadow-lg shadow-slate-200 sm:p-8">
                 <Table className=" text-gray-500 mt-6">
                     <TableHeader>
                         <TableRow>

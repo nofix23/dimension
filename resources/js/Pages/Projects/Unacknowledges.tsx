@@ -27,7 +27,7 @@ export default function Unacknowledges({ auth, customer_requests }: PageProps) {
         >
             <Head title="Megrendelői árajánlatok" />
 
-            <div className="mt-8">
+            <div className="flex flex-col gap-8 mt-8">
                 <NewCustomerRequestsTable />
             </div>
         </AdminAuthLayout>
