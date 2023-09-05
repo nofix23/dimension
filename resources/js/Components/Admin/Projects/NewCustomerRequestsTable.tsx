@@ -16,7 +16,7 @@ function NewCustomerRequestsTable() {
     const { customerRequestItems, setSelectedItem } = useCustomerRequestStore();
 
     return (
-        <div className="sm:w-[1400px] bg-white shadow-lg shadow-slate-200 p-8">
+        <div className="md:w-[1400px] bg-white p-8 rounded-xl shadow-lg shadow-slate-200">
             <div className="border-b pb-8 ">
                 <span className="text-xl">Beérkezett árajánlatok</span>
             </div>

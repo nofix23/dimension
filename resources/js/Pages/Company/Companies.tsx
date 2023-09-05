@@ -133,7 +133,7 @@ export default function Companies({ auth, companies, users }: PageProps) {
         >
             <Head title="Cégek" />
 
-            <div className="flex flex-wrap sm:flex-row justify-between mt-8 pb-1 border-b sm:w-[1400px] text-xs bg-white p-8">
+            <div className="flex flex-wrap sm:flex-row justify-between mt-8 pb-1 border-b sm:w-[1400px] text-xs bg-white p-8 ">
                 <div>
                     <span className="text-xl">Cégek</span>
                 </div>

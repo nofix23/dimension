@@ -20,7 +20,7 @@ function Groups() {
     );
 
     return (
-        <div className="bg-white p-8 rounded-xl sm:w-[1400px]">
+        <div className="md:w-[1400px] bg-white p-8 rounded-xl shadow-lg shadow-slate-200">
             <div>
                 <span className="text-xl">Hozzáférések</span>
             </div>
