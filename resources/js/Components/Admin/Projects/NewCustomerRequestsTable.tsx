@@ -18,7 +18,7 @@ function NewCustomerRequestsTable() {
     return (
         <div className="sm:w-[1400px] bg-white shadow-lg shadow-slate-200 p-8">
             <div className="border-b pb-8 ">
-                <span className="text-xl">Megrendelői árajánlatok</span>
+                <span className="text-xl">Beérkezett árajánlatok</span>
             </div>
             <Table className=" text-gray-500 mt-6">
                 <TableHeader>
@@ -48,7 +48,7 @@ function NewCustomerRequestsTable() {
                             <TableCell>
                                 <CompanyRequestSheet
                                     side="left"
-                                    title="Megrendelői árajánlat"
+                                    title="Beérkezett árajánlat"
                                 >
                                     <EyeIcon
                                         className="h-5 "

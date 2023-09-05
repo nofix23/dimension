@@ -66,7 +66,7 @@ function SideBAR() {
                                         <SidebarItem
                                             type="link"
                                             href="/projects/unacknowledge"
-                                            text="Megrendelői árajánlatok"
+                                            text="Beérkezett árajánlatok"
                                             full
                                             className="pl-3"
                                         />

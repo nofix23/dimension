@@ -21,11 +21,11 @@ export default function Unacknowledges({ auth, customer_requests }: PageProps) {
             header={
                 <div className="flex flex-row gap-4 mt-8 items-center font-semibold text-2xl text-gray-600 leading-tight p-2">
                     <BoltIcon className="h-12" />
-                    <span>Megrendelői árajánlatok</span>
+                    <span>Beérkezett árajánlatok</span>
                 </div>
             }
         >
-            <Head title="Megrendelői árajánlatok" />
+            <Head title="Beérkezett árajánlatok" />
 
             <div className="flex flex-col gap-8 mt-8">
                 <NewCustomerRequestsTable />

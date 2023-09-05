@@ -19,7 +19,7 @@ import { useCompanyStore } from "@/store/CompanyStore";
 import { useEffect, useState } from "react";
 
 type Props = {
-    company: Company;
+    company: Company|null;
     users: User[];
     user: User;
     triggerText: string;
@@ -69,7 +69,7 @@ function UpdateCompanyForm({ company, user, triggerText, TriggerIcon }: Props) {
             slug,
             {
                 user_id: user?.id ?? null,
-                id: user.company?.id,
+                id: user.company?.id ? user.company.id : company?.id,
                 company_name: values.company_name,
                 email_address: values.email_address,
                 phone_number: values.phone_number,

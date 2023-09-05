@@ -127,7 +127,7 @@ function CompanyData({ user, users, company, type }: Props) {
                 </div>
                 <div className="">
                     <UpdateCompanyForm
-                        company={user?.company}
+                        company={type === "user" ? user?.company : company}
                         users={users}
                         user={user}
                         triggerText="Szerkesztés"
