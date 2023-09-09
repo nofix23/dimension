@@ -12,7 +12,7 @@ use Inertia\Inertia;
 class IndexController extends Controller
 {
     public function index(){
-        return Inertia::render("Customer/Page");
+        return Inertia::render("Customer/CompanySign");
     }
 
     public function handleCustomerRequest(Request $request){

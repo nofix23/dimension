@@ -9,6 +9,6 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-        return Inertia::render("Customer/Page");
+        return Inertia::render("Customer/CompanySign");
     }
 }
